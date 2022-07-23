@@ -1,5 +1,5 @@
 # CoRe
-# Communication through Reactome and Interactome (CoRe)
+## Communication through Reactome and Interactome (CoRe)
 
 CoRe is a software package to construct communication network models for biological pathways, compute information transfer through the networks, and identify the biological processes affected by communication. CoRe uses the following databases:
 
