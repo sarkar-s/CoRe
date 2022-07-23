@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>enGO &mdash; CoReI Alpha 1 (0.1.1.1) documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="reader" href="reader.html" />
+    <link rel="prev" title="ncip" href="ncip.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CoReI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Construction_of_Top_Level_Pathway_Network.html">Network Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Add-human_PPI.html">Add interactome to reactome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SARS-CoV-2_human_PPI.html">SARS-CoV2 interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Information_transfer_in_the_network.html">Information transfer due to viral PPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Communicated_Proteins.html">Communicated proteins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="communicated_ORA.html">Communicated genes overrepresentation analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ncip.html">ncip</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">enGO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reader.html">reader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CoReI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>enGO</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/enGO.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-CoRe.enGO">
+<span id="engo"></span><h1>enGO<a class="headerlink" href="#module-CoRe.enGO" title="Permalink to this headline"></a></h1>
+<p>Entropic enrichment of Gene Ontology(GO) gene sets</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.MinMaxGOsets">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">MinMaxGOsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">GO_embedding</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GO_container</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GO_BP_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#MinMaxGOsets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.MinMaxGOsets" title="Permalink to this definition"></a></dt>
+<dd><p>Identifies the minimum gene sets that do not contain any other gene sets and the maximum gene sets that
+are not contained in any other gene sets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GO_embedding</strong> (<em>dict</em>) – Dict with the index of gene ontology set name as keys and the list of indices of the gene
+sets that contains the key gene set.</p></li>
+<li><p><strong>GO_container</strong> (<em>dict</em>) – Dict with the index of gene ontology set name as keys and the list of indices of the gene sets
+that are contained in the key gene set.</p></li>
+<li><p><strong>GO_BP_names</strong> (<em>list</em>) – Names of gene ontology gene sets.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.compute_p_values">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">compute_p_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GO_BPs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_genes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_GOBP</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#compute_p_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.compute_p_values" title="Permalink to this definition"></a></dt>
+<dd><p>Benjamini-Hochberg p-value correction for multiple hypothesis testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sources</strong> (<em>list</em>) – Names of factors that are causing the information transfer in the network.</p></li>
+<li><p><strong>minimum_GOBP</strong> (<em>list</em>) – Names of gene sets for biological processes at the lowest level, i.e. these sets do not contain other gene sets.</p></li>
+<li><p><strong>GO_BPs</strong> (<em>array_like</em>) – Gene sets for Gene Ontology Biological Processes.</p></li>
+<li><p><strong>interaction_set</strong> (<em>dict</em>) – Set of genes receiving information from the sources.</p></li>
+<li><p><strong>total_genes</strong> (<em>int</em>) – Total number of unique genes across all gene sets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>go_names</strong> (<em>dict</em>) – Gene Ontology Biological Processes that are over-represented by the sources.</p></li>
+<li><p><strong>p_values</strong> (<em>dict</em>) – Fisher’s exact test p-value for Gene Ontology over-represenation analysis.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.compute_q_values">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">compute_q_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">go_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">go_tags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#compute_q_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.compute_q_values" title="Permalink to this definition"></a></dt>
+<dd><p>Benjamini-Hochberg p-value correction for multiple hypothesis testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p_values</strong> (<em>array_like</em>) – A list or array of p-values, from Fisher’s exact text, for multiple hypothesis.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>q_values</strong> (<em>array_like</em>) – Sorted positive False Discovery Rate corrected for multiple hypothesis testing.</p></li>
+<li><p><strong>p_values_go</strong> (<em>array_like</em>) – Names of the associated gene ontology biological processes.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.findGOcontainer">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">findGOcontainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">GO_embedding</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#findGOcontainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.findGOcontainer" title="Permalink to this definition"></a></dt>
+<dd><p>Identifies that gene sets that contains other gene sets. The gene sets that do not contain other
+gene sets are returned as dictionary keys with an empty list as the entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GO_sets</strong> (<em>dict</em>) – Dictionary with gene set index as keys and the list of gene set that contains it as entries.</p></li>
+<li><p><strong>outputfile</strong> (<em>string</em>) – Name of the file to store the output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>GO_container</strong> – Dict with the index of gene ontology set name as keys and the list of indices of the gene sets
+that are contained in the key gene set.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.findGOembedding">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">findGOembedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">GO_sets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#findGOembedding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.findGOembedding" title="Permalink to this definition"></a></dt>
+<dd><p>Identifies that gene sets that are embedded within other gene sets. The gene sets that are not embedded
+in any other gene set are returned as dictionary keys with an empty list as the entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GO_sets</strong> (<em>dict</em>) – Dictionary with gene set name as keys and the list of associated genes as entries.</p></li>
+<li><p><strong>outputfile</strong> (<em>string</em>) – Name of the file to store the output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>GO_embedding</strong> – Dict with the index of gene ontology set name as keys and the list of indices of the gene
+sets that contains the key gene set.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.p_adjust_bh">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">p_adjust_bh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#p_adjust_bh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.p_adjust_bh" title="Permalink to this definition"></a></dt>
+<dd><p>Benjamini-Hochberg p-value correction for multiple hypothesis testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>array_like</em>) – A list or array of p-values, from Fisher’s exact text, for multiple hypothesis.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>q</strong> – Adjusted positive False Discovery Rate (pFDR).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array_like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.qvalue">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">qvalue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pvals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#qvalue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.qvalue" title="Permalink to this definition"></a></dt>
+<dd><p>Function for estimating q-values from p-values using the Storey-
+Tibshirani q-value method (2003).
+Input arguments:
+================
+pvals       - P-values corresponding to a family of hypotheses.
+threshold   - Threshold for deciding which q-values are significant.
+Output arguments:
+=================
+significant - An array of flags indicating which p-values are significant.
+qvals       - Q-values corresponding to the p-values.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.readGOBPs">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">readGOBPs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">GO_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#readGOBPs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.readGOBPs" title="Permalink to this definition"></a></dt>
+<dd><p>Reads the gene sets associated with Gene Ontology Biological Processes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>GO_directory</strong> – Directory containing the GO data files from <a class="reference external" href="https://www.gsea-msigdb.org/gsea/msigdb/">Moleculary Signatures Database</a>.
+This directory contains a set of .csv files with GOBP names as filenames containing the list of associated genes.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>GO_BPs</strong> – Dict with GOBP names as keys and the list of associated genes as the dictionary entry.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.readGOsets">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">readGOsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">GO_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GO_category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#readGOsets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.readGOsets" title="Permalink to this definition"></a></dt>
+<dd><p>Reads the gene ontology data set as a python dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GO_file</strong> (<em>string</em>) – Name of the file containing Gene Ontology gene sets.</p></li>
+<li><p><strong>GO_category</strong> (<em>string</em>) – Name of the gene ontology category, one among the three, ‘GOBP’, ‘GOCC’, or ‘GOMF’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>GO_BPs</strong> (<em>dict</em>) – Dict with gene ontology gene set as keys and the list of associated genes as dictionary entries.</p></li>
+<li><p><strong>total_unique_genes</strong> (<em>list</em>) – Names of unique genes in the total gene ontology data set.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CoRe.enGO.total_genes">
+<span class="sig-prename descclassname"><span class="pre">CoRe.enGO.</span></span><span class="sig-name descname"><span class="pre">total_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">GOBPs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/enGO.html#total_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.enGO.total_genes" title="Permalink to this definition"></a></dt>
+<dd><p>Determines the list of unique genes across all the GO gene sets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>GO_BPs</strong> (<em>dict</em>) – Dict with GOBP names as keys and the list of associated genes as the dictionary entry.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>unique_genes</strong> – Name of genes present in the gene set database.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ncip.html" class="btn btn-neutral float-left" title="ncip" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reader.html" class="btn btn-neutral float-right" title="reader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Swarnavo Sarkar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

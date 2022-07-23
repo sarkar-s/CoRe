@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoRe.ncip &mdash; CoReI Alpha 1 (0.1.1.1) documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> CoReI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Construction_of_Top_Level_Pathway_Network.html">Network Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Add-human_PPI.html">Add interactome to reactome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../SARS-CoV-2_human_PPI.html">SARS-CoV2 interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Information_transfer_in_the_network.html">Information transfer due to viral PPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Communicated_Proteins.html">Communicated proteins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../communicated_ORA.html">Communicated genes overrepresentation analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ncip.html">ncip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enGO.html">enGO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reader.html">reader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencies.html">Dependencies</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CoReI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>CoRe.ncip</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for CoRe.ncip</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Network constructor and information propagator (ncip) contains functions for constructing the information network and entropy for the Reactome TopLevelPathways</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">from</span> <span class="nn">CoRe.cypher_commands</span> <span class="kn">import</span> <span class="n">command_set</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="c1">#import BA_C.BA as BA</span>
+
+<div class="viewcode-block" id="ncip"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip">[docs]</a><span class="k">class</span> <span class="nc">ncip</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_property</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;reaction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1">#self.edge_data[&#39;category&#39;] = []</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;module&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">property</span> <span class="o">=</span> <span class="n">_property</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_log</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">_edge_data</span><span class="p">,</span><span class="n">_node_data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span> <span class="o">=</span> <span class="n">_edge_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span> <span class="o">=</span> <span class="n">_node_data</span>
+
+    <span class="k">def</span> <span class="nf">load_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filename</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gml</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ncip.construct_edges"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.construct_edges">[docs]</a>    <span class="k">def</span> <span class="nf">construct_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inputs</span><span class="p">,</span><span class="n">outputs</span><span class="p">,</span><span class="n">neglect_ids</span><span class="o">=</span><span class="p">[],</span><span class="n">neglect_class</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts reactions into a local graph topology.</span>
+<span class="sd">        If a reaction is: A + B -&gt; C + D + E,</span>
+<span class="sd">        then A and B are two input nodes to three separate output nodes C, D, and E.</span>
+<span class="sd">        If the reaction is chemically balanced then the edges are bidirectional,</span>
+<span class="sd">        else edges are unidirectional.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inputs: neo4j result</span>
+<span class="sd">            Result object from neo4j containing Reactome physical entities nodes that are inputs to an event.</span>
+
+<span class="sd">        outputs: neo4j result</span>
+<span class="sd">            object from neo4j containing Reactome physical entities nodes that are outputs to an event.</span>
+
+<span class="sd">        neglect_ids: list</span>
+<span class="sd">            stId of Reactome physical entities that should be neglected from the network.</span>
+
+<span class="sd">        neglect_class: list</span>
+<span class="sd">            schemaClass of Reactome physical entities that should be neglected from the network.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        edge_nodes: dict</span>
+<span class="sd">            Dict containing the fields [&#39;inputs&#39;,&#39;outputs&#39;,&#39;input_names&#39;,&#39;output_names&#39;].</span>
+<span class="sd">            &#39;inputs&#39; and &#39;outputs&#39; for the input and output node property values of an edge.</span>
+<span class="sd">            &#39;input names&#39; and &#39;output_names&#39; are tuples (displayName,schemaClass) with values from</span>
+<span class="sd">            the Reactome Data Schema, https://reactome.org/content/schema/PhysicalEntity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>            <span class="c1"># Property value as input node id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>           <span class="c1"># Property value as output node id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># Physical entity name of input nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>      <span class="c1"># Physical entity name of output nodes</span>
+
+        <span class="n">node_in_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">node_out_names</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">res_in</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+            <span class="n">node_in</span> <span class="o">=</span> <span class="n">res_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">node_in</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">neglect_ids</span> <span class="ow">and</span> <span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">neglect_class</span><span class="p">:</span>
+
+                <span class="k">for</span> <span class="n">res_out</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
+                    <span class="n">node_out</span> <span class="o">=</span> <span class="n">res_out</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">]</span>
+
+                    <span class="k">if</span> <span class="n">node_out</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">neglect_ids</span>  <span class="ow">and</span> <span class="n">res_out</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">neglect_class</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_in</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_out</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;displayName&#39;</span><span class="p">],</span><span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">res_out</span><span class="p">[</span><span class="s1">&#39;displayName&#39;</span><span class="p">],</span><span class="n">res_out</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="ncip.construct_exo_edges"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.construct_exo_edges">[docs]</a>    <span class="k">def</span> <span class="nf">construct_exo_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inputs</span><span class="p">,</span><span class="n">neglect_ids</span><span class="o">=</span><span class="p">[],</span><span class="n">neglect_class</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts reactions into a local graph topology.</span>
+<span class="sd">        If a reaction is: A + B -&gt; C + D + E,</span>
+<span class="sd">        then A and B are two input nodes to three separate output nodes C, D, and E.</span>
+<span class="sd">        If the reaction is chemically balanced then the edges are bidirectional,</span>
+<span class="sd">        else edges are unidirectional.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inputs: neo4j result</span>
+<span class="sd">            Result object from neo4j containing Reactome physical entities nodes that are inputs to an event.</span>
+
+<span class="sd">        neglect_ids: list</span>
+<span class="sd">            stId of Reactome physical entities that should be neglected from the network.</span>
+
+<span class="sd">        neglect_class: list</span>
+<span class="sd">            schemaClass of Reactome physical entities that should be neglected from the network.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        edge_nodes: dict</span>
+<span class="sd">            Dict containing the fields [&#39;inputs&#39;,&#39;outputs&#39;,&#39;input_names&#39;,&#39;output_names&#39;].</span>
+<span class="sd">            &#39;inputs&#39; and &#39;outputs&#39; for the input and output node property values of an edge.</span>
+<span class="sd">            &#39;input names&#39; and &#39;output_names&#39; are tuples (displayName,schemaClass) with values from</span>
+<span class="sd">            the Reactome Data Schema, https://reactome.org/content/schema/PhysicalEntity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>            <span class="c1"># Property value as input node id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>           <span class="c1"># Property value as output node id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># Physical entity name of input nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>      <span class="c1"># Physical entity name of output nodes</span>
+
+        <span class="n">node_in_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">node_out_names</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">res_in</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+            <span class="n">node_in</span> <span class="o">=</span> <span class="n">res_in</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">node_in</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">neglect_ids</span> <span class="ow">and</span> <span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">neglect_class</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_in</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_in</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;displayName&#39;</span><span class="p">],</span><span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;displayName&#39;</span><span class="p">],</span><span class="n">res_in</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="ncip.add_edges"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.add_edges">[docs]</a>    <span class="k">def</span> <span class="nf">add_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">session</span><span class="p">,</span><span class="n">reaction_info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds information about an edge to the edge_data and node_data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        session: neo4j session</span>
+<span class="sd">            To query the neo4j reactome database</span>
+
+<span class="sd">        command_set: dict</span>
+<span class="sd">            Set of commands to query the neo4j reactome database.</span>
+
+<span class="sd">        reaction_info: list</span>
+<span class="sd">            Row entry of the ReactionLikeEvents dataframe containing stId, category, schemaClass, and name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ref_gene_info</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ref_gene_keys</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">species_name</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">])):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ref_gene_keys</span><span class="p">:</span>
+                    <span class="n">ref_gene_command</span> <span class="o">=</span> <span class="n">command_set</span><span class="p">[</span><span class="s1">&#39;reference_gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ref_gene_command</span><span class="p">)</span>
+                    <span class="n">refgene_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+
+                    <span class="n">spec_command</span> <span class="o">=</span> <span class="s2">&quot;MATCH(n:EntityWithAccessionedSequence {stId:&#39;&quot;</span><span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span><span class="s2">&quot;&#39;}) RETURN n.speciesName&quot;</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">spec_command</span><span class="p">)</span>
+                    <span class="n">spec_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="n">species_name</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">spec_name</span>
+
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">gene_name</span> <span class="o">=</span> <span class="n">refgene_inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;geneName&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                        <span class="n">gene_name</span> <span class="o">=</span> <span class="n">refgene_inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="n">edge_log_name_in</span> <span class="o">=</span> <span class="n">gene_name</span>
+
+                    <span class="n">ref_gene_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">ref_gene_info</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">edge_log_name_in</span><span class="p">,</span><span class="n">gene_name</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ref_gene_keys</span><span class="p">:</span>
+                    <span class="n">ref_gene_command</span> <span class="o">=</span> <span class="n">command_set</span><span class="p">[</span><span class="s1">&#39;reference_gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ref_gene_command</span><span class="p">)</span>
+                    <span class="n">refgene_outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+
+                    <span class="n">spec_command</span> <span class="o">=</span> <span class="s2">&quot;MATCH(n:EntityWithAccessionedSequence {stId:&#39;&quot;</span><span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span><span class="s2">&quot;&#39;}) RETURN n.speciesName&quot;</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">spec_command</span><span class="p">)</span>
+                    <span class="n">spec_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">result</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="n">species_name</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">spec_name</span>
+
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">gene_name</span> <span class="o">=</span> <span class="n">refgene_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;geneName&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                        <span class="n">gene_name</span> <span class="o">=</span> <span class="n">refgene_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="n">edge_log_name_out</span> <span class="o">=</span> <span class="n">gene_name</span>
+
+                    <span class="n">ref_gene_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">ref_gene_info</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">edge_log_name_out</span><span class="p">,</span><span class="n">gene_name</span><span class="p">)</span>
+
+        <span class="c1">#print(&#39;Reference gene search completed&#39;)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">])):</span>
+            <span class="n">edge_log_name_in</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">edge_log_name_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">edge_log_name_in</span> <span class="o">=</span> <span class="n">ref_gene_info</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">edge_log_name_out</span> <span class="o">=</span> <span class="n">ref_gene_info</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+
+            <span class="n">edge_tag</span> <span class="o">=</span> <span class="n">edge_log_name_in</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="n">edge_log_name_out</span>
+
+            <span class="k">if</span> <span class="n">edge_tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_log</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge_tag</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge_log_name_in</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge_log_name_out</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;reaction&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction_info</span><span class="p">[</span><span class="s1">&#39;reaction&#39;</span><span class="p">])</span>
+                <span class="c1">#self.edge_data[&#39;category&#39;].append(reaction_info[&#39;category&#39;])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction_info</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;module&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction_info</span><span class="p">[</span><span class="s1">&#39;module&#39;</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;input_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">species_name</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span><span class="o">==</span><span class="s1">&#39;Homo sapiens&#39;</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ref_gene_info</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+                        <span class="c1">#node_data[&#39;reference stId&#39;].append(&#39;None&#39;)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;output_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">species_name</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span><span class="o">==</span><span class="s1">&#39;Homo sapiens&#39;</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ref_gene_info</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_nodes</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ncip.make_graph"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.make_graph">[docs]</a>    <span class="k">def</span> <span class="nf">make_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a networkx graph using the connecitivity data and assigns a color value to each edge</span>
+<span class="sd">        depending the subpathway they belong to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+        <span class="n">edge_category</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">edge_names</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">edge_model</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">edge_module</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">edge_reaction</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">check1</span><span class="p">,</span> <span class="n">check2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+        <span class="c1">#for n1,n2,prop,sc,name in zip(edge_data[&#39;input&#39;],edge_data[&#39;output&#39;],edge_data[&#39;category&#39;],edge_data[&#39;schemaClass&#39;],edge_data[&#39;name&#39;]):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]))):</span>
+            <span class="c1">#if self.edge_data[&#39;input&#39;][i]!=self.edge_data[&#39;output&#39;][i]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]):</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#if self.edge_data[&#39;input&#39;][i]!=self.edge_data[&#39;output&#39;][i]:</span>
+                <span class="c1">#if (self.edge_data[&#39;input&#39;][i]==self.edge_data[&#39;output&#39;][i]):</span>
+                <span class="c1">#    pass</span>
+                <span class="c1">#else:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="n">edge_names</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="s1">&#39;binding&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;Binding&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;binding&#39;</span>
+                <span class="k">elif</span> <span class="s1">&#39;Negative&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;nhibit&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;negative regulation&#39;</span>
+                <span class="k">elif</span> <span class="s1">&#39;Positive&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;egulation&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;positive regulation&#39;</span>
+                <span class="k">elif</span> <span class="s1">&#39;phorylat&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;phosphorylation&#39;</span>
+                <span class="k">elif</span> <span class="s1">&#39;Expression&#39;</span>  <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;expression&#39;</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;PPI&#39;</span><span class="p">:</span>
+                    <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;PPI&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;other&#39;</span>
+
+                <span class="n">edge_category</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="n">category_name</span>
+                <span class="n">edge_module</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;module&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">edge_reaction</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;reaction&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+
+                <span class="k">if</span> <span class="s1">&#39;nhibit&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="s1">&#39;Negative&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                <span class="c1">#if &#39;Exocytosis&#39; in edge_data[&#39;name&#39;][i] or &#39;Inhibit&#39; in edge_data[&#39;name&#39;][i] or &#39;Negative&#39; in edge_data[&#39;schemaClass&#39;][i]:</span>
+                    <span class="n">edge_model</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="s1">&#39;down&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">edge_model</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span>
+
+                <span class="c1">#if True==False:</span>
+                <span class="c1">#if edge_data[&#39;category&#39;][i]==&#39;binding&#39; or edge_data[&#39;category&#39;][i]==&#39;dissociation&#39; or edge_data[&#39;category&#39;][i]==&#39;PPI&#39;:</span>
+                <span class="c1">#if prop!=&#39;PositiveRegulation&#39; and prop!=&#39;NegativeRegulation&#39;:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Reaction&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;PPI&#39;</span><span class="p">:</span><span class="c1"># and &#39;Exocytosis&#39; not in edge_data[&#39;name&#39;][i]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+                    <span class="n">edge_names</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">edge_category</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="n">category_name</span>
+                    <span class="n">edge_model</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="n">edge_model</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span>
+                    <span class="n">edge_module</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;module&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">edge_reaction</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;reaction&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">edge_category</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">edge_names</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">edge_model</span><span class="p">,</span> <span class="s2">&quot;channel&quot;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">edge_module</span><span class="p">,</span> <span class="s2">&quot;module&quot;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">edge_reaction</span><span class="p">,</span> <span class="s2">&quot;reaction&quot;</span><span class="p">)</span>
+
+        <span class="n">node_names</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">node_genes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">node_w_seq</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">node_types</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1">#for id,n,g,s in zip(self.node_data[&#39;node&#39;],self.node_data[&#39;name&#39;],self.node_data[&#39;reference gene&#39;],self.node_data[&#39;genome-encoded&#39;]):</span>
+        <span class="c1">#    node_names[id] = n</span>
+        <span class="c1">#    node_genes[id] = g</span>
+        <span class="c1">#    node_w_seq[id] = s</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span>
+
+            <span class="n">node_names</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="n">node_genes</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;reference gene&#39;</span><span class="p">]</span>
+            <span class="n">node_w_seq</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;genome-encoded&#39;</span><span class="p">]</span>
+            <span class="n">node_types</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schemaClass&#39;</span><span class="p">]</span>
+
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">node_names</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">node_genes</span><span class="p">,</span> <span class="s2">&quot;gene&quot;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">node_w_seq</span><span class="p">,</span> <span class="s2">&quot;sequenced&quot;</span><span class="p">)</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span> <span class="n">node_types</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ncip.state_entropy"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.state_entropy">[docs]</a>    <span class="k">def</span> <span class="nf">state_entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">,</span><span class="n">sources</span><span class="p">,</span><span class="n">reference_state</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the entropy of the network state with respect to the maximum entropy state.</span>
+<span class="sd">        For binary valued network nodes, the state is: {P(v=1),P(v=0)}, where v=1 means the physical</span>
+<span class="sd">        entity at high concentration (or copy number). Similary, v=0 means the physical entity is</span>
+<span class="sd">        at low concentration (or copy number). The total number of nodes in the network is n and the</span>
+<span class="sd">        number of states for each node is m.</span>
+
+<span class="sd">        Nodes that act as sources are neglected from the entropy calculation, to determine only</span>
+<span class="sd">        the effect of the information propagation through the network.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state: array_like</span>
+<span class="sd">            A [mn,1] numpy array.</span>
+
+<span class="sd">        sources: list</span>
+<span class="sd">            Node numbers that are sources in the network.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        H: float</span>
+<span class="sd">            Entropy of the network state in bits.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">H</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">maxEnt_state</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">,))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">reference_state</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+                    <span class="n">H</span> <span class="o">+=</span> <span class="n">st</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">maxEnt_state</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                    <span class="c1">#print(state[self.code_length*i:self.code_length*(i+1),0])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+                    <span class="n">this_entropy</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">reference_state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">this_entropy</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+                        <span class="n">H</span> <span class="o">+=</span> <span class="n">this_entropy</span>
+                    <span class="c1">#print(state[self.code_length*i:self.code_length*(i+1),0])</span>
+
+        <span class="k">return</span> <span class="n">H</span></div>
+
+    <span class="k">def</span> <span class="nf">entropy_drop_and_rise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state_1</span><span class="p">,</span><span class="n">state_2</span><span class="p">,</span><span class="n">reference_state</span><span class="p">,</span><span class="n">sources</span><span class="p">):</span>
+        <span class="n">H_drop</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">H_gain</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">maxEnt_state</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">,))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">state_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+                <span class="n">this_entropy_1</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">state_1</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">reference_state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+                <span class="n">this_entropy_2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">state_2</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">reference_state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">this_entropy_1</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="ow">and</span> <span class="n">this_entropy_2</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">this_entropy_1</span><span class="o">&gt;=</span><span class="n">this_entropy_2</span><span class="p">:</span>
+                        <span class="n">H_gain</span> <span class="o">+=</span> <span class="n">this_entropy_1</span> <span class="o">-</span> <span class="n">this_entropy_2</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">H_drop</span> <span class="o">+=</span> <span class="n">this_entropy_1</span> <span class="o">-</span> <span class="n">this_entropy_2</span>
+                    <span class="c1">#print(state[self.code_length*i:self.code_length*(i+1),0])</span>
+
+        <span class="k">return</span> <span class="n">H_drop</span><span class="p">,</span> <span class="n">H_gain</span>
+
+<div class="viewcode-block" id="ncip.get_final_state"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.get_final_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_final_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the final state of the network using the initial state X and the information transfer</span>
+<span class="sd">        matrix Tmat. The state of the sources are fixed during the information transfer. The number of</span>
+<span class="sd">        nodes in the network is n and the number of states for each node is m.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X: array_like</span>
+<span class="sd">            A [mn,1] numpy array.</span>
+
+<span class="sd">        sources: list</span>
+<span class="sd">            Node numbers that are sources in the network, whose probabilistic state, e.g. {P[v=1],P[v=0]}</span>
+<span class="sd">            has to be fixed during information propagation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        X: array_like</span>
+<span class="sd">            Stationary state of the network.</span>
+
+<span class="sd">        steps: int</span>
+<span class="sd">            Number of steps it took to reach the stationary state of the network.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tol</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">tol</span><span class="o">&gt;</span><span class="mf">1e-4</span><span class="p">:</span>
+            <span class="n">X_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C_sparse</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+                <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">),:]</span> <span class="o">=</span> <span class="n">X_old</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">),:]</span>
+
+            <span class="n">tol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">X_old</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">steps</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">steps</span></div>
+
+<div class="viewcode-block" id="ncip.construct_C"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.construct_C">[docs]</a>    <span class="k">def</span> <span class="nf">construct_C</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rho</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">neglect_modules</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the information transition matrix for the graph using the adjacency matrix and</span>
+<span class="sd">        interference due to multiple information sources.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        G_d: networkx DiGraph</span>
+<span class="sd">            Graph of a Reactome TopLevelPathway consisting of ReactionLikeEvents and regulations.</span>
+
+<span class="sd">        rho: float</span>
+<span class="sd">            Communication error in each edge.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        C: numpy matrix</span>
+<span class="sd">            Information transition matrix of the network.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">code_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">m_rho</span> <span class="o">=</span> <span class="n">rho</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">up_regulation</span><span class="p">,</span> <span class="n">down_regulation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)))</span>
+
+        <span class="n">up_regulation</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rho</span><span class="p">)</span><span class="o">*</span><span class="n">up_regulation</span>
+        <span class="n">down_regulation</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rho</span><span class="p">)</span><span class="o">*</span><span class="n">down_regulation</span>
+
+        <span class="n">up_regulation</span> <span class="o">+=</span> <span class="n">m_rho</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span>
+        <span class="n">down_regulation</span> <span class="o">+=</span> <span class="n">m_rho</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)))</span>
+
+        <span class="n">null_communicator</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span>
+
+        <span class="c1"># bao = BA()</span>
+        <span class="c1"># bao.set_response(up_regulation)</span>
+        <span class="c1"># print(bao.get_CC())</span>
+        <span class="c1">#</span>
+        <span class="c1"># bao.set_response(down_regulation)</span>
+        <span class="c1"># print(bao.get_CC())</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">))</span>
+
+        <span class="n">node_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+        <span class="n">node_idx</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">node_list</span><span class="p">)):</span>
+            <span class="n">node_idx</span><span class="p">[</span><span class="n">node_list</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="c1"># for n1 in range(0,A.shape[0]):</span>
+        <span class="c1">#     in_degree = self.G_d.in_degree(node_list[n1])</span>
+        <span class="c1">#     for n2 in range(0,A.shape[0]):</span>
+        <span class="c1">#         if A[n1,n2]&gt;0:</span>
+        <span class="c1">#             if self.G_d.get_edge_data(node_list[n2],node_list[n1])[&#39;channel&#39;]==&#39;down&#39;:</span>
+        <span class="c1">#                 C[self.code_length*n1:self.code_length*(n1+1),self.code_length*n2:self.code_length*(n2+1)] = (1.0/in_degree)*down_regulation</span>
+        <span class="c1">#             else:</span>
+        <span class="c1">#                 C[self.code_length*n1:self.code_length*(n1+1),self.code_length*n2:self.code_length*(n2+1)] = (1.0/in_degree)*up_regulation</span>
+
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">node_idx</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">node_idx</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+            <span class="k">if</span> <span class="s1">&#39;PPI&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="s1">&#39;category&#39;</span><span class="p">]:</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="s1">&#39;channel&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;down&#39;</span><span class="p">:</span>
+                <span class="n">C</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">j</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">down_regulation</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">C</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">j</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">up_regulation</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">get_edge_data</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="s1">&#39;module&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">neglect_modules</span><span class="p">:</span>
+                <span class="n">C</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">j</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">null_communicator</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">total_row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+
+            <span class="k">if</span> <span class="n">total_row</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">*=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">total_row</span>
+
+        <span class="c1"># Apply bounday condition</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">node_list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">node_list</span><span class="p">[</span><span class="n">n</span><span class="p">])</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">C</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">n</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">n</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">C_sparse</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_regulation</span> <span class="o">=</span> <span class="n">up_regulation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_regulation</span> <span class="o">=</span> <span class="n">down_regulation</span></div>
+
+<div class="viewcode-block" id="ncip.disconnect_nodes"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.disconnect_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">classname</span><span class="p">,</span><span class="n">sources</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes nodes of the specified class from the network communication (or transition) matrix.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        classname: string</span>
+<span class="sd">            Class of the nodes to be disconnected from the network communication matrix.</span>
+
+<span class="sd">        sources: list</span>
+<span class="sd">            List of source nodes which remains to be connected to the communication matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+        <span class="n">C_dense</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C_sparse</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">classname</span><span class="o">==</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+                <span class="n">C_dense</span><span class="p">[:,</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">C_dense</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">C_dense</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">*=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">C_sparse</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">C_dense</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ncip.disconnect_drug_nodes"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.disconnect_drug_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect_drug_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes nodes of the specified class from the network communication (or transition) matrix.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        classname: string</span>
+<span class="sd">            Class of the nodes to be disconnected from the network communication matrix.</span>
+
+<span class="sd">        sources: list</span>
+<span class="sd">            List of source nodes which remains to be connected to the communication matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">drugs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">drug_ids</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+        <span class="n">all_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;Drug&#39;</span> <span class="ow">in</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">skip</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
+                <span class="n">drugs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; [&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">drug_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">total_edges_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">total_edges_to_delete</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_deletions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">drug_ids</span><span class="p">:</span>
+                <span class="n">total_edges_to_delete</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">total_edges_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;reaction&#39;</span><span class="p">])</span>
+                <span class="n">total_deletions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nodes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">nodes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+
+        <span class="n">C_dense</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C_sparse</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">deletion</span> <span class="ow">in</span> <span class="n">total_deletions</span><span class="p">:</span>
+            <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="n">deletion</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">deletion</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">C_dense</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">j</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">,))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">C_dense</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">*=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">C_dense</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">C_sparse</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">C_dense</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ncip.save_edges_and_nodes"><a class="viewcode-back" href="../../ncip.html#CoRe.ncip.ncip.save_edges_and_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">save_edges_and_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pathway_nametag</span><span class="p">,</span><span class="n">network_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds information about an edge to the edge_data and node_data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pathway_name: string</span>
+<span class="sd">            Name of the reactome top level pathway.</span>
+
+<span class="sd">        network_type: string</span>
+<span class="sd">            To query the neo4j reactome database</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df_e</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_data</span><span class="p">)</span>
+
+        <span class="n">df_e</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s1">&#39;-edges.pkl&#39;</span><span class="p">)</span>
+        <span class="n">df_e</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s1">&#39;-edges.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">df_n</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_data</span><span class="p">)</span>
+        <span class="n">df_n</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s1">&#39;-nodes.pkl&#39;</span><span class="p">)</span>
+        <span class="n">df_n</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s1">&#39;-nodes.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">save_network</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pathway_nametag</span><span class="p">,</span><span class="n">network_type</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Communication network &quot;</span><span class="o">+</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s2">&quot;-&quot;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s2">&quot;.gml created.&quot;</span><span class="p">)</span>
+
+        <span class="n">nx</span><span class="o">.</span><span class="n">write_gml</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s2">&quot;-&quot;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s2">&quot;.gml&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">initialize_network_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">additional_sources</span><span class="p">,</span><span class="n">source_state</span><span class="p">):</span>
+        <span class="n">network_state</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">network_sources</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">node_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">additional_sources</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">node_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+                <span class="n">network_state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">source_state</span>
+
+                <span class="n">network_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">write_nodes_and_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filetag</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="n">ef</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filetag</span><span class="o">+</span><span class="s1">&#39;-edges.tsv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input</span><span class="se">\t</span><span class="s1">Output</span><span class="se">\t</span><span class="s1">ReactionName</span><span class="se">\t</span><span class="s1">Channel</span><span class="se">\t</span><span class="s1">ReactionId&#39;</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">outstring</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;channel&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;reaction&#39;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">outstring</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+
+        <span class="n">ef</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="n">nf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filetag</span><span class="o">+</span><span class="s1">&#39;-nodes.tsv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Node</span><span class="se">\t</span><span class="s1">NodeName</span><span class="se">\t</span><span class="s1">Class</span><span class="se">\t</span><span class="s1">Sequenced&#39;</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">nf</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;sequenced&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">outstring</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;sequenced&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">outstring</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;sequenced&#39;</span><span class="p">])</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="n">outstring</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">nf</span><span class="p">)</span>
+
+        <span class="n">nf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Swarnavo Sarkar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

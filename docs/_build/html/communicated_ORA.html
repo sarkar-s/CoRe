@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Communicated genes overrepresentation analysis &mdash; CoReI Alpha 1 (0.1.1.1) documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ncip" href="ncip.html" />
+    <link rel="prev" title="Communicated proteins" href="Communicated_Proteins.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CoReI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Construction_of_Top_Level_Pathway_Network.html">Network Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Add-human_PPI.html">Add interactome to reactome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SARS-CoV-2_human_PPI.html">SARS-CoV2 interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Information_transfer_in_the_network.html">Information transfer due to viral PPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Communicated_Proteins.html">Communicated proteins</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Communicated genes overrepresentation analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ncip.html">ncip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enGO.html">enGO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reader.html">reader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CoReI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Communicated genes overrepresentation analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/communicated_ORA.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="communicated-genes-overrepresentation-analysis">
+<h1>Communicated genes overrepresentation analysis<a class="headerlink" href="#communicated-genes-overrepresentation-analysis" title="Permalink to this headline"></a></h1>
+<p>Performs the over-representation analysis of the direct and communicated
+gene sets using the Gene Ontology Biological Processes from the c5
+collection in the <a class="reference external" href="https://www.gsea-msigdb.org/gsea/msigdb/">Molecular Signatures
+Database</a>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+
+<span class="kn">import</span> <span class="nn">statsmodels.stats</span> <span class="k">as</span> <span class="nn">sts</span>
+
+<span class="kn">from</span> <span class="nn">CoRe</span> <span class="kn">import</span> <span class="n">reader</span><span class="p">,</span> <span class="n">enGO</span>
+<span class="kn">from</span> <span class="nn">multipy.fdr</span> <span class="kn">import</span> <span class="n">qvalue</span>
+</pre></div>
+</div>
+<p>Read the gene sets and determine the list of unique genes.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_genes</span> <span class="o">=</span> <span class="mi">17949</span>
+<span class="n">gene_set_cutoff</span> <span class="o">=</span> <span class="mi">373</span>
+</pre></div>
+</div>
+<p>Specify positive false discovery rate</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fdr</span> <span class="o">=</span> <span class="mf">0.01</span>
+</pre></div>
+</div>
+<p>The GOBP gene sets are stored as a dict in json format.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+<span class="n">go_directory</span> <span class="o">=</span> <span class="n">current_directory</span> <span class="o">+</span> <span class="s2">&quot;/Examples/GO_sets&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">go_directory</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">((</span><span class="s1">&#39;GO_BPs.json&#39;</span><span class="p">))</span>
+<span class="n">GO_BPs</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">bp_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">GO_BPs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">GO_BPs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">GO_BPs</span><span class="p">[</span><span class="n">bp</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">GO_BPs</span><span class="p">[</span><span class="n">bp</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total gene sets: &#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">GO_BPs</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+
+<span class="n">wf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;BP_embedding.csv&#39;</span><span class="p">)</span>
+<span class="n">all_lines</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">embed_idx</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">all_lines</span><span class="p">:</span>
+    <span class="n">all_values</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+    <span class="n">embed_idx</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">all_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">all_values</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">embed_idx</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">all_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+
+
+<span class="n">bp_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;GOBP_list.csv&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Total</span> <span class="n">gene</span> <span class="n">sets</span><span class="p">:</span>  <span class="mi">7481</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">go_directory</span> <span class="o">=</span> <span class="n">current_directory</span> <span class="o">+</span> <span class="s2">&quot;/Examples/GO_sets&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">go_directory</span><span class="p">)</span>
+
+<span class="n">wf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;BP_embedding.csv&#39;</span><span class="p">)</span>
+<span class="n">all_lines</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">embed_idx</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">all_lines</span><span class="p">:</span>
+    <span class="n">all_values</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+    <span class="n">embed_idx</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">all_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">all_values</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">embed_idx</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">all_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+
+
+<span class="n">bp_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;GOBP_list.csv&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Read the two sets of genes.</p>
+<p><strong>PPI set:</strong> Genes that have direct protein-protein interactions with
+SARS-CoV-2 proteins. <strong>Total interaction set:</strong> Genes that have either
+direct interaction or receive communication from SARS-CoV-2 proteins.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_pathway</span> <span class="o">=</span> <span class="s1">&#39;Immune System&#39;</span>
+<span class="n">pathway_nametag</span> <span class="o">=</span> <span class="n">selected_pathway</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+
+<span class="n">network_type</span> <span class="o">=</span> <span class="s1">&#39;medium-PPI&#39;</span>
+<span class="n">state_type</span> <span class="o">=</span> <span class="s1">&#39;maxEnt&#39;</span>
+
+<span class="n">data_directory</span> <span class="o">=</span> <span class="n">current_directory</span> <span class="o">+</span> <span class="s2">&quot;/Examples/&quot;</span><span class="o">+</span><span class="n">pathway_nametag</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
+
+
+<span class="n">direct_interaction_set</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_interactions_for_GO</span><span class="p">(</span><span class="s1">&#39;SARS_CoV2-&#39;</span><span class="o">+</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_interactions.json&#39;</span><span class="p">)</span>
+<span class="n">total_interaction_set</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_interactions_for_GO</span><span class="p">(</span><span class="n">state_type</span><span class="o">+</span><span class="s1">&#39;-SARS_CoV2_total_&#39;</span><span class="o">+</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s1">&#39;_interactions.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Identify the sources, or SARS-CoV-2 proteins, that are causing
+communication. We determine this if for a SARS-CoV-2 protein the number
+of affected genes is greater than the number of genes that have PPI.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;SARS-CoV-2 protein&#39;</span><span class="o">+</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Directly interacting proteins&#39;</span><span class="o">+</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;30</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Direct and communicated proteins&#39;</span><span class="o">+</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">total_interaction_set</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">total_interaction_set</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">&gt;</span><span class="nb">len</span><span class="p">(</span><span class="n">direct_interaction_set</span><span class="p">[</span><span class="n">k</span><span class="p">]):</span>
+        <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">direct_interaction_set</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">:</span><span class="s2">&lt;30</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">total_interaction_set</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SARS</span><span class="o">-</span><span class="n">CoV</span><span class="o">-</span><span class="mi">2</span> <span class="n">protein</span>   <span class="n">Directly</span> <span class="n">interacting</span> <span class="n">proteins</span>  <span class="n">Direct</span> <span class="ow">and</span> <span class="n">communicated</span> <span class="n">proteins</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp2</span>       <span class="mi">2</span>                              <span class="mi">3</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp7</span>       <span class="mi">9</span>                              <span class="mi">28</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp12</span>      <span class="mi">1</span>                              <span class="mi">7</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp13</span>      <span class="mi">1</span>                              <span class="mi">3</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp14</span>      <span class="mi">2</span>                              <span class="mi">7</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF3a</span>      <span class="mi">1</span>                              <span class="mi">2</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">M</span>          <span class="mi">2</span>                              <span class="mi">33</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF8</span>       <span class="mi">7</span>                              <span class="mi">46</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF9b</span>      <span class="mi">1</span>                              <span class="mi">3</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF9c</span>      <span class="mi">2</span>                              <span class="mi">5</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF10</span>      <span class="mi">2</span>                              <span class="mi">4</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">go_tags</span><span class="p">,</span> <span class="n">go_names</span><span class="p">,</span> <span class="n">p_values</span> <span class="o">=</span> <span class="n">enGO</span><span class="o">.</span><span class="n">compute_p_values</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span><span class="n">GO_BPs</span><span class="p">,</span><span class="n">total_interaction_set</span><span class="p">,</span><span class="n">total_genes</span><span class="p">)</span><span class="c1">#,size_threshold=gene_set_cutoff)</span>
+</pre></div>
+</div>
+<p>Save the GOBP gene sets that have a nontrivial raw <span class="math notranslate nohighlight">\(p\)</span>-value.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">json_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">go_tags</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">state_type</span><span class="o">+</span><span class="s1">&#39;-all_nontrivial_GOs.json&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Multiple hypothesis testing using Benjamini-Hochberg (BH) correction</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q_values</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">s_g</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+    <span class="n">go_tags</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span> <span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span> <span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span> <span class="o">=</span> <span class="n">enGO</span><span class="o">.</span><span class="n">compute_q_values</span><span class="p">(</span><span class="n">p_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span><span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span><span class="n">go_tags</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">go_idx</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+    <span class="n">go_idx</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">go</span> <span class="ow">in</span> <span class="n">go_tags</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+        <span class="n">go_idx</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bp_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">go</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx_to_remove</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+    <span class="n">idx_to_remove</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">go_idx</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+        <span class="n">idx_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">go_idx</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+        <span class="n">idx_copy</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
+
+        <span class="n">d1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">embed_idx</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">idx_copy</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">intersection</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">len_intersection</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">intersection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+
+            <span class="k">if</span> <span class="n">len_intersection</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">idx_to_remove</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">s_g</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">idx_to_remove</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+        <span class="n">q_list</span> <span class="o">=</span> <span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">idx_to_remove</span><span class="p">[</span><span class="n">s_g</span><span class="p">]:</span>
+            <span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">go_tags</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">q_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">q_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Save all GOBP gene sets that are significant after the BH correction.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">json_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">go_names</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">state_type</span><span class="o">+</span><span class="s1">&#39;-all_gos-afterBH.json&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json_obj</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_unique_go_names</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">go_names</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">all_unique_go_names</span> <span class="o">+=</span> <span class="n">go_names</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+
+<span class="n">all_unique_go_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">all_unique_go_names</span><span class="p">))</span>
+
+<span class="n">wf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">state_type</span><span class="o">+</span><span class="s1">&#39;-all_unique_go_names.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">g_n</span> <span class="ow">in</span> <span class="n">all_unique_go_names</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g_n</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">wf</span><span class="p">)</span>
+
+<span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_unique_go_tags</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">go_tags</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">all_unique_go_tags</span> <span class="o">+=</span> <span class="n">go_tags</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+
+<span class="n">all_unique_go_tags</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">all_unique_go_tags</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Options for selecting the number of GOBP gene sets for plotting.</p>
+<p><strong>Option 1:</strong> Plot all significant BPs. <strong>Option 2:</strong> Specify the top
+<span class="math notranslate nohighlight">\(n\)</span> significant BPs to select for each SARS-CoV-2 protein.
+<strong>Option 3:</strong> Specify a file containing a list of Gene Ontology
+Biological Processes to select.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_option</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">#&#39;high-selected_gos-hierarchical.csv&#39;</span>
+
+<span class="k">if</span> <span class="n">plot_option</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+    <span class="n">selected_gos</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">go</span><span class="p">,</span><span class="n">q</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">go_names</span><span class="p">[</span><span class="n">s</span><span class="p">],</span><span class="n">q_values</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">go</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">selected_gos</span><span class="p">:</span>
+                <span class="n">selected_gos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">go</span><span class="p">)</span>
+<span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">plot_option</span><span class="p">)</span><span class="o">==</span><span class="nb">int</span><span class="p">:</span>
+    <span class="n">selected_gos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">n_c</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">go_names</span><span class="p">[</span><span class="n">s</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">go</span><span class="p">,</span><span class="n">q</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">go_names</span><span class="p">[</span><span class="n">s</span><span class="p">][:</span><span class="n">n_c</span><span class="p">],</span><span class="n">q_values</span><span class="p">[</span><span class="n">s</span><span class="p">][:</span><span class="n">n_c</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">go</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">selected_gos</span> <span class="ow">and</span> <span class="n">q</span><span class="o">&lt;</span><span class="n">cutoff</span><span class="p">:</span>
+                <span class="n">selected_gos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">go</span><span class="p">)</span>
+
+    <span class="n">wf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">state_type</span><span class="o">+</span><span class="s1">&#39;-selected_gos-top&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">plot_option</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">selected_gos</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">wf</span><span class="p">)</span>
+
+    <span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">selected_gos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">plot_option</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">20</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_q</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)))</span>
+<span class="n">q_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)):</span>
+        <span class="n">s_g</span> <span class="o">=</span> <span class="n">sources</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">&lt;</span><span class="n">cutoff</span><span class="p">:</span>
+                <span class="n">total_q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">][</span><span class="n">k</span><span class="p">])</span>
+            <span class="c1">#else:</span>
+            <span class="c1">#    total_q[i,j] = 1.0</span>
+
+            <span class="n">q_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+<span class="n">short_sars</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+    <span class="n">short_sars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">state_type</span><span class="o">+</span><span class="s1">&#39;-q_mat-H.csv&#39;</span><span class="p">,</span><span class="n">q_matrix</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_max</span> <span class="o">=</span> <span class="mi">10</span><span class="c1">#min(np.max(total_q),10.0)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">c_max</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span>
+<span class="n">c_min</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span> <span class="o">-</span> <span class="n">r</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">total_q</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">c_max</span><span class="p">,</span><span class="n">c_min</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0</span>
+<span class="mi">10</span> <span class="o">-</span><span class="mf">6.0</span> <span class="mf">8.0</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pixel_width</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="n">pixel_width</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">)</span>
+<span class="c1">#w = 0.55*pixel_width*len(list(total_interaction_set))</span>
+<span class="c1">#print(l,w)</span>
+<span class="c1">#print(np.min(total_q))</span>
+
+<span class="n">non_zero_short_sars</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">total_q</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="c1">#print(np.sum(total_q[:,i]))</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">total_q</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">non_zero_short_sars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">short_sars</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">non_zero_q</span><span class="p">)</span><span class="o">==</span><span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">total_q</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">non_zero_q</span><span class="p">,</span><span class="n">total_q</span><span class="p">[:,</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">)</span>
+
+<span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">non_zero_q</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">non_zero_q</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">total_q</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="mf">0.9</span><span class="o">*</span><span class="n">pixel_width</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Nsp7&#39;</span><span class="p">,</span> <span class="s1">&#39;Nsp12&#39;</span><span class="p">,</span> <span class="s1">&#39;Nsp13&#39;</span><span class="p">,</span> <span class="s1">&#39;Nsp14&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;ORF8&#39;</span><span class="p">,</span> <span class="s1">&#39;ORF9b&#39;</span><span class="p">,</span> <span class="s1">&#39;ORF9c&#39;</span><span class="p">,</span> <span class="s1">&#39;ORF10&#39;</span><span class="p">]</span>
+<span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="mf">4.05</span> <span class="mf">10.0</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">l</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">non_zero_q</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">c_max</span><span class="p">)</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$-\log_</span><span class="si">{10}</span><span class="s1">$($Q$)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span><span class="n">labelpad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;minor&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/output_31_0.png" src="_images/output_31_0.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">go_tags</span><span class="p">,</span> <span class="n">go_names</span><span class="p">,</span> <span class="n">p_values</span> <span class="o">=</span> <span class="n">enGO</span><span class="o">.</span><span class="n">compute_p_values</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span><span class="n">GO_BPs</span><span class="p">,</span><span class="n">direct_interaction_set</span><span class="p">,</span><span class="n">total_genes</span><span class="p">)</span><span class="c1">#,size_threshold=gene_set_cutoff)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q_values</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">s_g</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+    <span class="n">go_tags</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span> <span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span> <span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span> <span class="o">=</span> <span class="n">enGO</span><span class="o">.</span><span class="n">compute_q_values</span><span class="p">(</span><span class="n">p_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span><span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span><span class="n">go_tags</span><span class="p">[</span><span class="n">s_g</span><span class="p">],</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_q</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)):</span>
+        <span class="n">s_g</span> <span class="o">=</span> <span class="n">sources</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">go_names</span><span class="p">[</span><span class="n">s_g</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">&lt;</span><span class="n">cutoff</span><span class="p">:</span>
+                <span class="n">total_q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">q_values</span><span class="p">[</span><span class="n">s_g</span><span class="p">][</span><span class="n">k</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">total_q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+<span class="n">short_sars</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+    <span class="n">short_sars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_max</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">c_max</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span>
+<span class="n">c_min</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span> <span class="o">-</span> <span class="n">r</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">total_q</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">c_max</span><span class="p">,</span><span class="n">c_min</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mf">0.0</span>
+<span class="mi">10</span> <span class="o">-</span><span class="mf">6.0</span> <span class="mf">8.0</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pixel_width</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="n">pixel_width</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">)</span>
+
+<span class="n">non_zero_short_sars</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">total_q</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">total_q</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">non_zero_short_sars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">short_sars</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">non_zero_q</span><span class="p">)</span><span class="o">==</span><span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">total_q</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">non_zero_q</span><span class="p">,</span><span class="n">total_q</span><span class="p">[:,</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">)</span>
+
+<span class="n">non_zero_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">non_zero_q</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">non_zero_q</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">total_q</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="mf">0.9</span><span class="o">*</span><span class="n">pixel_width</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Nsp7&#39;</span><span class="p">,</span> <span class="s1">&#39;Nsp14&#39;</span><span class="p">,</span> <span class="s1">&#39;ORF8&#39;</span><span class="p">,</span> <span class="s1">&#39;ORF10&#39;</span><span class="p">]</span>
+<span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">l</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">non_zero_q</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">c_max</span><span class="p">)</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$-\log_</span><span class="si">{10}</span><span class="s1">$($Q$)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span><span class="n">labelpad</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_zero_short_sars</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_gos</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;minor&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/output_37_0.png" src="_images/output_37_0.png" />
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Communicated_Proteins.html" class="btn btn-neutral float-left" title="Communicated proteins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ncip.html" class="btn btn-neutral float-right" title="ncip" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Swarnavo Sarkar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
