@@ -1,0 +1,22 @@
+#+TITLE: CoRe: Communication through Reactome and Interactome (CoRe)
+
+CoRe is a software package to construct communication network models for biological pathways, compute information transfer through the networks, and identify the biological processes affected by communication. CoRe uses the following databases:
+
+- The Reactome database (https://reactome.org)
+- The Interactome database (http://interactome.dfci.harvard.edu)
+- The c5 collection in the MSigDB (http://www.gsea-msigdb.org/gsea/msigdb)
+
+* System Requirements
+
+** Hardware requirements
+   ~CoRe~ was primarily developed and used on an Apple M1 Pro MacBook with 16 GB RAM. Other computers should be also adequate. The information transfer algorithm takes only $\approx 40 \%$ of the time on M1 Pro compared to the Intel processor, with the same RAM.
+
+** Software requirements
+   CoRe is supported for macOS, Monterey (12.4), and has not been tested for other systems yet.
+
+** Python Dependencies
+   ~CoRe~ needs the following libraries:
+   - ~neo4j~
+   - ~pandas~
+   - ~numpy~
+   - ~scipy~
