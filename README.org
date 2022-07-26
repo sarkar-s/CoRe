@@ -17,6 +17,7 @@ CoRe is a software package to construct communication network models for biologi
 ** Python Dependencies
    ~CoRe~ needs the following libraries:
    - ~neo4j~
+   - ~networkx~
    - ~pandas~
    - ~numpy~
    - ~scipy~
