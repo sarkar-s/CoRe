@@ -1,4 +1,4 @@
-#+TITLE: CoRe: Communication through Reactome and Interactome (CoRe)
+#+TITLE: CoRe: Communication through Reactome and Interactome
 
 CoRe is a software package to construct communication network models for biological pathways, compute information transfer through the networks, and identify the biological processes affected by communication. CoRe uses the following databases:
 
@@ -17,6 +17,7 @@ CoRe is a software package to construct communication network models for biologi
 ** Python Dependencies
    ~CoRe~ needs the following libraries:
    - ~neo4j~
+   - ~networkx~
    - ~pandas~
    - ~numpy~
    - ~scipy~
