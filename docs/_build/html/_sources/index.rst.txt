@@ -35,6 +35,8 @@ Gene Ontology over-representation analysis.
    Information_transfer_in_the_network.ipynb
    Communicated_Proteins.ipynb
    communicated_ORA.ipynb
+   Drug_efficacy.ipynb
+   Artificial-protein-expression_efficacy.ipynb
    ncip
    enGO
    reader
