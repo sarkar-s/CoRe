@@ -72,10 +72,6 @@ impact of the SARS-CoV-2 proteins.
 
 .. code:: ipython3
 
-    #netObj.write_nodes_and_edges(filetag=pathway_nametag)
-
-.. code:: ipython3
-
     f = open('SARS_CoV2-'+pathway_nametag+'_interactions.json')
     SARS_nodes = json.load(f)
     f.close()
@@ -137,19 +133,18 @@ effective abundance of the associated network nodes, so we set the state
 of these nodes at :math:`\{0,1\}`. Additionally, we set the state of
 ATP, ADP, and Pi at the maximum entropy state :math:`\{0.5,0.5\}`.
 
+**Additional sources nodes to specify for information transfer**
+
 .. code:: ipython3
 
-    additional_source_nodes = []#['UBE2L6']#["R-ALL-139836","R-ALL-196180","R-ALL-113592","R-ALL-29370","R-ALL-29358","R-ALL-113582","R-ALL-29372"]
+    additional_source_nodes = []
+
+**Disconnect all drug nodes from the network, we only use them while
+screening therapies**
 
 .. code:: ipython3
 
     netObj.disconnect_drug_nodes()
-
-.. code:: ipython3
-
-    #netObj.disconnect_nodes('ChemicalDrug',additional_source_nodes)
-    #netObj.disconnect_nodes('ProteinDrug',additional_source_nodes)
-    #netObj.disconnect_nodes('SimpleEntity',additional_source_nodes)
 
 .. code:: ipython3
 
@@ -158,10 +153,6 @@ ATP, ADP, and Pi at the maximum entropy state :math:`\{0.5,0.5\}`.
     for nG in netObj.G_d.nodes():
         if netObj.G_d.in_degree(nG)==0:
             topological_source_count += 1
-            
-    print(topological_source_count)
-    
-    print(len(node_list),len(netObj.G_d.nodes()))
 
 
 .. parsed-literal::
@@ -234,23 +225,23 @@ ATP, ADP, and Pi at the maximum entropy state :math:`\{0.5,0.5\}`.
 
 .. parsed-literal::
 
-    SARS-CoV2 ORF9b 1 2940
-    SARS-CoV2 Nsp8 1 2940
-    SARS-CoV2 N 0 2941
-    SARS-CoV2 Nsp12 1 2940
-    SARS-CoV2 Nsp10 0 2941
-    SARS-CoV2 Nsp15 1 2940
-    SARS-CoV2 ORF9c 2 2939
-    SARS-CoV2 Nsp13 1 2940
-    SARS-CoV2 ORF3a 1 2940
-    SARS-CoV2 Nsp14 1 2940
     SARS-CoV2 Nsp2 1 2940
-    SARS-CoV2 M 1 2940
-    SARS-CoV2 ORF10 2 2939
-    SARS-CoV2 E 0 2941
     SARS-CoV2 Nsp7 2 2939
-    SARS-CoV2 ORF8 4 2937
+    SARS-CoV2 Nsp8 1 2940
+    SARS-CoV2 Nsp10 0 2941
+    SARS-CoV2 Nsp12 1 2940
+    SARS-CoV2 Nsp13 1 2940
+    SARS-CoV2 Nsp14 1 2940
+    SARS-CoV2 Nsp15 1 2940
     SARS-CoV2 Spike 0 2941
+    SARS-CoV2 ORF3a 1 2940
+    SARS-CoV2 E 0 2941
+    SARS-CoV2 M 1 2940
+    SARS-CoV2 ORF8 4 2937
+    SARS-CoV2 ORF9b 1 2940
+    SARS-CoV2 ORF9c 2 2939
+    SARS-CoV2 N 0 2941
+    SARS-CoV2 ORF10 2 2939
 
 
 **Relative entropy of the total network and number of steps to
@@ -296,7 +287,7 @@ stationary state.**
 
 .. parsed-literal::
 
-      0%|          | 0/27 [00:00<?, ?it/s]
+      0%|          | 0/28 [00:00<?, ?it/s]
 
 
 .. code:: ipython3
@@ -419,5 +410,5 @@ entropy to reference gene products.
     
     os.chdir(data_directory)
     
-    df_reduced.to_csv(initial_state_type+'-'+'SARS_CoV2_'+pathway_nametag+'_'+network_type+'_affected_genes'+errorname+'.csv',index=None)
+    df_reduced.to_csv(initial_state_type+'-'+'SARS_CoV2_Immune_System_medium-PPI_affected_genes'+errorname+'.csv',index=None)
 

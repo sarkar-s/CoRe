@@ -48,6 +48,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Information transfer due to viral PPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Communicated_Proteins.html">Communicated proteins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="communicated_ORA.html">Communicated genes overrepresentation analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Drug_efficacy.html">Scanning drugs to counter signaling from viral PPIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Artificial-protein-expression_efficacy.html">Artificial protein expression screening</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ncip.html">ncip</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enGO.html">enGO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reader.html">reader</a></li>
@@ -168,9 +170,6 @@ impact of the SARS-CoV-2 proteins.</p>
     <span class="n">netObj</span><span class="o">.</span><span class="n">save_network</span><span class="p">(</span><span class="n">pathway_nametag</span><span class="p">,</span><span class="n">network_type</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#netObj.write_nodes_and_edges(filetag=pathway_nametag)</span>
-</pre></div>
-</div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;SARS_CoV2-&#39;</span><span class="o">+</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_interactions.json&#39;</span><span class="p">)</span>
 <span class="n">SARS_nodes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -224,15 +223,13 @@ We set every node in the network initially at the maximum entropy state.</p>
 effective abundance of the associated network nodes, so we set the state
 of these nodes at <span class="math notranslate nohighlight">\(\{0,1\}\)</span>. Additionally, we set the state of
 ATP, ADP, and Pi at the maximum entropy state <span class="math notranslate nohighlight">\(\{0.5,0.5\}\)</span>.</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">additional_source_nodes</span> <span class="o">=</span> <span class="p">[]</span><span class="c1">#[&#39;UBE2L6&#39;]#[&quot;R-ALL-139836&quot;,&quot;R-ALL-196180&quot;,&quot;R-ALL-113592&quot;,&quot;R-ALL-29370&quot;,&quot;R-ALL-29358&quot;,&quot;R-ALL-113582&quot;,&quot;R-ALL-29372&quot;]</span>
+<p><strong>Additional sources nodes to specify for information transfer</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">additional_source_nodes</span> <span class="o">=</span> <span class="p">[]</span>
 </pre></div>
 </div>
+<p><strong>Disconnect all drug nodes from the network, we only use them while
+screening therapies</strong></p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">netObj</span><span class="o">.</span><span class="n">disconnect_drug_nodes</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#netObj.disconnect_nodes(&#39;ChemicalDrug&#39;,additional_source_nodes)</span>
-<span class="c1">#netObj.disconnect_nodes(&#39;ProteinDrug&#39;,additional_source_nodes)</span>
-<span class="c1">#netObj.disconnect_nodes(&#39;SimpleEntity&#39;,additional_source_nodes)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topological_source_count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -240,10 +237,6 @@ ATP, ADP, and Pi at the maximum entropy state <span class="math notranslate nohi
 <span class="k">for</span> <span class="n">nG</span> <span class="ow">in</span> <span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">nG</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
         <span class="n">topological_source_count</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">topological_source_count</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_list</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">()))</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">89</span>
@@ -303,23 +296,23 @@ ATP, ADP, and Pi at the maximum entropy state <span class="math notranslate nohi
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>0%|          | 0/17 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF9b</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp8</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">N</span> <span class="mi">0</span> <span class="mi">2941</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp12</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp10</span> <span class="mi">0</span> <span class="mi">2941</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp15</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF9c</span> <span class="mi">2</span> <span class="mi">2939</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp13</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF3a</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp14</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp2</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">M</span> <span class="mi">1</span> <span class="mi">2940</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF10</span> <span class="mi">2</span> <span class="mi">2939</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">E</span> <span class="mi">0</span> <span class="mi">2941</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp2</span> <span class="mi">1</span> <span class="mi">2940</span>
 <span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp7</span> <span class="mi">2</span> <span class="mi">2939</span>
-<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF8</span> <span class="mi">4</span> <span class="mi">2937</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp8</span> <span class="mi">1</span> <span class="mi">2940</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp10</span> <span class="mi">0</span> <span class="mi">2941</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp12</span> <span class="mi">1</span> <span class="mi">2940</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp13</span> <span class="mi">1</span> <span class="mi">2940</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp14</span> <span class="mi">1</span> <span class="mi">2940</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Nsp15</span> <span class="mi">1</span> <span class="mi">2940</span>
 <span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">Spike</span> <span class="mi">0</span> <span class="mi">2941</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF3a</span> <span class="mi">1</span> <span class="mi">2940</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">E</span> <span class="mi">0</span> <span class="mi">2941</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">M</span> <span class="mi">1</span> <span class="mi">2940</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF8</span> <span class="mi">4</span> <span class="mi">2937</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF9b</span> <span class="mi">1</span> <span class="mi">2940</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF9c</span> <span class="mi">2</span> <span class="mi">2939</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">N</span> <span class="mi">0</span> <span class="mi">2941</span>
+<span class="n">SARS</span><span class="o">-</span><span class="n">CoV2</span> <span class="n">ORF10</span> <span class="mi">2</span> <span class="mi">2939</span>
 </pre></div>
 </div>
 <p><strong>Relative entropy of the total network and number of steps to
@@ -359,7 +352,7 @@ stationary state.</strong></p>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>0%|          | 0/27 [00:00&lt;?, ?it/s]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>0%|          | 0/28 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[1m&#39;</span><span class="o">+</span><span class="s1">&#39;Relative entropy of the network induced by the interaction with the SARS-CoV-2 protiens&#39;</span><span class="p">)</span>
@@ -463,7 +456,7 @@ entropy to reference gene products.</p>
 
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
 
-<span class="n">df_reduced</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">initial_state_type</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="s1">&#39;SARS_CoV2_&#39;</span><span class="o">+</span><span class="n">pathway_nametag</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">network_type</span><span class="o">+</span><span class="s1">&#39;_affected_genes&#39;</span><span class="o">+</span><span class="n">errorname</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df_reduced</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">initial_state_type</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="s1">&#39;SARS_CoV2_Immune_System_medium-PPI_affected_genes&#39;</span><span class="o">+</span><span class="n">errorname</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
