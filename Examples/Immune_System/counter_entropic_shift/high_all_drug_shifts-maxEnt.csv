@@ -1,0 +1,21 @@
+Protein,Relative Entropy,Drug Type,Drug
+Ref,65.4157289254401,None,
+,63.33869541881879,ChemicalDrug,acalabrutinib
+,63.33869541881879,ChemicalDrug,ibrutinib
+,63.6264192695006,ChemicalDrug,delgocitinib
+,64.25679284384192,ChemicalDrug,amlexanox
+,64.65598094076508,ProteinDrug,tocilizumab
+,64.65598094076508,ProteinDrug,sarilumab
+,64.65598094076508,ProteinDrug,satralizumab
+,64.78141999145998,ChemicalDrug,ruxolitinib
+,64.78141999145998,ChemicalDrug,baricitinib
+,64.78141999145998,ChemicalDrug,tofacitinib
+,65.24598358391025,ProteinDrug,isunakinra
+,65.24598358391025,ProteinDrug,anakinra
+,65.43974353608,ProteinDrug,natalizumab
+,65.63359951859883,ProteinDrug,camrelizumab
+,65.63359951859883,ProteinDrug,cemiplimab
+,65.63359951859883,ProteinDrug,nivolumab
+,66.57208267605479,ChemicalDrug,HCQ
+,68.38347621671754,ChemicalDrug,tacrolimus
+,68.50240879233993,ProteinDrug,omalizumab

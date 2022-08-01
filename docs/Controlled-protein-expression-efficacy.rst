@@ -1,8 +1,9 @@
-Artificial protein expression screening
-=======================================
+Effect of controlled protein expression on the information from viral PPIs
+==========================================================================
 
 **Computes the change in network relative entropy from viral PPIs after
-setting immune system proteins, one at a time, to high abundance**
+setting immune system proteins, one at a time, to high abundance
+{1,0}.**
 
 .. code:: ipython3
 
@@ -24,6 +25,10 @@ setting immune system proteins, one at a time, to high abundance**
     import networkx as nx
     import matplotlib.pyplot as plt
     import json
+    
+    from matplotlib import cm
+    from matplotlib import rcParams
+    import matplotlib.patches as patches
 
 .. code:: ipython3
 
@@ -47,7 +52,7 @@ setting immune system proteins, one at a time, to high abundance**
         netObj.save_network(pathway_nametag,network_type)
 
 **All immune system communication network proteins that have PPI with
-SARS-CoV-2 proteins**
+SARS-CoV-2 proteins.**
 
 .. code:: ipython3
 
@@ -67,11 +72,11 @@ SARS-CoV-2 proteins**
 
 .. parsed-literal::
 
-    ['GOLGA7', 'RIPK1', 'NEU1', 'NLRX1', 'PVR', 'RAB18', 'HECTD1', 'RAB7A', 'ITGB1', 'IMPDH2', 'ERP44', 'RAB14', 'ELOC', 'CSNK2B', 'RALA', 'AP2A2', 'RNF41', 'CYB5R3', 'ELOB', 'ECSIT', 'ANO6', 'PTGES2', 'STOM', 'HMOX1', 'GGH', 'RAB5C', 'NPC2', 'GLA', 'RHOA', 'TBK1', 'SLC27A2', 'IL17RA', 'SLC44A2', 'TOMM70', 'RAB10', 'EIF4E2']
+    ['RHOA', 'SLC27A2', 'PVR', 'ELOB', 'EIF4E2', 'CYB5R3', 'NLRX1', 'RAB14', 'ECSIT', 'AP2A2', 'CSNK2B', 'HECTD1', 'ERP44', 'IL17RA', 'ITGB1', 'RALA', 'RAB10', 'NEU1', 'IMPDH2', 'TOMM70', 'GGH', 'PTGES2', 'TBK1', 'RIPK1', 'RAB7A', 'ANO6', 'HMOX1', 'SLC44A2', 'NPC2', 'RNF41', 'RAB18', 'GOLGA7', 'ELOC', 'STOM', 'RAB5C', 'GLA']
 
 
 **Specifying the reference state and construction of the global
-transition matrix**
+transition matrix.**
 
 .. code:: ipython3
 
@@ -109,13 +114,13 @@ transition matrix**
     [1. 0.] [0. 1.]
 
 
-**Disconnect all drugs from the network initially**
+**Disconnect all drugs from the network.**
 
 .. code:: ipython3
 
     netObj.disconnect_drug_nodes()
 
-**Compute the reference stationary state of the network**
+**Compute the reference stationary state of the network.**
 
 .. code:: ipython3
 
@@ -137,7 +142,7 @@ transition matrix**
     Reference state relative entropy:  0.0
 
 
-**Set the SARS-CoV-2 nodes in the network to low abundance**
+**Set the SARS-CoV-2 nodes in the network to low abundance.**
 
 .. code:: ipython3
 
@@ -172,17 +177,10 @@ stationary state.**
 .. code:: ipython3
 
     final_state, steps = netObj.get_final_state(network_state,network_sources)
-    final_entropy = netObj.state_entropy(final_state,network_sources)
-    print(final_entropy)
-
-
-.. parsed-literal::
-
-    65.4157289254401
-
+    SARSCoV2_entropy = netObj.state_entropy(final_state,network_sources)
 
 **Compute stationary state of the network due to SARS-CoV-2 PPIs and
-proteins**
+proteins.**
 
 The proteins in the Reactome database were set to the state {1,0} to
 compute the stationary state, and the subsequent change in the network
@@ -213,12 +211,17 @@ relative entropy.
 
 .. code:: ipython3
 
-    entropy_shifts = {}
-    H_drops = {}
-    H_gains = {}
+    df_H_with_proteins = pd.DataFrame()
+    df_H_drop_and_gain = pd.DataFrame()
     
-    for s_pair in tqdm(all_sources):
-        s = s_pair[0]
+    df_H_with_proteins = pd.DataFrame([],columns=['Protein', 'Relative Entropy'])
+    
+    df_H_drop_and_gain = pd.DataFrame([],columns=['Protein', 'Drop', 'Gain'])
+
+.. code:: ipython3
+
+    for this_protein in tqdm(all_sources):
+        s = this_protein[0]
         additional_source_nodes = [s]
         
         netObj.construct_C(rho,h=input_bits)
@@ -252,16 +255,15 @@ relative entropy.
                 except ValueError:
                     pass
             
-        entropy_shifts[s] = 0.0
-    
         this_state, steps = netObj.get_final_state(network_state,network_sources)
-        this_entropy = netObj.state_entropy(this_state,network_sources)
+        H_with_proteins = netObj.state_entropy(this_state,network_sources)
         H_drop, H_gain = netObj.entropy_drop_and_rise(this_state,final_state,reference_final_state,network_sources)
                     
-        entropy_shifts[s] = this_entropy
-            
-        H_drops[s] = H_drop
-        H_gains[s] = H_gain
+        df_temp = pd.DataFrame([[this_protein[0],H_with_proteins]],columns=['Protein','Relative Entropy'])
+        df_H_with_proteins = pd.concat([df_H_with_proteins,df_temp],sort=False,ignore_index=True)
+    
+        df_temp = pd.DataFrame([[this_protein[0],H_drop,H_gain]],columns=['Protein', 'Drop', 'Gain'])
+        df_H_drop_and_gain = pd.concat([df_H_drop_and_gain,df_temp],sort=False,ignore_index=True)
 
 
 
@@ -280,38 +282,87 @@ relative entropy.
 
 .. code:: ipython3
 
-    node_data = nx.get_node_attributes(netObj.G_d,"name")
-    node_class = nx.get_node_attributes(netObj.G_d,"class")
+    df_H_with_proteins = df_H_with_proteins.sort_values(by=['Relative Entropy'],ignore_index=True)
+
+.. code:: ipython3
+
+    #df_temp = pd.DataFrame([['Ref',SARSCoV2_entropy]],columns=['Protein','Relative Entropy'])
+    #df_H_with_proteins = pd.concat([df_temp,df_H_with_proteins],sort=False,ignore_index=True)
     
-    of = open('high_all_protein_shifts.csv','w')
+    #df_H_with_proteins.to_csv('high_all_protein_shifts-'+initial_state_type+'.csv',index=False)
     
-    print('Gene,Relative Entropy,In Degree',file=of)
+    df_H_drop_and_gain = df_H_drop_and_gain.sort_values(by=['Drop'],ascending=True,ignore_index=True)
+    df_H_drop_and_gain.to_csv('split_all_high_protein_shifts-'+initial_state_type+'.csv',index=False)
+
+.. code:: ipython3
+
+    c_high = df_H_with_proteins['Relative Entropy'][1:] - SARSCoV2_entropy
+    r_min, r_max = np.min(c_high), np.max(c_high)
+    max_r = max(abs(r_min),abs(r_max))
+    v_min, v_max = -abs(r_min), abs(r_min)
+
+**Immune system proteins ranked by :math:`\Delta H_{\mathrm{ref}}(X)`.**
+
+.. code:: ipython3
+
+    all_tick_names = df_H_with_proteins['Protein'].to_list()[1:]
+    data_size = len(all_tick_names)
+    x = np.linspace(1,data_size,data_size)
     
-    print('Ref,'+str(final_entropy)+',0',file=of)
+    tick_names = [n.split(' [')[0] for n in all_tick_names]
     
-    for s in all_sources:
-        if node_class[s[0]]=="Complex":
-            this_name = node_data[s[0]]
-            this_name = this_name.replace(',',';')
-        else:
-            this_name = s[0]
-            
-        print(this_name+','+str(entropy_shifts[s[0]])+','+str(s[1]),file=of)
-        
-    of.close()
+    fig, ax = plt.subplots(figsize=(8,6))
     
-    of = open('split_all_high_protein_shifts-'+initial_state_type+'.csv','w')
+    plt.scatter(x,df_H_with_proteins['Relative Entropy'][1:],c=c_high,cmap=cm.seismic,vmin=v_min,vmax=v_max,marker='o',alpha=0.8,s=30)
+    plt.plot(x,SARSCoV2_entropy*np.ones(shape=x.shape),color='black',markersize=0,linewidth=4,alpha=1.0)
+    plt.plot(-10,df_H_with_proteins['Relative Entropy'][0],lw=0,ms=8,marker='o',label=r'Protein state: $\{1,0\}$',c='black')
     
-    print('Protein,Drop,Gain',file=of)
+    plt.xlim(-3,data_size+5)
     
-    for s in all_sources:
-        if node_class[s[0]]=="Complex":
-            this_name = node_data[s[0]]
-            this_name = this_name.replace(',',';')
-        else:
-            this_name = s[0]
-            
-        print(this_name+','+str(H_drops[s[0]])+','+str(H_gains[s[0]]),file=of)
-        
-    of.close()
+    plt.ylabel(r'$H_{\mathrm{ref}}(X)$ (bits)',size=20)
+    plt.tick_params(axis='y',labelsize=20)
+    plt.tick_params(axis='x',labelsize=22)
+    
+    plt.xlabel('Immune system proteins sorted by $\Delta H_{\mathrm{ref}}(X)$',size=22,labelpad=10)
+    
+    plt.legend(frameon=True,fontsize=20,handlelength=1.0,handletextpad=0.25,loc='upper left')
+    
+    cbar = plt.colorbar(fraction=0.05,pad=0.01)
+    
+    cbar.set_label(r'$\Delta H_{\mathrm{ref}}(X)$',fontsize=18,rotation=-90,labelpad=5)
+    cbar.ax.tick_params(labelsize=18)
+    
+    plt.tight_layout()
+    plt.show()
+
+
+
+.. image:: output_27_0.png
+
+
+**Immune system proteins ranked by the drop component of
+:math:`\Delta H_{\mathrm{ref}}(X)`.**
+
+.. code:: ipython3
+
+    fig, ax = plt.subplots(figsize=(8,6))
+    
+    plt.bar(x,df_H_drop_and_gain['Drop'],color='Blue',label='Drop')
+    plt.bar(x,df_H_drop_and_gain['Gain'],color='Red',label='Gain')
+    plt.xlim(-0.5,len(df_H_drop_and_gain['Protein'])+0.5)
+    
+    plt.ylabel(r'drop/gain in $\Delta H_{\mathrm{ref}}(X)$ (bits)',size=20)
+    plt.tick_params(axis='x',labelsize=20)
+    plt.tick_params(axis='y',labelsize=20)
+    plt.xlabel(r'Immune system proteins sorted by $\Delta H_{\mathrm{ref}}(X)$ drop',size=22,labelpad=10)
+    plt.text(350,-25,r'$\Delta H_{\mathrm{ref}}(X)=$ drop + gain',fontsize=20)
+    plt.legend(frameon=True,fontsize=20,handlelength=1.0,handletextpad=0.25,loc='upper left')
+    
+    plt.tight_layout()
+    plt.show()
+
+
+
+.. image:: output_29_0.png
+
 
