@@ -1,5 +1,5 @@
-Information transfer due to viral PPI
-=====================================
+Information transfer
+====================
 
 The SARS-CoV-2 and human protein interactions are treated as information
 sources. Each edge in the pathway network is treated as a binary

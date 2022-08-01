@@ -1,5 +1,5 @@
-Effect of controlled protein expression on the information from viral PPIs
-==========================================================================
+Controlled protein expression efficacy
+======================================
 
 **Computes the change in network relative entropy from viral PPIs after
 setting immune system proteins, one at a time, to high abundance

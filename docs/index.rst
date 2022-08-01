@@ -29,17 +29,16 @@ Gene Ontology over-representation analysis.
    :maxdepth: 3
    :caption: Contents:
 
-   Construction_of_Top_Level_Pathway_Network.ipynb
+   Construct_network.ipynb
    Add-human_PPI.ipynb
    SARS-CoV-2_human_PPI.ipynb
-   Information_transfer_in_the_network.ipynb
+   Information_transfer.ipynb
    Communicated_Proteins.ipynb
    communicated_ORA.ipynb
    Drug_efficacy.ipynb
-   Controlled-protein-expression-efficacy.ipynb
+   Controlled_protein_expression_efficacy.ipynb
    ncip
    enGO
-   reader
    dependencies
 
 

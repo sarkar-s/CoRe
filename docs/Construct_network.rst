@@ -1,5 +1,5 @@
-Network Construction
-====================
+Construct network
+=================
 
 ::
 
