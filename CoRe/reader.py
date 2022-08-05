@@ -1,6 +1,7 @@
 """
 Functions for reading gene sets for performing various analysis for CoRe.
 """
+
 import numpy as np
 import pandas as pd
 import json
@@ -39,16 +40,6 @@ def read_interactions(datafile):
                 interactions[ns[0]].append(nn)
 
     return interactions
-
-# def read_interactions_for_GO(datafile):
-#     data_dict = read_interactions(datafile)
-#
-#     data = {}
-#
-#     for d in data_dict.keys():
-#         data[d] = pd.DataFrame(data_dict[d])
-#
-#     return data
 
 def read_interactions_for_GO(datafile):
     f = open(datafile)

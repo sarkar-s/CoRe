@@ -349,11 +349,6 @@ class ncip:
         node_w_seq = {}
         node_types = {}
 
-        #for id,n,g,s in zip(self.node_data['node'],self.node_data['name'],self.node_data['reference gene'],self.node_data['genome-encoded']):
-        #    node_names[id] = n
-        #    node_genes[id] = g
-        #    node_w_seq[id] = s
-
         for index,row in self.node_data.iterrows():
             id = row['node']
 
@@ -411,7 +406,28 @@ class ncip:
 
         return H
 
-    def entropy_drop_and_rise(self,state_1,state_2,reference_state,sources):
+    def entropy_drop_and_gain(self,state_1,state_2,reference_state,sources):
+        """
+        Computes the difference between two Kullback-Leibeler divergences, D_KL(state_1||reference_state), and
+        D_KL(state_2||reference_state), for each unconstrained node in the network.
+
+        Parameters
+        ----------
+        state: array_like
+            A [mn,1] numpy array.
+
+        sources: list
+            Node numbers that are sources in the network.
+
+        Returns
+        -------
+        drop: float
+            Sum of all difference in the relative entropy values for all the nodes in the network where, state_2 > state_1.
+
+        gain: float
+            Sum of all difference in the relative entropy values for all the nodes in the network where, state_1 <= state_2.
+        """
+
         H_drop = 0.0
         H_gain = 0.0
 
@@ -647,15 +663,15 @@ class ncip:
 
     def save_edges_and_nodes(self,pathway_nametag,network_type):
         """
-        Adds information about an edge to the edge_data and node_data.
+        Saves the network nodes and edges as csv and pickled files.
 
         Parameters
         ----------
         pathway_name: string
-            Name of the reactome top level pathway.
+            Name of the Reactome top level pathway.
 
         network_type: string
-            To query the neo4j reactome database
+            Additional description about the network.
         """
         df_e = pd.DataFrame(self.edge_data)
 
@@ -667,11 +683,35 @@ class ncip:
         df_n.to_csv(pathway_nametag+'_'+network_type+'-nodes.csv',index=None)
 
     def save_network(self,pathway_nametag,network_type):
+        """
+        Saves the network as a gml file.
+
+        Parameters
+        ----------
+        pathway_name: string
+            Name of the Reactome top level pathway.
+
+        network_type: string
+            Additional description about the network.
+        """
+
         print("Communication network "+pathway_nametag+"-"+network_type+".gml created.")
 
         nx.write_gml(self.G_d,pathway_nametag+"-"+network_type+".gml")
 
     def initialize_network_state(self,additional_sources,source_state):
+        """
+        Saves the network as a gml file.
+
+        Parameters
+        ----------
+        pathway_name: string
+            Name of the Reactome top level pathway.
+
+        network_type: string
+            Additional description about the network.
+        """
+
         network_state = (1.0/float(self.code_length))*np.ones(shape=(C.shape[0],1))
         network_sources = []
 

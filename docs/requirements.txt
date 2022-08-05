@@ -2,3 +2,4 @@ nbsphinx
 numpy
 scipy
 ipython
+pandas

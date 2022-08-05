@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controlled protein expression efficacy &mdash; CoRe Alpha 1 (0.1.1.1) documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ncip" href="ncip.html" />
+    <link rel="prev" title="Drug efficacy" href="Drug_efficacy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CoRe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Construct_network.html">Construct network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Add-human_PPI.html">Add human PPI to the network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SARS-CoV-2_human_PPI.html">Specify information sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Information_transfer.html">Information transfer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Communicated_Proteins.html">Communicated proteins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="communicated_ORA.html">Communicated genes overrepresentation analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Drug_efficacy.html">Drug efficacy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Controlled protein expression efficacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ncip.html">ncip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fnGO.html">fnGO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CoRe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Controlled protein expression efficacy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Controlled_protein_expression_efficacy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="controlled-protein-expression-efficacy">
+<h1>Controlled protein expression efficacy<a class="headerlink" href="#controlled-protein-expression-efficacy" title="Permalink to this headline"></a></h1>
+<p><strong>Computes the change in network relative entropy from viral PPIs after
+setting immune system proteins, one at a time, to high abundance
+{1,0}.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">copy</span> <span class="k">as</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+
+<span class="kn">from</span> <span class="nn">CoRe</span> <span class="kn">import</span> <span class="n">reader</span>
+<span class="kn">from</span> <span class="nn">CoRe.ncip</span> <span class="kn">import</span> <span class="n">ncip</span>
+<span class="kn">from</span> <span class="nn">CoRe.BA_C</span> <span class="kn">import</span> <span class="n">BA</span>
+
+<span class="kn">import</span> <span class="nn">importlib</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_directory</span> <span class="o">=</span> <span class="s2">&quot;./Examples/Immune_System&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">data_directory</span><span class="p">)</span>
+
+<span class="n">edge_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;Immune_System_medium-PPI-edges.pkl&#39;</span><span class="p">)</span>
+<span class="n">node_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;Immune_System_medium-PPI-nodes.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remake_graph</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">remake_graph</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+    <span class="n">netObj</span> <span class="o">=</span> <span class="n">ncip</span><span class="p">()</span>
+    <span class="n">netObj</span><span class="o">.</span><span class="n">load_graph</span><span class="p">(</span><span class="s1">&#39;Immune_System-medium-PPI.gml&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">netObj</span> <span class="o">=</span> <span class="n">ncip</span><span class="p">()</span>
+    <span class="n">netObj</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">edge_data</span><span class="p">,</span><span class="n">node_data</span><span class="p">)</span>
+    <span class="n">netObj</span><span class="o">.</span><span class="n">make_graph</span><span class="p">()</span>
+    <span class="n">netObj</span><span class="o">.</span><span class="n">save_network</span><span class="p">(</span><span class="n">pathway_nametag</span><span class="p">,</span><span class="n">network_type</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>All immune system communication network proteins that have PPI with
+SARS-CoV-2 proteins.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;SARS_CoV2-Immune_System_interactions.json&#39;</span><span class="p">)</span>
+<span class="n">SARS_nodes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">all_sars_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">SARS_nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">all_sars_nodes</span> <span class="o">+=</span> <span class="n">SARS_nodes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+
+<span class="n">all_sars_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">all_sars_nodes</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">all_sars_nodes</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;RHOA&#39;</span><span class="p">,</span> <span class="s1">&#39;SLC27A2&#39;</span><span class="p">,</span> <span class="s1">&#39;PVR&#39;</span><span class="p">,</span> <span class="s1">&#39;ELOB&#39;</span><span class="p">,</span> <span class="s1">&#39;EIF4E2&#39;</span><span class="p">,</span> <span class="s1">&#39;CYB5R3&#39;</span><span class="p">,</span> <span class="s1">&#39;NLRX1&#39;</span><span class="p">,</span> <span class="s1">&#39;RAB14&#39;</span><span class="p">,</span> <span class="s1">&#39;ECSIT&#39;</span><span class="p">,</span> <span class="s1">&#39;AP2A2&#39;</span><span class="p">,</span> <span class="s1">&#39;CSNK2B&#39;</span><span class="p">,</span> <span class="s1">&#39;HECTD1&#39;</span><span class="p">,</span> <span class="s1">&#39;ERP44&#39;</span><span class="p">,</span> <span class="s1">&#39;IL17RA&#39;</span><span class="p">,</span> <span class="s1">&#39;ITGB1&#39;</span><span class="p">,</span> <span class="s1">&#39;RALA&#39;</span><span class="p">,</span> <span class="s1">&#39;RAB10&#39;</span><span class="p">,</span> <span class="s1">&#39;NEU1&#39;</span><span class="p">,</span> <span class="s1">&#39;IMPDH2&#39;</span><span class="p">,</span> <span class="s1">&#39;TOMM70&#39;</span><span class="p">,</span> <span class="s1">&#39;GGH&#39;</span><span class="p">,</span> <span class="s1">&#39;PTGES2&#39;</span><span class="p">,</span> <span class="s1">&#39;TBK1&#39;</span><span class="p">,</span> <span class="s1">&#39;RIPK1&#39;</span><span class="p">,</span> <span class="s1">&#39;RAB7A&#39;</span><span class="p">,</span> <span class="s1">&#39;ANO6&#39;</span><span class="p">,</span> <span class="s1">&#39;HMOX1&#39;</span><span class="p">,</span> <span class="s1">&#39;SLC44A2&#39;</span><span class="p">,</span> <span class="s1">&#39;NPC2&#39;</span><span class="p">,</span> <span class="s1">&#39;RNF41&#39;</span><span class="p">,</span> <span class="s1">&#39;RAB18&#39;</span><span class="p">,</span> <span class="s1">&#39;GOLGA7&#39;</span><span class="p">,</span> <span class="s1">&#39;ELOC&#39;</span><span class="p">,</span> <span class="s1">&#39;STOM&#39;</span><span class="p">,</span> <span class="s1">&#39;RAB5C&#39;</span><span class="p">,</span> <span class="s1">&#39;GLA&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Specifying the reference state and construction of the global
+transition matrix.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initial_state_type</span> <span class="o">=</span> <span class="s1">&#39;maxEnt&#39;</span>
+
+<span class="n">errorname</span> <span class="o">=</span> <span class="s1">&#39;0.0&#39;</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">errorname</span><span class="p">)</span>
+
+<span class="n">input_bits</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">code_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">input_bits</span><span class="p">)</span>
+
+<span class="n">max_entropy_state</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">code_length</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">code_length</span><span class="p">,))</span>
+
+<span class="n">low_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">code_length</span><span class="p">,))</span>
+<span class="n">low_state</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">high_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">code_length</span><span class="p">,))</span>
+<span class="n">high_state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">if</span> <span class="n">initial_state_type</span><span class="o">==</span><span class="s1">&#39;high&#39;</span><span class="p">:</span>
+    <span class="n">initial_state</span> <span class="o">=</span> <span class="n">high_state</span>
+<span class="k">elif</span> <span class="n">initial_state_type</span><span class="o">==</span><span class="s1">&#39;low&#39;</span><span class="p">:</span>
+    <span class="n">initial_state</span> <span class="o">=</span> <span class="n">low_state</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">initial_state</span> <span class="o">=</span> <span class="n">max_entropy_state</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">high_state</span><span class="p">,</span><span class="n">low_state</span><span class="p">)</span>
+
+<span class="n">netObj</span><span class="o">.</span><span class="n">construct_C</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="n">input_bits</span><span class="p">,</span><span class="n">neglect_modules</span><span class="o">=</span><span class="p">[])</span>
+<span class="n">node_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span> <span class="p">[</span><span class="mf">0.</span> <span class="mf">1.</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Disconnect all drugs from the network.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">netObj</span><span class="o">.</span><span class="n">disconnect_drug_nodes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Compute the reference stationary state of the network.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initial_network_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">netObj</span><span class="o">.</span><span class="n">C_sparse</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">network_sources</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">node_list</span><span class="p">)):</span>
+    <span class="n">initial_network_state</span><span class="p">[</span><span class="n">code_length</span><span class="o">*</span><span class="n">n</span><span class="p">:</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
+
+<span class="n">network_sources</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">reference_final_state</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">netObj</span><span class="o">.</span><span class="n">get_final_state</span><span class="p">(</span><span class="n">initial_network_state</span><span class="p">,[])</span>
+<span class="n">reference_final_entropy</span> <span class="o">=</span> <span class="n">netObj</span><span class="o">.</span><span class="n">state_entropy</span><span class="p">(</span><span class="n">reference_final_state</span><span class="p">,[])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reference state relative entropy: &#39;</span><span class="p">,</span><span class="n">reference_final_entropy</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reference</span> <span class="n">state</span> <span class="n">relative</span> <span class="n">entropy</span><span class="p">:</span>  <span class="mf">0.0</span>
+</pre></div>
+</div>
+<p><strong>Set the SARS-CoV-2 nodes in the network to low abundance.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">network_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">netObj</span><span class="o">.</span><span class="n">C_sparse</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">network_sources</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">node_list</span><span class="p">)):</span>
+    <span class="n">network_state</span><span class="p">[</span><span class="n">code_length</span><span class="o">*</span><span class="n">n</span><span class="p">:</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">SARS_nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">SARS_nodes</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">node_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+            <span class="n">network_state</span><span class="p">[</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">low_state</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">network_sources</span><span class="p">:</span>
+                <span class="n">network_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>0%|          | 0/17 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<p><strong>Relative entropy of the total network and number of steps to
+stationary state.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_state</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">netObj</span><span class="o">.</span><span class="n">get_final_state</span><span class="p">(</span><span class="n">network_state</span><span class="p">,</span><span class="n">network_sources</span><span class="p">)</span>
+<span class="n">SARSCoV2_entropy</span> <span class="o">=</span> <span class="n">netObj</span><span class="o">.</span><span class="n">state_entropy</span><span class="p">(</span><span class="n">final_state</span><span class="p">,</span><span class="n">network_sources</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Compute stationary state of the network due to SARS-CoV-2 PPIs and
+proteins.</strong></p>
+<p>The proteins in the Reactome database were set to the state {1,0} to
+compute the stationary state, and the subsequent change in the network
+relative entropy.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_class</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="p">,</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="n">node_n</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">node_n</span><span class="p">)):</span>
+    <span class="n">nn</span> <span class="o">=</span> <span class="n">node_n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">node_class</span><span class="p">[</span><span class="n">nn</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span><span class="p">:</span>
+        <span class="n">relH</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">final_state</span><span class="p">[</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">],</span><span class="n">max_entropy_state</span><span class="p">,</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">relH</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_sources</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;EntityWithAccessionedSequence&#39;</span> <span class="ow">and</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_sars_nodes</span><span class="p">:</span>
+        <span class="n">all_sources</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">netObj</span><span class="o">.</span><span class="n">G_d</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_H_with_proteins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">df_H_drop_and_gain</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="n">df_H_with_proteins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Protein&#39;</span><span class="p">,</span> <span class="s1">&#39;Relative Entropy&#39;</span><span class="p">])</span>
+
+<span class="n">df_H_drop_and_gain</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Protein&#39;</span><span class="p">,</span> <span class="s1">&#39;Drop&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">this_protein</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">all_sources</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">this_protein</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">additional_source_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+
+    <span class="n">netObj</span><span class="o">.</span><span class="n">construct_C</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">h</span><span class="o">=</span><span class="n">input_bits</span><span class="p">)</span>
+    <span class="n">netObj</span><span class="o">.</span><span class="n">disconnect_nodes</span><span class="p">(</span><span class="s1">&#39;ChemicalDrug&#39;</span><span class="p">,</span><span class="n">additional_source_nodes</span><span class="p">)</span>
+    <span class="n">netObj</span><span class="o">.</span><span class="n">disconnect_nodes</span><span class="p">(</span><span class="s1">&#39;ProteinDrug&#39;</span><span class="p">,</span><span class="n">additional_source_nodes</span><span class="p">)</span>
+
+    <span class="n">network_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">netObj</span><span class="o">.</span><span class="n">C_sparse</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">network_sources</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">node_list</span><span class="p">)):</span>
+        <span class="n">network_state</span><span class="p">[</span><span class="n">code_length</span><span class="o">*</span><span class="n">n</span><span class="p">:</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">SARS_nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">SARS_nodes</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">node_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+                <span class="n">network_state</span><span class="p">[</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">low_state</span>
+
+                <span class="n">network_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">additional_source_nodes</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">node_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+                <span class="n">network_state</span><span class="p">[</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="n">netObj</span><span class="o">.</span><span class="n">code_length</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">high_state</span>
+
+                <span class="n">network_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+    <span class="n">this_state</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">netObj</span><span class="o">.</span><span class="n">get_final_state</span><span class="p">(</span><span class="n">network_state</span><span class="p">,</span><span class="n">network_sources</span><span class="p">)</span>
+    <span class="n">H_with_proteins</span> <span class="o">=</span> <span class="n">netObj</span><span class="o">.</span><span class="n">state_entropy</span><span class="p">(</span><span class="n">this_state</span><span class="p">,</span><span class="n">network_sources</span><span class="p">)</span>
+    <span class="n">H_drop</span><span class="p">,</span> <span class="n">H_gain</span> <span class="o">=</span> <span class="n">netObj</span><span class="o">.</span><span class="n">entropy_drop_and_rise</span><span class="p">(</span><span class="n">this_state</span><span class="p">,</span><span class="n">final_state</span><span class="p">,</span><span class="n">reference_final_state</span><span class="p">,</span><span class="n">network_sources</span><span class="p">)</span>
+
+    <span class="n">df_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">this_protein</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">H_with_proteins</span><span class="p">]],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Protein&#39;</span><span class="p">,</span><span class="s1">&#39;Relative Entropy&#39;</span><span class="p">])</span>
+    <span class="n">df_H_with_proteins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_H_with_proteins</span><span class="p">,</span><span class="n">df_temp</span><span class="p">],</span><span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">df_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">this_protein</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">H_drop</span><span class="p">,</span><span class="n">H_gain</span><span class="p">]],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Protein&#39;</span><span class="p">,</span> <span class="s1">&#39;Drop&#39;</span><span class="p">,</span> <span class="s1">&#39;Gain&#39;</span><span class="p">])</span>
+    <span class="n">df_H_drop_and_gain</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_H_drop_and_gain</span><span class="p">,</span><span class="n">df_temp</span><span class="p">],</span><span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>0%|          | 0/1122 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;./counter_entropic_shift&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;./counter_entropic_shift&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;./counter_entropic_shift&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_H_with_proteins</span> <span class="o">=</span> <span class="n">df_H_with_proteins</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Relative Entropy&#39;</span><span class="p">],</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df_temp = pd.DataFrame([[&#39;Ref&#39;,SARSCoV2_entropy]],columns=[&#39;Protein&#39;,&#39;Relative Entropy&#39;])</span>
+<span class="c1">#df_H_with_proteins = pd.concat([df_temp,df_H_with_proteins],sort=False,ignore_index=True)</span>
+
+<span class="c1">#df_H_with_proteins.to_csv(&#39;high_all_protein_shifts-&#39;+initial_state_type+&#39;.csv&#39;,index=False)</span>
+
+<span class="n">df_H_drop_and_gain</span> <span class="o">=</span> <span class="n">df_H_drop_and_gain</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Drop&#39;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_H_drop_and_gain</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;split_all_high_protein_shifts-&#39;</span><span class="o">+</span><span class="n">initial_state_type</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_high</span> <span class="o">=</span> <span class="n">df_H_with_proteins</span><span class="p">[</span><span class="s1">&#39;Relative Entropy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">SARSCoV2_entropy</span>
+<span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">c_high</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">c_high</span><span class="p">)</span>
+<span class="n">max_r</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r_min</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">r_max</span><span class="p">))</span>
+<span class="n">v_min</span><span class="p">,</span> <span class="n">v_max</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">r_min</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r_min</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Immune system proteins ranked by :math:`Delta H_{mathrm{ref}}(X)`.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_tick_names</span> <span class="o">=</span> <span class="n">df_H_with_proteins</span><span class="p">[</span><span class="s1">&#39;Protein&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">data_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_tick_names</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">data_size</span><span class="p">,</span><span class="n">data_size</span><span class="p">)</span>
+
+<span class="n">tick_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; [&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">all_tick_names</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">df_H_with_proteins</span><span class="p">[</span><span class="s1">&#39;Relative Entropy&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:],</span><span class="n">c</span><span class="o">=</span><span class="n">c_high</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">seismic</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">v_min</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">v_max</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">SARSCoV2_entropy</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="n">df_H_with_proteins</span><span class="p">[</span><span class="s1">&#39;Relative Entropy&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Protein state: $\{1,0\}$&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">data_size</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$H_{\mathrm</span><span class="si">{ref}</span><span class="s1">}(X)$ (bits)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Immune system proteins sorted by $\Delta H_{\mathrm</span><span class="si">{ref}</span><span class="s1">}(X)$&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span><span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">handlelength</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">handletextpad</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta H_{\mathrm</span><span class="si">{ref}</span><span class="s1">}(X)$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span><span class="n">labelpad</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_27_0.png" src="_images/output_27_0.png" />
+<p><strong>Immune system proteins ranked by the drop component of
+:math:`Delta H_{mathrm{ref}}(X)`.</strong></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">df_H_drop_and_gain</span><span class="p">[</span><span class="s1">&#39;Drop&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Drop&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">df_H_drop_and_gain</span><span class="p">[</span><span class="s1">&#39;Gain&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gain&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">df_H_drop_and_gain</span><span class="p">[</span><span class="s1">&#39;Protein&#39;</span><span class="p">])</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;drop/gain in $\Delta H_{\mathrm</span><span class="si">{ref}</span><span class="s1">}(X)$ (bits)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Immune system proteins sorted by $\Delta H_{\mathrm</span><span class="si">{ref}</span><span class="s1">}(X)$ drop&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span><span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\Delta H_{\mathrm</span><span class="si">{ref}</span><span class="s1">}(X)=$ drop + gain&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">handlelength</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">handletextpad</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_29_0.png" src="_images/output_29_0.png" />
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Drug_efficacy.html" class="btn btn-neutral float-left" title="Drug efficacy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ncip.html" class="btn btn-neutral float-right" title="ncip" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Swarnavo Sarkar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ncip &mdash; CoRe Alpha 1 (0.1.1.1) documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fnGO" href="fnGO.html" />
+    <link rel="prev" title="Controlled protein expression efficacy" href="Controlled_protein_expression_efficacy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CoRe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Construct_network.html">Construct network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Add-human_PPI.html">Add human PPI to the network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SARS-CoV-2_human_PPI.html">Specify information sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Information_transfer.html">Information transfer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Communicated_Proteins.html">Communicated proteins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="communicated_ORA.html">Communicated genes overrepresentation analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Drug_efficacy.html">Drug efficacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Controlled_protein_expression_efficacy.html">Controlled protein expression efficacy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ncip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fnGO.html">fnGO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CoRe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ncip</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ncip.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="ncip">
+<h1>ncip<a class="headerlink" href="#ncip" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CoRe.ncip.</span></span><span class="sig-name descname"><span class="pre">ncip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_property</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.add_edges">
+<span class="sig-name descname"><span class="pre">add_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reaction_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.add_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.add_edges" title="Permalink to this definition"></a></dt>
+<dd><p>Adds information about an edge to the edge_data and node_data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session</strong> (<em>neo4j session</em>) – To query the neo4j reactome database</p></li>
+<li><p><strong>command_set</strong> (<em>dict</em>) – Set of commands to query the neo4j reactome database.</p></li>
+<li><p><strong>reaction_info</strong> (<em>list</em>) – Row entry of the ReactionLikeEvents dataframe containing stId, category, schemaClass, and name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.construct_C">
+<span class="sig-name descname"><span class="pre">construct_C</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neglect_modules</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.construct_C"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.construct_C" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the information transition matrix for the graph using the adjacency matrix and
+interference due to multiple information sources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G_d</strong> (<em>networkx DiGraph</em>) – Graph of a Reactome TopLevelPathway consisting of ReactionLikeEvents and regulations.</p></li>
+<li><p><strong>rho</strong> (<em>float</em>) – Communication error in each edge.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>C</strong> – Information transition matrix of the network.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.construct_edges">
+<span class="sig-name descname"><span class="pre">construct_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neglect_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neglect_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.construct_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.construct_edges" title="Permalink to this definition"></a></dt>
+<dd><p>Converts reactions into a local graph topology.
+If a reaction is: A + B -&gt; C + D + E,
+then A and B are two input nodes to three separate output nodes C, D, and E.
+If the reaction is chemically balanced then the edges are bidirectional,
+else edges are unidirectional.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>neo4j result</em>) – Result object from neo4j containing Reactome physical entities nodes that are inputs to an event.</p></li>
+<li><p><strong>outputs</strong> (<em>neo4j result</em>) – object from neo4j containing Reactome physical entities nodes that are outputs to an event.</p></li>
+<li><p><strong>neglect_ids</strong> (<em>list</em>) – stId of Reactome physical entities that should be neglected from the network.</p></li>
+<li><p><strong>neglect_class</strong> (<em>list</em>) – schemaClass of Reactome physical entities that should be neglected from the network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>edge_nodes</strong> – Dict containing the fields [‘inputs’,’outputs’,’input_names’,’output_names’].
+‘inputs’ and ‘outputs’ for the input and output node property values of an edge.
+‘input names’ and ‘output_names’ are tuples (displayName,schemaClass) with values from
+the Reactome Data Schema, <a class="reference external" href="https://reactome.org/content/schema/PhysicalEntity">https://reactome.org/content/schema/PhysicalEntity</a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.construct_exo_edges">
+<span class="sig-name descname"><span class="pre">construct_exo_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neglect_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neglect_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.construct_exo_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.construct_exo_edges" title="Permalink to this definition"></a></dt>
+<dd><p>Converts reactions into a local graph topology.
+If a reaction is: A + B -&gt; C + D + E,
+then A and B are two input nodes to three separate output nodes C, D, and E.
+If the reaction is chemically balanced then the edges are bidirectional,
+else edges are unidirectional.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>neo4j result</em>) – Result object from neo4j containing Reactome physical entities nodes that are inputs to an event.</p></li>
+<li><p><strong>neglect_ids</strong> (<em>list</em>) – stId of Reactome physical entities that should be neglected from the network.</p></li>
+<li><p><strong>neglect_class</strong> (<em>list</em>) – schemaClass of Reactome physical entities that should be neglected from the network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>edge_nodes</strong> – Dict containing the fields [‘inputs’,’outputs’,’input_names’,’output_names’].
+‘inputs’ and ‘outputs’ for the input and output node property values of an edge.
+‘input names’ and ‘output_names’ are tuples (displayName,schemaClass) with values from
+the Reactome Data Schema, <a class="reference external" href="https://reactome.org/content/schema/PhysicalEntity">https://reactome.org/content/schema/PhysicalEntity</a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.disconnect_drug_nodes">
+<span class="sig-name descname"><span class="pre">disconnect_drug_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'None'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.disconnect_drug_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.disconnect_drug_nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Removes nodes of the specified class from the network communication (or transition) matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classname</strong> (<em>string</em>) – Class of the nodes to be disconnected from the network communication matrix.</p></li>
+<li><p><strong>sources</strong> (<em>list</em>) – List of source nodes which remains to be connected to the communication matrix.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.disconnect_nodes">
+<span class="sig-name descname"><span class="pre">disconnect_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.disconnect_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.disconnect_nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Removes nodes of the specified class from the network communication (or transition) matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classname</strong> (<em>string</em>) – Class of the nodes to be disconnected from the network communication matrix.</p></li>
+<li><p><strong>sources</strong> (<em>list</em>) – List of source nodes which remains to be connected to the communication matrix.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.entropy_drop_and_gain">
+<span class="sig-name descname"><span class="pre">entropy_drop_and_gain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.entropy_drop_and_gain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.entropy_drop_and_gain" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the difference between two Kullback-Leibeler divergences, D_KL(state_1||reference_state), and
+D_KL(state_2||reference_state), for each unconstrained node in the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>array_like</em>) – A [mn,1] numpy array.</p></li>
+<li><p><strong>sources</strong> (<em>list</em>) – Node numbers that are sources in the network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>drop</strong> (<em>float</em>) – Sum of all difference in the relative entropy values for all the nodes in the network where, state_2 &gt; state_1.</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Sum of all difference in the relative entropy values for all the nodes in the network where, state_1 &lt;= state_2.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.get_final_state">
+<span class="sig-name descname"><span class="pre">get_final_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.get_final_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.get_final_state" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the final state of the network using the initial state X and the information transfer
+matrix Tmat. The state of the sources are fixed during the information transfer. The number of
+nodes in the network is n and the number of states for each node is m.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array_like</em>) – A [mn,1] numpy array.</p></li>
+<li><p><strong>sources</strong> (<em>list</em>) – Node numbers that are sources in the network, whose probabilistic state, e.g. {P[v=1],P[v=0]}
+has to be fixed during information propagation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X</strong> (<em>array_like</em>) – Stationary state of the network.</p></li>
+<li><p><strong>steps</strong> (<em>int</em>) – Number of steps it took to reach the stationary state of the network.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.initialize_network_state">
+<span class="sig-name descname"><span class="pre">initialize_network_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">additional_sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.initialize_network_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.initialize_network_state" title="Permalink to this definition"></a></dt>
+<dd><p>Saves the network as a gml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pathway_name</strong> (<em>string</em>) – Name of the Reactome top level pathway.</p></li>
+<li><p><strong>network_type</strong> (<em>string</em>) – Additional description about the network.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.load_data">
+<span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_edge_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_node_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.load_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.load_graph">
+<span class="sig-name descname"><span class="pre">load_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.load_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.load_graph" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.make_graph">
+<span class="sig-name descname"><span class="pre">make_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.make_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.make_graph" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a networkx graph using the connecitivity data and assigns a color value to each edge
+depending the subpathway they belong to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.save_edges_and_nodes">
+<span class="sig-name descname"><span class="pre">save_edges_and_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathway_nametag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">network_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.save_edges_and_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.save_edges_and_nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Saves the network nodes and edges as csv and pickled files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pathway_name</strong> (<em>string</em>) – Name of the Reactome top level pathway.</p></li>
+<li><p><strong>network_type</strong> (<em>string</em>) – Additional description about the network.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.save_network">
+<span class="sig-name descname"><span class="pre">save_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathway_nametag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">network_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.save_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.save_network" title="Permalink to this definition"></a></dt>
+<dd><p>Saves the network as a gml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pathway_name</strong> (<em>string</em>) – Name of the Reactome top level pathway.</p></li>
+<li><p><strong>network_type</strong> (<em>string</em>) – Additional description about the network.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.state_entropy">
+<span class="sig-name descname"><span class="pre">state_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.state_entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.state_entropy" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the entropy of the network state with respect to the maximum entropy state.
+For binary valued network nodes, the state is: {P(v=1),P(v=0)}, where v=1 means the physical
+entity at high concentration (or copy number). Similary, v=0 means the physical entity is
+at low concentration (or copy number). The total number of nodes in the network is n and the
+number of states for each node is m.</p>
+<p>Nodes that act as sources are neglected from the entropy calculation, to determine only
+the effect of the information propagation through the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>array_like</em>) – A [mn,1] numpy array.</p></li>
+<li><p><strong>sources</strong> (<em>list</em>) – Node numbers that are sources in the network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>H</strong> – Entropy of the network state in bits.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoRe.ncip.ncip.write_nodes_and_edges">
+<span class="sig-name descname"><span class="pre">write_nodes_and_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filetag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoRe/ncip.html#ncip.write_nodes_and_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoRe.ncip.ncip.write_nodes_and_edges" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Controlled_protein_expression_efficacy.html" class="btn btn-neutral float-left" title="Controlled protein expression efficacy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fnGO.html" class="btn btn-neutral float-right" title="fnGO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Swarnavo Sarkar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
