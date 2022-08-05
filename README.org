@@ -6,7 +6,7 @@ CoRe is a software package to construct communication network models for biologi
 
 - The Reactome database (https://reactome.org)
 - The Interactome database (http://interactome.dfci.harvard.edu)
-- The c5 collection in the MSigDB (http://www.gsea-msigdb.org/gsea/msigdb)
+- The c5 collection in MSigDB (http://www.gsea-msigdb.org/gsea/msigdb)
 
 * System Requirements
 
