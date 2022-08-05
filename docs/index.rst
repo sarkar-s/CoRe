@@ -13,11 +13,12 @@ Welcome to CoRe's documentation!
 
 **Co**\ mmunication through the **Re**\ actome and Interactome (CoRe) is an open-source scientific software to model human biological pathways
 as information transferring networks. CoRe uses the `Reactome <https://reactome.org>`_ and the `Interactome <http://interactome.dfci.harvard.edu/H_sapiens/>`_ databases
-to construct communication network models of human biology. The current version computes the information transferred due protein-protein interactions (PPIs) with viral
-proteins, demonstrated using the SARS-CoV-2 PPIs as a case study.
+to construct communication network models for human biology.
 
 CoRe also uses the gene sets from the c5 collection in the `MSigDB <https://www.gsea-msigdb.org/gsea/msigdb/>`_ database to identify the significant biological processes using
 Gene Ontology over-representation analysis.
+
+This version of CoRe computes the information transfer in the immune system due to interactions with SARS-CoV-2 proteins.
 
 :Author:
   `Swarnavo Sarkar <https://swarnavosarkar.com>`_
