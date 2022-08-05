@@ -16,6 +16,8 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -360,7 +362,7 @@ relative entropy.</p>
 <span class="n">v_min</span><span class="p">,</span> <span class="n">v_max</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">r_min</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r_min</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Immune system proteins ranked by :math:`Delta H_{mathrm{ref}}(X)`.</strong></p>
+<p><strong>Immune system proteins ranked by</strong> <span class="math notranslate nohighlight">\(\Delta H_{\mathrm{ref}}(X).\)</span></p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_tick_names</span> <span class="o">=</span> <span class="n">df_H_with_proteins</span><span class="p">[</span><span class="s1">&#39;Protein&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="n">data_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_tick_names</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">data_size</span><span class="p">,</span><span class="n">data_size</span><span class="p">)</span>
@@ -393,8 +395,7 @@ relative entropy.</p>
 </pre></div>
 </div>
 <img alt="_images/output_27_0.png" src="_images/output_27_0.png" />
-<p><strong>Immune system proteins ranked by the drop component of
-:math:`Delta H_{mathrm{ref}}(X)`.</strong></p>
+<p><strong>Immune system proteins ranked by the drop component of</strong> <span class="math notranslate nohighlight">\(\Delta H_{\mathrm{ref}}(X).\)</span></p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">df_H_drop_and_gain</span><span class="p">[</span><span class="s1">&#39;Drop&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Drop&#39;</span><span class="p">)</span>
