@@ -1,25 +1,10 @@
 Construct network
 =================
 
-::
-
-   Copyright (C) 2022
-
-   Code by Swarnavo Sarkar
-   National Institute of Standards and Technology, Gaithersburg, MD
-
-   This work is licensed under the Creative Commons Attribution 4.0 International License. 
-   To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/ 
-   or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
-
-   If you find this code useful in your work, please cite our article
-   "Communication network model of the immune system identifies potential dysregulation and therapies", 
-   Swarnavo Sarkar
-
-We use the data in the Reactome database for a Top Level Pathway to
+**We use the data in the Reactome database for a Top Level Pathway to
 construct a network where the nodes represent physical entities
 connected by events, which include reactions, regulation,
-(de)polymerisation, synthesis, and degradations.
+(de)polymerisation, synthesis, and degradations.**
 
 .. code:: ipython3
 
