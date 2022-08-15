@@ -4,6 +4,5 @@ scipy
 ipython
 pandas
 tqdm
-os
 statsmodels
 itertools
