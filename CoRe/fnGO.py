@@ -3,7 +3,6 @@ Functions for Gene Ontology (GO) overrepresentation analysis using the communica
 """
 
 import numpy as np
-import math
 import pandas as pd
 from glob import glob
 import os
