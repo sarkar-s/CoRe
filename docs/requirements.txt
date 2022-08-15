@@ -4,3 +4,8 @@ scipy
 ipython
 pandas
 tqdm
+math
+glob
+os
+statsmodels
+itertools

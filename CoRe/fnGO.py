@@ -4,13 +4,11 @@ Functions for Gene Ontology (GO) overrepresentation analysis using the communica
 
 import numpy as np
 import math
-import networkx as nx
 import pandas as pd
 from glob import glob
-import os, sys
+import os
 from scipy.stats import hypergeom as hg
 #from multipy.fdr import qvalue
-from scipy.interpolate import UnivariateSpline
 from statsmodels.stats.multitest import fdrcorrection
 from itertools import compress
 

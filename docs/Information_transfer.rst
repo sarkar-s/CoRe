@@ -3,12 +3,10 @@ Information transfer
 
 The SARS-CoV-2 and human protein interactions are treated as information
 sources. Each edge in the pathway network is treated as a binary
-symmetric information channel. Initial state of the network is all
-network nodes at maximum entropy state. The information source nodes are
-fixed at low entropy state. Information propagates through the network
-edges (information channels) to the other nodes (receiver nodes) of the
-network. We use relative entropy of the receiver nodes as a measure of
-impact of the SARS-CoV-2 proteins.
+symmetric information channel. Information propagates through the
+network edges (information channels) to the other nodes (receiver nodes)
+of the network. We use relative entropy of the receiver nodes as a
+measure of the impact of the SARS-CoV-2 proteins.
 
 .. code:: ipython3
 
@@ -86,7 +84,7 @@ theory <https://books.google.com/books?hl=en&lr=&id=VWq5GG6ycxMC&oi=fnd&pg=PR15&
 
 .. code:: ipython3
 
-    initial_state_type = 'maxEnt'
+    initial_state_type = 'high'
     
     errorname = '0.0'
     rho = float(errorname)
@@ -154,13 +152,6 @@ screening therapies**
         if netObj.G_d.in_degree(nG)==0:
             topological_source_count += 1
 
-
-.. parsed-literal::
-
-    89
-    3030 3030
-
-
 .. code:: ipython3
 
     initial_network_state = np.zeros(shape=(netObj.C_sparse.shape[0],1))
@@ -178,7 +169,7 @@ screening therapies**
 
 .. parsed-literal::
 
-    Reference state relative entropy:  0.0
+    Reference state relative entropy:  443.53300763777236
 
 
 .. code:: ipython3
