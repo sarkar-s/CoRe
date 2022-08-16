@@ -5,4 +5,3 @@ ipython
 pandas
 tqdm
 statsmodels
-itertools
