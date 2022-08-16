@@ -2,6 +2,6 @@ fnGO
 ====
 
 
-.. automodule:: CoRe.fnGO
+.. automodule:: fnGO
     :members:
     :undoc-members:

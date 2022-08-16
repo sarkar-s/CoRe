@@ -2,6 +2,6 @@ ncip
 ====
 
 
-.. autoclass:: CoRe.ncip.ncip
+.. autoclass:: ncip.ncip
     :members:
     :undoc-members:
