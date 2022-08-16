@@ -29,9 +29,6 @@ This version of CoRe computes the information transfer in the immune system due 
 :References:
  If you are using any part of **CoRe**, please cite, `S. Sarkar, Communication network model of the immune system identifies the impact of interactions with SARS-CoV-2 proteins, arXiv (2022) <https://doi.org/10.48550/arXiv.2208.06355>`_
 
-:Website:
-  `swarnavosarkar.com <https://swarnavosarkar.com>`_
-
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
