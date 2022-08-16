@@ -1,7 +1,3 @@
-"""
-Network constructor and information propagator (ncip) contains functions for constructing the information network and entropy for the Reactome TopLevelPathways.
-"""
-
 import os,sys
 import numpy as np
 import math
