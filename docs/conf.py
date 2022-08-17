@@ -14,7 +14,7 @@
 import os
 import sys
 
-autodoc_mock_imports = ["glob","itertools","math"]
+autodoc_mock_imports = ["glob","itertools","math","CoRe"]
 
 sys.path.insert(0, os.path.abspath('..'))
 
