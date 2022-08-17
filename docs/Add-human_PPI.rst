@@ -1,5 +1,5 @@
-Add human PPI to the network
-============================
+Adding human PPI to the network
+===============================
 
 This notebook identfies the proteins in the communication network built
 from Reactome and adds edges due protein-protein interactions (PPI). The

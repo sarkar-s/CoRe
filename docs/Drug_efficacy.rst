@@ -1,5 +1,5 @@
-Drug efficacy
-=============
+Computing drug efficacy
+=======================
 
 **Computes the change in network relative entropy from viral PPIs after
 setting drug state to high abundance**
