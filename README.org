@@ -1,4 +1,4 @@
-#+TITLE: CoRe: Communication through the Reactome and Interactome
+#+TITLE: CoRe: Communication through Reactome and Interactome
 
 Documentation: https://core-docs.readthedocs.io/en/latest/
 
