@@ -1,5 +1,5 @@
-Computing protein expression efficacy
-=====================================
+Computing efficacy (protein expression)
+=======================================
 
 **Computes the change in network relative entropy from viral PPIs after
 setting immune system proteins, one at a time, to high abundance
