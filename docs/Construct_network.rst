@@ -87,7 +87,7 @@ connected by events, which include reactions, regulation,
     selected_TopLevelPathway = 'Immune System'
     pathway_nametag = selected_TopLevelPathway.replace(' ','_')
 
-    output_directory = '/Users/swarnavo/Research/Reactome-Graph-Database/HumanData/'+ pathway_nametag
+    output_directory = '/Examples/'+ pathway_nametag
 
     try:
         os.chdir(output_directory)
