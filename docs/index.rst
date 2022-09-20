@@ -29,6 +29,10 @@ This version of CoRe computes the information transfer in the immune system due 
 :References:
  If you are using any part of **CoRe**, please cite: `S. Sarkar, Communication network model of the immune system identifies the impact of interactions with SARS-CoV-2 proteins, arXiv (2022) <https://doi.org/10.48550/arXiv.2208.06355>`_
 
+ Other references on the use of information theory for biochemical networks.
+ `Sarkar S, Hubbard JB, Halter M, Plant AL. Information thermodynamics and reducibility of large gene networks. Entropy. 2021 Jan 1;23(1):63 <https://doi.org/10.3390/e23010063>`_
+ `Sarkar S, Tack D, Ross D. Sparse estimation of mutual information landscapes quantifies information transmission through cellular biochemical reaction networks. Communications biology. 2020 Apr 30;3(1):1-8. <https://doi.org/10.1038/s42003-020-0901-9>`_
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
