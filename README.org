@@ -8,6 +8,8 @@ CoRe is a software package to construct communication network models for biologi
 - The Interactome database (http://interactome.dfci.harvard.edu)
 - The c5 collection in MSigDB (http://www.gsea-msigdb.org/gsea/msigdb)
 
+If you are using any part of core, please cite: Sarkar, S (2022) Communication network model of the immune system identifies the impact of interactions with SARS-CoV-2 proteins. arXiv preprint arXiv:2208.06355.
+
 * System Requirements
 
 ** Hardware requirements
