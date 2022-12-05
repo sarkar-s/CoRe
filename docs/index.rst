@@ -49,12 +49,3 @@ This version of CoRe computes the information transfer in the immune system due 
    ncip
    fnGO
    dependencies
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

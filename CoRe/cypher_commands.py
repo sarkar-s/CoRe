@@ -4,6 +4,7 @@ Contains commands for Reactome database query using Cypher
 
 command_set = {}
 command_set['events'] = "MATCH(n:TopLevelPathway {displayName:'#',speciesName:'Homo sapiens'})-[:hasEvent*]->(rle:ReactionLikeEvent) RETURN DISTINCT rle"
+command_set['events_generic'] = "MATCH(n:Pathway {displayName:'#',speciesName:'Homo sapiens'})-[:hasEvent*]->(rle:ReactionLikeEvent) RETURN DISTINCT rle"
 command_set['sub events'] = "MATCH(n:Pathway {stId:'#',speciesName:'Homo sapiens'})-[:hasEvent*]->(rle:ReactionLikeEvent) RETURN rle"
 
 command_set['input'] = {}
