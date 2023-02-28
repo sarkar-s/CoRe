@@ -525,7 +525,7 @@ class ncip:
 
         n = len(self.G_d.nodes())
         C = np.zeros(shape=(self.code_length*n,self.code_length*n))
-        A = np.transpose(nx.to_numpy_matrix(self.G_d))
+        A = np.transpose(nx.to_numpy_array(self.G_d))
 
         node_list = list(self.G_d.nodes)
 

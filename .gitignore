@@ -3,6 +3,9 @@ Check-disease-networks.ipynb
 Maximum-reference-state.ipynb
 Construct_network-multiple_modules.ipynb
 Drug_efficacy_cancer.ipynb
+network-random-walk.ipynb
+Collective_action.ipynb
+Collective_finite_responses_ORA.ipynb
 /Examples/Universal
 /Examples/Immunometabolism_with_SARS-CoV-2
 /preprocessors
