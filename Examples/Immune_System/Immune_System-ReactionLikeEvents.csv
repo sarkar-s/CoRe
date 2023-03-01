@@ -1,0 +1,1623 @@
+reaction,name,schemaClass,module
+R-HSA-198270,PDPK1 phosphorylates AKT at T308,Reaction,Immune System
+R-HSA-2317314,AKT binds PDPK1,Reaction,Immune System
+R-HSA-198640,TORC2 (mTOR) phosphorylates AKT at S473,Reaction,Immune System
+R-HSA-2317332,PIP3 recruits AKT to the membrane,Reaction,Immune System
+R-HSA-199456,PTEN dephosphorylates PIP3,Reaction,Immune System
+R-HSA-168053,Phosphorylated MAPKs phosphorylate ATF-2,Reaction,Immune System
+R-HSA-74448,Calcium binds calmodulin,Reaction,Immune System
+R-HSA-434798,CRAC translocates calcium from the extracellular region to the cytosol,Reaction,Immune System
+R-HSA-434700,STIM1 activation of CRAC,Reaction,Immune System
+R-HSA-1168376,STIM1 oligomerizes,Reaction,Immune System
+R-HSA-169683,"IP3R:I(1,4,5)P3 tetramer transports Ca2+ from ER lumen to cytosol",Reaction,Immune System
+R-HSA-169680,"IP3 binds to the IP3 receptor, opening the endoplasmic reticulum Ca2+ channel",Reaction,Immune System
+R-HSA-167686,Active PLCG1 hydrolyses PIP2,Reaction,Immune System
+R-HSA-2029272,Release of PLCG from FCGR,Reaction,Immune System
+R-HSA-2029268,Phosphorylation and activation of PLCG,Reaction,Immune System
+R-HSA-2029270,Recruitment of PLCgamma to membrane,Reaction,Immune System
+R-HSA-2029271,PI3K phosphorylates PIP2 to PIP3,Reaction,Immune System
+R-HSA-2029273,PI3K binds to p-6Y-SYK,Reaction,Immune System
+R-HSA-202407,PLC-gamma1 hydrolyses PIP2,Reaction,Immune System
+R-HSA-202354,Translocation of PLC-gamma1 to PIP2,Reaction,Immune System
+R-HSA-202248,Phosphorylation of PLC-gamma1,Reaction,Immune System
+R-HSA-202375,Recruitment of ITK to SLP-76,Reaction,Immune System
+R-HSA-202216,Phosphorylation of SLP-76,Reaction,Immune System
+R-HSA-202241,Recruitment of SLP-76 to Gads,Reaction,Immune System
+R-HSA-202325,Recruitment of Gads to LAT,Reaction,Immune System
+R-HSA-202245,Phosphorylation of TBSMs in LAT,Reaction,Immune System
+R-HSA-202174,Activation of ZAP-70,Reaction,Immune System
+R-HSA-202168,Phosphorylation of ZAP-70 by Lck,Reaction,Immune System
+R-HSA-202344,Recruitment of ZAP-70 to phosphorylated ITAMs,Reaction,Immune System
+R-HSA-202165,Phosphorylation of ITAM motifs in CD3 complexes,Reaction,Immune System
+R-HSA-202291,Activation of Lck,Reaction,Immune System
+R-HSA-202214,Dephosphorylation of Lck-pY505 by CD45,Reaction,Immune System
+R-HSA-202233,Inactivation of Lck by Csk,Reaction,Immune System
+R-HSA-203774,Interaction of Csk with PAG,Reaction,Immune System
+R-HSA-202212,Recruitment of PLC-gamma1 to LAT,Reaction,Immune System
+R-HSA-202331,Recruitment of PLC-gamma1 to SLP-76,Reaction,Immune System
+R-HSA-213407,Disassociation of PLC-gamma1 from SLP-76,Reaction,Immune System
+R-HSA-213406,Disassociation of PLC-gamma1 from LAT,Reaction,Immune System
+R-HSA-202203,Recruitment of PI3K to plasma membrane,Reaction,Immune System
+R-HSA-388830,PI3K binds ICOS,Reaction,Immune System
+R-HSA-444647,C3a receptor binds anaphylatoxin C3a,Reaction,Immune System
+R-HSA-166817,Cleavage of C3 by C3 convertases,Reaction,Immune System
+R-HSA-174551,Formation of alternative pathway C5 convertase,Reaction,Immune System
+R-HSA-173754,Properdin stabilizes C3b:Bb bound to cell surfaces,Reaction,Immune System
+R-HSA-183122,Factor D cleaves C3b-bound Factor B,Reaction,Immune System
+R-HSA-183126,Factor B binds to surface-associated C3b,Reaction,Immune System
+R-HSA-981539,C3b binds to cell surface,Reaction,Immune System
+R-HSA-183130,C3(H2O):Factor Bb cleaves C3 to C3b and C3a,Reaction,Immune System
+R-HSA-173745,Factor D cleaves C3(H2O)-bound Factor B,Reaction,Immune System
+R-HSA-173740,Factor B binds to C3(H2O),Reaction,Immune System
+R-HSA-173739,Spontaneous hydrolysis of C3 thioester,Reaction,Immune System
+R-HSA-166795,Formation of Classical C3 convertase (C4b:C2a complex),Reaction,Immune System
+R-HSA-166792,Conversion of C2 into C2a and C2b,Reaction,Immune System
+R-HSA-166726,Activation of MASPs,Reaction,Immune System
+R-HSA-166721,"MBL binds to repetitive carbohydrate structures on the surfaces of viruses, bacteria, fungi, and protozoa",Reaction,Immune System
+R-HSA-2855054,Ficolin-2 binds to molecular patterns on the target cell surface ,Reaction,Immune System
+R-HSA-8852509,CL-LK binds carbohydrates on target cell surface,Reaction,Immune System
+R-HSA-2855125,Ficolin-1 binds to molecular patterns on the target cell surface,Reaction,Immune System
+R-HSA-2855077,Ficolin-3 binds to molecular patterns on the target cell surface ,Reaction,Immune System
+R-HSA-981713,C4b binds to cell surface,Reaction,Immune System
+R-HSA-166753,Conversion of C4 into C4a and C4b,Reaction,Immune System
+R-HSA-173631,Activation of C1s,Reaction,Immune System
+R-HSA-173626,Activation of C1r,Reaction,Immune System
+R-HSA-375395,C5a receptor binds C5a anaphylatoxin,Reaction,Immune System
+R-HSA-173680,Activation of C5,Reaction,Immune System
+R-HSA-173636,Formation of classic pathway C5 convertase,Reaction,Immune System
+R-HSA-1112666,"BLNK (SLP-65) Signalosome hydrolyzes phosphatidyinositol bisphosphate forming diacylglycerol and inositol-1,4,5-trisphosphate",Reaction,Immune System
+R-HSA-9606162,Phosphorylated BTK phosphorylates PLCG2,Reaction,Immune System
+R-HSA-9606159,BTK autophosphorylates,Reaction,Immune System
+R-HSA-9606163,p-SYK and LYN phosphorylate BTK,BlackBoxEvent,Immune System
+R-HSA-9606151,"Phosphorylated BLNK (SLP65, in Antigen:p-BCR:p-SYK:p-BLNK:CIN85:GRB2:SOS1) binds BTK, PLCG2, VAV1, NCK1",Reaction,Immune System
+R-HSA-983703,p-6Y-SYK phosphorylates BLNK (SLP65),Reaction,Immune System
+R-HSA-983707,SYK autophosphorylates at the activated BCR,Reaction,Immune System
+R-HSA-983700,SYK binds the activated BCR,Reaction,Immune System
+R-HSA-983709,"LYN, FYN, BLK phosphorylate ITAMs of Ig-alpha (CD79A) and Ig-beta (CD79B)",Reaction,Immune System
+R-HSA-983696,The Immunoglobulin of the BCR binds antigen,Reaction,Immune System
+R-HSA-2089943,TRPC1 translocates calcium from the extracellular region to the cytosol,Reaction,Immune System
+R-HSA-2089927,STIM1 binds TRPC1 forming STIM1:TRPC1 complex,Reaction,Immune System
+R-HSA-2396599,Recruitment of GRB2:SOS to p-5Y-LAT,Reaction,Immune System
+R-HSA-2730844,Interaction of GRB2:SOS complex with p-SHC1,Reaction,Immune System
+R-HSA-2730886,Phosphorylation of SHC by SYK kinase,Reaction,Immune System
+R-HSA-2395801,Phosphorylation of LAT by p-SYK,Reaction,Immune System
+R-HSA-2395412,Phosphorylation of SYK,Reaction,Immune System
+R-HSA-210289,Recruitment of SYK to p-DAP12,Reaction,Immune System
+R-HSA-2395439,Phosphorylation of DAP12,Reaction,Immune System
+R-HSA-210295,Interaction of DAP12 and NKG2D,Reaction,Immune System
+R-HSA-2130151,Dimerization of DAP12,Reaction,Immune System
+R-HSA-2172126,DAP12 interacts with NKG2C,Reaction,Immune System
+R-HSA-210300,Interaction of DAP12 and TREM2,Reaction,Immune System
+R-HSA-1168374,RasGRP1 and RasGRP3 binds diacylglycerol and is phosphorylated,BlackBoxEvent,Immune System
+R-HSA-453111,Phosphorylated SHC recruits GRB2:SOS1,Reaction,Immune System
+R-HSA-452100,SHC1 bound to IL2 receptor is phosphorylated,Reaction,Immune System
+R-HSA-452091,Phosphorylation of IL2RB Y338 enables SHC recruitment,Reaction,Immune System
+R-HSA-452122,"JAK1 phosphorylates Y338, Y392 and Y510 of IL2RB",Reaction,Immune System
+R-HSA-451942,Within the IL-2R complex JAK3 phosphorylates JAK1,Reaction,Immune System
+R-HSA-450063,Interleukin-2: IL2 receptor alpha:beta binds IL2 receptor gamma subunit,Reaction,Immune System
+R-HSA-451895,IL2RG binds JAK3,Reaction,Immune System
+R-HSA-450027,Interleukin-2 receptor alpha:IL2 binds Interleukin-2 receptor beta,Reaction,Immune System
+R-HSA-450054,Interleukin-2 receptor alpha binds interleukin-2,Reaction,Immune System
+R-HSA-451900,IL2RB binds JAK1,Reaction,Immune System
+R-HSA-879925,SHC1 bound to the common beta chain becomes tyrosine phosphorylated,Reaction,Immune System
+R-HSA-879934,Recruitment of SHC1 is mediated by Y593 of the common beta chain,Reaction,Immune System
+R-HSA-879907,Tyrosine kinases phosphorylate the receptor,Reaction,Immune System
+R-HSA-913371,GM-CSF receptor alpha:GM-CSF binds Bc,Reaction,Immune System
+R-HSA-879937,The common beta chain IL3RB binds JAK2,Reaction,Immune System
+R-HSA-913360,GM-CSF receptor alpha subunit binds GM-CSF,Reaction,Immune System
+R-HSA-913370,Interleukin-5:Interleukin-5 receptor alpha binds IL3RB:JAK2,Reaction,Immune System
+R-HSA-913456,Interleukin-5 receptor alpha subunit binds Interleukin-5,Reaction,Immune System
+R-HSA-913446,Interleukin-5 is a homodimer,Reaction,Immune System
+R-HSA-450031,Interleukin-3 receptor alpha: Interleukin-3 binds IL3RB:JAK2,Reaction,Immune System
+R-HSA-450074,Interleukin-3 receptor alpha subunit binds Interleukin-3,Reaction,Immune System
+R-HSA-879942,The receptor is activated,BlackBoxEvent,Immune System
+R-HSA-9607304,SOS1-mediated nucleotide exchange of RAS downstream of FLT3,Reaction,Immune System
+R-HSA-9607301,Active FLT3:GRB2 binds SOS1,Reaction,Immune System
+R-HSA-9604738,Active FLT3 dimer binds GRB2,Reaction,Immune System
+R-HSA-9604767,FLT3LG dimer:FLT3 dimer autophosphorylates,BlackBoxEvent,Immune System
+R-HSA-8854736,FLT3LG dimer:FLT3 binds FLT3,Reaction,Immune System
+R-HSA-6786789,FLT3LG dimer binds FLT3,Reaction,Immune System
+R-HSA-451649,"TPL2 phosphorylates MEK1, SEK1",Reaction,Immune System
+R-HSA-5684273,"3xUb,p-S-NFkB p105:TPL2:ABIN2 dissociates due to degradation of p105",BlackBoxEvent,Immune System
+R-HSA-5684250,"SCF betaTrCP ubiquitinates NFKB p105 within p-S927, S932-NFkB p105:TPL2:ABIN2 ",Reaction,Immune System
+R-HSA-5684248,"SCF betaTrCP1,2 binds p-NFkB p105:TPL2:ABIN2",Reaction,Immune System
+R-HSA-5684261,MAP3K8 is phosphorylated,Reaction,Immune System
+R-HSA-168184,Activated TAK1 mediates phosphorylation of the IKK Complex,Reaction,Immune System
+R-HSA-936991,Auto phosphorylation of TAK1 bound to p-IRAK2:pUb oligo-TRAF6: free K63 pUb:TAB1:TAB2/TAB3 ,Reaction,Immune System
+R-HSA-936960,Activated TRAF6:p-IRAK2 interacts with TAK1 complex,Reaction,Immune System
+R-HSA-936942,Auto ubiquitination of oligo-TRAF6 bound to p-IRAK2,BlackBoxEvent,Immune System
+R-HSA-936963,IRAK2 induces TRAF6 oligomerization,Reaction,Immune System
+R-HSA-166362,Dissociation of hp-IRAK1:TRAF6 from the activated TLR:oligo-Myd88:TIRAP:p-IRAK4 complex,Reaction,Immune System
+R-HSA-166363,TRAF6 binds to hp- IRAK1,Reaction,Immune System
+R-HSA-166286,Multiple IRAK1 autophosphorylation steps,Reaction,Immune System
+R-HSA-166284,Second phosphorylation of IRAK1 by IRAK4 bound to activated TLR:MyD88:TIRAP,Reaction,Immune System
+R-HSA-166119,First phosphorylation of IRAK1 by IRAK4 bound to activated TLR:MyD88:Mal,Reaction,Immune System
+R-HSA-166091,IRAK1 or IRAK2 binds to the activated IRAK4 :activated TLR:MyD88:TIRAP complex,Reaction,Immune System
+R-HSA-937022,IRAK4 autophosphorylation in the complex with activated TLR:MyD88:TIRAP,Reaction,Immune System
+R-HSA-166082,IRAK4 binds to the activated TLR receptor:TIRAP:MyD88 complex,Reaction,Immune System
+R-HSA-937079,MyD88 oligomerization within the complex of activated TLR:TIRAP:MyD88,Reaction,Immune System
+R-HSA-166072,MyD88 forms a complex with TIRAP:activated TLR2/4,Reaction,Immune System
+R-HSA-2201322,TIRAP is phosphorylated by BTK,Reaction,Immune System
+R-HSA-2559414,Activated TLR2/4:TIRAP interacts with BTK,Reaction,Immune System
+R-HSA-2201316,Activated TLR2/4 interacts with MAL (TIRAP),Reaction,Immune System
+R-HSA-6805943,S100A1 binds TLR4:LY96,Reaction,Immune System
+R-HSA-8870678,Cleaved fibrinogen products bind TLR4:LY96,Reaction,Immune System
+R-HSA-5432849,S100A8:S100A9 binds TLR4:LY96,Reaction,Immune System
+R-HSA-168950,TLR6:TLR2 is recruited to ligand:CD14:CD36,Reaction,Immune System
+R-HSA-2559464,TLR6/2 ligand associates with CD14 and CD36 within lipid rafts,Reaction,Immune System
+R-HSA-168951,TLR1:TLR2 is recruited to ligand:CD14,Reaction,Immune System
+R-HSA-2559468,TLR1/2 ligand binds to CD14,Reaction,Immune System
+R-HSA-166041,Transfer of LPS onto TLR4,Reaction,Immune System
+R-HSA-166038,GPI-bound CD14 binds LPS,Reaction,Immune System
+R-HSA-166015,Association of LBP with LPS,Reaction,Immune System
+R-HSA-169719,Secreted CD14 binds LPS,Reaction,Immune System
+R-HSA-5432825,HMGB1 binds TLR4:LY96,Reaction,Immune System
+R-HSA-6805981,HMGB1 release from cells,BlackBoxEvent,Immune System
+R-HSA-975879,Dissociation of hp-IRAK1:TRAF6 or IRAK2:TRAF6-oligomer from the activated TLR5 or 10:oligo-Myd88:p-IRAK4 complex,Reaction,Immune System
+R-HSA-975857,TRAF6 binds to hp- IRAK1 or p-IRAK2,Reaction,Immune System
+R-HSA-975853,Multiple IRAK1 autophosphorylation within the complex p-IRAK4:oligo MyD88:activated TLR,Reaction,Immune System
+R-HSA-975874,Second phosphorylation of IRAK1 by IRAK4 bound to MyD88:activated TLR complex,Reaction,Immune System
+R-HSA-975878,First phosphorylation of IRAK1 by IRAK4 bound to MyD88:activated TLR,Reaction,Immune System
+R-HSA-975852,IRAK1/or IRAK2 binds to the activated IRAK4 :oligo MyD88:activated TLR5 or 10 complex,Reaction,Immune System
+R-HSA-975865,IRAK4 autophosphorylation within the complex activated TLR:MyD88,Reaction,Immune System
+R-HSA-975873,IRAK4 binds to MyD88 bound to the activated TLR5 or 10 receptor,Reaction,Immune System
+R-HSA-975880,MyD88 oligomerization within the complex of activated TLR:MyD88,Reaction,Immune System
+R-HSA-975866,MyD88 forms a complex with the activated TLR receptor,Reaction,Immune System
+R-HSA-168947,Ligand binds to TLR10,BlackBoxEvent,Immune System
+R-HSA-188025,Flagellin binds to TLR5,Reaction,Immune System
+R-HSA-975861,Phosphorylation of IRAK2 bound to the activated IRAK4:MyD88 oligomerl:activated TLR5 or 10 complex,Reaction,Immune System
+R-HSA-936986,Activated TRAF6 synthesizes unanchored polyubiquitin chains,Polymerisation,Immune System
+R-HSA-9645442,Auto phosphorylation of TAK1 within the ALPK1:ADP-heptose:p-T9-TIFA:pUb-TRAF6: free K63 pUb:TAB1:TAB2/TAB3 :MAP3K7 complex,Reaction,Immune System
+R-HSA-9645406,ALPK1:ADP-heptose:p-T9-TIFA oligomer:K63pUb-TRAF6 oligomer recruits MAP3K7 (TAK1),Reaction,Immune System
+R-HSA-9645394,Activated TRAF6 synthesizes unanchored polyubiquitin chains upon ALPK1:ADP-heptose stimulation ,Polymerisation,Immune System
+R-HSA-9645414,Auto ubiquitination of TRAF6 bound to ALPK1:ADP-heptose:TIFA oligomer,BlackBoxEvent,Immune System
+R-HSA-9645501,TRAF6 oligomerizes within the ALPK1:ADP-heptose:TIFA oligomer complex,Reaction,Immune System
+R-HSA-9645520,ALPK1:ADP-heptose:TIFA oligomer recruits TRAF6,Reaction,Immune System
+R-HSA-9645481,TIFA oligomerization,Reaction,Immune System
+R-HSA-9645535,ALPK1 phosphorylates TIFA,Reaction,Immune System
+R-HSA-9645524,ALPK1:ADP-heptose binds TIFA,Reaction,Immune System
+R-HSA-9645428,ALPK1 binds ADP-heptose,Reaction,Immune System
+R-HSA-847070,Phosphorylated TAK1 dissociates from the TLR3 receptor complex,Reaction,Immune System
+R-HSA-177692,Activation of recruited TAK1 within the activated TLR3 complex ,Reaction,Immune System
+R-HSA-177690,Activated TLR3:TRIF:K63pUb-TRAF6 recruits TAK1complex,Reaction,Immune System
+R-HSA-9628444,Activated TRAF6 synthesizes unanchored polyubiquitin chains upon TLR3 stimulation ,Polymerisation,Immune System
+R-HSA-450259,Auto ubiqitination of TRAF6 bound to viral dsRNS:TLR3:TICAM1 complex,BlackBoxEvent,Immune System
+R-HSA-177694,Viral dsRNA:TLR3:TICAM1 complex recruits TRAF6,Reaction,Immune System
+R-HSA-168929,Viral dsRNA:TLR3 recruits TRIF (TICAM1),Reaction,Immune System
+R-HSA-168092,Viral dsRNA binds the Toll-Like Receptor 3 (TLR3),Reaction,Immune System
+R-HSA-706479,TAK1 is activated,BlackBoxEvent,Immune System
+R-HSA-688985,K63 polyubiquitinated RIP2 associates with the TAK1 complex,Reaction,Immune System
+R-HSA-688137,RIP2 is K63 polyubiquitinated,Reaction,Immune System
+R-HSA-168405,Activated NOD oligomer recruites RIP2 (RICK),Reaction,Immune System
+R-HSA-708349,Activated NOD2 oligomerizes,Reaction,Immune System
+R-HSA-168412,MDP elicits a NOD2 response,Reaction,Immune System
+R-HSA-622310,Activated NOD1 oligomerizes,Reaction,Immune System
+R-HSA-168400,iE-DAP elicits a NOD1 response,Reaction,Immune System
+R-HSA-936951,Activation of TAK1 complex bound to activated TLR4 complex,Reaction,Immune System
+R-HSA-936947,Activated TLR4:TICAM1:K63pUb-TRAF6 recruits TAK1complex,Reaction,Immune System
+R-HSA-936952,Auto ubiquitination of TRAF6 bound to the activated TLR4 complex,BlackBoxEvent,Immune System
+R-HSA-936985,Activated TLR4:TICAM1 recruits TRAF6,Reaction,Immune System
+R-HSA-166175,TRAM:TLR4:LY96:LPS:CD14 recruits TRIF (TICAM1),Reaction,Immune System
+R-HSA-5684275,IKBKB phosphorylates TPL2 (MAP3K8) at Ser400,Reaction,Immune System
+R-HSA-451634,"NFKB p105, TPL2 (COT) and ABIN2 form a stable complex",Reaction,Immune System
+R-HSA-5684267,IKBKB phosphorylates NFkB p105 within the NFkB p105:TPL2:ABIN2 complex,Reaction,Immune System
+R-HSA-450348,Activated human JNKs migrate to nucleoplasm,Reaction,Immune System
+R-HSA-168162,Phosphorylation of human JNKs by activated MKK4/MKK7,Reaction,Immune System
+R-HSA-450337,Activated TAK1 phosphorylates MKK4/MKK7,Reaction,Immune System
+R-HSA-2730868,Phosphorylation of MEK7 by MEKK1,Reaction,Immune System
+R-HSA-2730887,Autophosphorylation and activation of MEKK1,Reaction,Immune System
+R-HSA-2730856,Autophosphorylation of PAK,Reaction,Immune System
+R-HSA-2730889,Recruitment of PAK to the membrane by binding active RAC1,Reaction,Immune System
+R-HSA-2730840,Activation of RAC1 by VAV,Reaction,Immune System
+R-HSA-2730841,Phosphorylation and activation of VAV,Reaction,Immune System
+R-HSA-2730892,Recruitment of VAV to p-SLP-76,Reaction,Immune System
+R-HSA-2730851,Phosphorylation of SLP-76 by p-SYK,Reaction,Immune System
+R-HSA-2396561,Recruitment of GADS:SLP-76 to p-5Y-LAT,Reaction,Immune System
+R-HSA-450333,Activated human MKK3/MKK6 phosphorylates p38 MAPK complexed with MAPKAPK2 or MAPKAPK3,Reaction,Immune System
+R-HSA-450296,Phosphorylated MKK3/MKK6 migrates to nucleus,Reaction,Immune System
+R-HSA-450346,activated human TAK1 phosphorylates MKK3/MKK6,Reaction,Immune System
+R-HSA-389158,CD28 bound PI3K phosphorylates PIP2 to PIP3,Reaction,Immune System
+R-HSA-388832,PI3K binds CD28,Reaction,Immune System
+R-HSA-388831,Phosphorylation of CD28,Reaction,Immune System
+R-HSA-388808,CD28 homodimer binds B7-2 monomer,Reaction,Immune System
+R-HSA-388811,CD28 homodimer binds B7-1 homodimer,Reaction,Immune System
+R-HSA-2076220,"CD19 Signalosome phosphorylates PI(4,5)P2 forming PI(3,4,5)P3",Reaction,Immune System
+R-HSA-9606887,p-CD19:VAV binds PI3K and GRB2,Reaction,Immune System
+R-HSA-9606883,CD19 is phosphorylated,BlackBoxEvent,Immune System
+R-HSA-2045911,"BCAP Signalosome phosphorylates PI(4,5)P2 forming PI(3,4,5)P3",Reaction,Immune System
+R-HSA-9606160,p-PIK3AP1 (p-BCAP) binds PIK3CD:PIK3R1 (PI3K delta),Reaction,Immune System
+R-HSA-202365,PI3K bound to TRAT1 phosphorylates PIP2 to PIP3,Reaction,Immune System
+R-HSA-2316429,PIP3 recruits PDPK1 to the membrane,Reaction,Immune System
+R-HSA-199935,MSK1 activates CREB,Reaction,Immune System
+R-HSA-198756,ERK1/2 phosphorylates MSK1,Reaction,Immune System
+R-HSA-198669,p38MAPK phosphorylates MSK1,Reaction,Immune System
+R-HSA-450292,Formation of Activated Protein 1 (AP-1) complex. cFOS/c-JUN heterodimer. ,Reaction,Immune System
+R-HSA-450325,c-FOS activation by phospho ERK1/2,Reaction,Immune System
+R-HSA-168136,Activated JNKs phosphorylate c-JUN,Reaction,Immune System
+R-HSA-450222,Active p38 MAPK phosphorylates MAPKAPK2 or 3,Reaction,Immune System
+R-HSA-198746,ERK1/2/5 activate RSK1/2/3,Reaction,Immune System
+R-HSA-199050,ICAM1-5 bind Integrin alphaLbeta2 (LFA-1),Reaction,Immune System
+R-HSA-198941,VCAM1 binds Integrin alpha4beta1,Reaction,Immune System
+R-HSA-9679740,ITGA4:ITGB1 binds natalizumab,Reaction,Immune System
+R-HSA-199032,MADCAM1-1 binds Integrin alpha4beta7,Reaction,Immune System
+R-HSA-2730872,Activation of Calcineurin,Reaction,Immune System
+R-HSA-198314,DAG stimulates protein kinase C-delta,Reaction,Immune System
+R-HSA-202541,"p-S177,S181-IKKB:IKKA:pUb-NEMO phosphorylates IkB-alpha:NF-kB",Reaction,Immune System
+R-HSA-202534,Ubiquitination of NEMO by TRAF6,BlackBoxEvent,Immune System
+R-HSA-2730876,Phosphorylation of IKK-beta by TAK1,Reaction,Immune System
+R-HSA-2730900,Activation of TAK1 complex bound to pUb-TRAF6,BlackBoxEvent,Immune System
+R-HSA-2730861,Recruitment of TAK1 kinase complex to oligo-K63-pUb-TRAF6,Reaction,Immune System
+R-HSA-2730904,Auto-ubiquitination of TRAF6,BlackBoxEvent,Immune System
+R-HSA-2730903,Oligomerization of TRAF6,BlackBoxEvent,Immune System
+R-HSA-2730864,Recruitment of TRAF6 to CBM complex by binding to MALT1,Reaction,Immune System
+R-HSA-2730899,Oligomerization of BCL10 and MALT1,BlackBoxEvent,Immune System
+R-HSA-2730836,Interaction of BCL10:MALT1 with CARMA1 to form CBM complex,Reaction,Immune System
+R-HSA-2730902,Oligomerization of p-CARMA1,BlackBoxEvent,Immune System
+R-HSA-2730863,Phosphorylation of CARMA1 by PKC-theta,Reaction,Immune System
+R-HSA-2730835,Autophosphorylation of PKC-theta,Reaction,Immune System
+R-HSA-2730882,Phosphorylation of PKC-theta,Reaction,Immune System
+R-HSA-202328,Translocation of PKC theta to plasma membrane,Reaction,Immune System
+R-HSA-2730847,Hydrolysis of PIP2 by PLCG,Reaction,Immune System
+R-HSA-202164,Translocation of PDK1 to Plasma membrane,Reaction,Immune System
+R-HSA-202237,"Hydrolysis of PIP3 to PI(3,4)P2",Reaction,Immune System
+R-HSA-2730870,Phosphorylation of PIP2 to PIP3 by PI3K,Reaction,Immune System
+R-HSA-2730842,PI3K associates with phosphorylated GAB2,Reaction,Immune System
+R-HSA-2730860,Phosphorylation of GAB2 by SYK/FYN,Reaction,Immune System
+R-HSA-2730848,Recruitment of GAB2 to PM and FCERI by binding to GRB2,Reaction,Immune System
+R-HSA-2730837,Recruitment of GRB2:SOS to p-10Y-NTAL,Reaction,Immune System
+R-HSA-2730884,Phosphorylation of NTAL by p-SYK/Lyn,Reaction,Immune System
+R-HSA-2454239,Phosphorylation of SYK,Reaction,Immune System
+R-HSA-2029452,Recruitment of SYK to phosphorylated ITAMs,Reaction,Immune System
+R-HSA-2029459,Sequestering and phosphorylation Fc gamma receptors in the lipid rafts,BlackBoxEvent,Immune System
+R-HSA-2029455,Cross-linking of FCGRIA with IgG-coated Ag,Reaction,Immune System
+R-HSA-1861621,Cross-linking of FCGRIIA with IgG-coated Ag,Reaction,Immune System
+R-HSA-2029457,Cross-linking of FCGRIIIA with IgG-coated Ag,Reaction,Immune System
+R-HSA-2454240,Recruitment of SYK to p-FCERI gamma subunit,Reaction,Immune System
+R-HSA-2454208,Phosphorylation of beta and gamma subunits by LYN,Reaction,Immune System
+R-HSA-2454192,Allergen dependent IgE bound FCERI aggregation,BlackBoxEvent,Immune System
+R-HSA-9725206,IgE binds FCERI,Reaction,Immune System
+R-HSA-2730862,Autophosphorylation of LYN kinase,Reaction,Immune System
+R-HSA-202500,Activation of IKK complex,Reaction,Immune System
+R-HSA-202510,Activation of TAK1-TAB2 complex,Reaction,Immune System
+R-HSA-202453,Auto-ubiquitination of TRAF6,Reaction,Immune System
+R-HSA-202472,Translocation of TRAF6 to CBM complex,Reaction,Immune System
+R-HSA-202478,Interaction and oligomerization of MALT1 to Bcl10,Reaction,Immune System
+R-HSA-202489,Oligomerization of Bcl10,Reaction,Immune System
+R-HSA-202459,Phosphorylation of Bcl10,Reaction,Immune System
+R-HSA-202466,Interaction of Bcl10 to CARMA1,Reaction,Immune System
+R-HSA-202443,Oligomerization of CARMA1,Reaction,Immune System
+R-HSA-202437,Phosphorylation of CARMA1,Reaction,Immune System
+R-HSA-202394,Translocation of CARMA1 to Plasma membrane,Reaction,Immune System
+R-HSA-202222,Phosphorylation of PKC theta,Reaction,Immune System
+R-HSA-202307,Change of PKC theta conformation,Reaction,Immune System
+R-HSA-5607742,"K63polyUb-p-3T,1S-TAK1 phosphorylates IKK-beta",Reaction,Immune System
+R-HSA-5607732,K63polyUb-TAK1 autophosphorylates,Reaction,Immune System
+R-HSA-5607757,K63polyUb-TRAF6 ubiquitinates TAK1,BlackBoxEvent,Immune System
+R-HSA-5607759,TRIKA2 binds K63polyUb-TRAF6 oligomer,Reaction,Immune System
+R-HSA-5607756,TRAF6 oligomer autoubiquitinates,BlackBoxEvent,Immune System
+R-HSA-5607751,TRAF6 oligomerizes,Polymerisation,Immune System
+R-HSA-5607747,TRAF6 binds MALT1 oligomers,Reaction,Immune System
+R-HSA-5607736,MALT1 oligomerizes,Polymerisation,Immune System
+R-HSA-5607744,MALT1 binds BCL10,Reaction,Immune System
+R-HSA-5607737,BCL10 oligomerizes,Polymerisation,Immune System
+R-HSA-5607733,BCL10 binds CARD9,Reaction,Immune System
+R-HSA-5607753,CARD9 oligomerizes,Polymerisation,Immune System
+R-HSA-5607740,PKC-delta phosphorylates CARD9,Reaction,Immune System
+R-HSA-5607746,PKC-delta is activated,Reaction,Immune System
+R-HSA-5607734,PKC-delta translocates to plasma membrane,Reaction,Immune System
+R-HSA-5607735,"p-Y753,Y759-PLCG2 hydrolyses PIP2",Reaction,Immune System
+R-HSA-5607755,"p-Y753,Y759-PLCG2 translocates from cytosol to plasma membrane",Reaction,Immune System
+R-HSA-5607745,"1,3-beta-D-glucan:p-Y15-CLEC7A:SYK phosphorylates PLCG",Reaction,Immune System
+R-HSA-5607738,"SYK binds p-Y15-CLEC7A:1,3-beta-D-glucan",Reaction,Immune System
+R-HSA-5607750,"SRC kinase phosphorylates CLEC7A:1,3-beta-D-glucan",Reaction,Immune System
+R-HSA-5607758,"CLEC7A binds 1,3-beta-D-glucan",Reaction,Immune System
+R-HSA-199959,ERKs are inactivated by protein phosphatase 2A,Reaction,Immune System
+R-HSA-198731,ERK1/2 activates ELK1,Reaction,Immune System
+R-HSA-199929,ERK5 activates the transcription factor MEF2,Reaction,Immune System
+R-HSA-203797,ERKs are inactivated by dual-specific phosphatases (DUSPs),Reaction,Immune System
+R-HSA-199895,RSK1/2/3 phosphorylates CREB at Serine 133,Reaction,Immune System
+R-HSA-199910,MSK1 activates ATF1,Reaction,Immune System
+R-HSA-199917,MAPKAPK2 phosphorylates CREB at Serine 133,Reaction,Immune System
+R-HSA-448702,Caspase-1 active tetramer formation,Reaction,Immune System
+R-HSA-448673,Formation of caspase-1 p10/p20 dimer,Reaction,Immune System
+R-HSA-448678,CTSG cleaves CASP1(1-404),Reaction,Immune System
+R-HSA-844617,IPAF binds procaspase-1,Reaction,Immune System
+R-HSA-874084,IPAF is activated,BlackBoxEvent,Immune System
+R-HSA-844618,dsDNA:AIM2:ASC cluster binds procaspase-1,Reaction,Immune System
+R-HSA-844620,dsDNA:AIM2 clusters bind ASC,Reaction,Immune System
+R-HSA-874079,AIM2 oligomerizes,Polymerisation,Immune System
+R-HSA-844619,AIM2 binds dsDNA,Reaction,Immune System
+R-HSA-844612,PYCARD recruits procaspase-1 via CARD,Reaction,Immune System
+R-HSA-844610,NLRP3 recruits PYCARD (ASC) via a PYD-PYD interaction,Reaction,Immune System
+R-HSA-1296421,NLRP3 oligomerizes via NACHT domains,Polymerisation,Immune System
+R-HSA-844440,NLRP3 activation by elicitor proteins,BlackBoxEvent,Immune System
+R-HSA-873951,SGT1:HSP90 binds inactive NLRP3,Reaction,Immune System
+R-HSA-874087,SGT1 binds HSP90,Reaction,Immune System
+R-HSA-877198,P2X7 mediates membrane pores that include pannexin-1,BlackBoxEvent,Immune System
+R-HSA-877158,P2X7 forms oligomeric non-selective cation channels,Reaction,Immune System
+R-HSA-877178,ATP binds to P2X7,Reaction,Immune System
+R-HSA-1250272,TXNIP binds NLRP3,Reaction,Immune System
+R-HSA-9603905,Expression of NLRP3 gene,BlackBoxEvent,Immune System
+R-HSA-1250264,TXNIP binds reduced thioredoxin,Reaction,Immune System
+R-HSA-1250253,TXNIP is released from oxidized thioredoxin,Reaction,Immune System
+R-HSA-1250280,ROS oxidize thioredoxin,BlackBoxEvent,Immune System
+R-HSA-877187,P2X7 mediates loss of intracellular K+,Reaction,Immune System
+R-HSA-1306876,NLRP3 activation by small molecules,BlackBoxEvent,Immune System
+R-HSA-449058,Interleukin-1 family are secreted,BlackBoxEvent,Immune System
+R-HSA-448703,Interleukin-1 family precursors are cleaved by caspase-1,Reaction,Immune System
+R-HSA-448629,IL33 binds IL1RL1,Reaction,Immune System
+R-HSA-448603,IL33:IL1RL1 binds IL1RAP-1,Reaction,Immune System
+R-HSA-446868,The Interleukin 1 receptor complex binds Tollip,Reaction,Immune System
+R-HSA-446862,Hyperphosphorylated IRAK1 associates with TRAF6,Reaction,Immune System
+R-HSA-446701,IRAK4-activated IRAK1 autophosphorylates,Reaction,Immune System
+R-HSA-445752,"Interleukin-1 receptor type 1: Interleukin 1 binds Interleukin-1 receptor accessory protein, membrane associated isoform",Reaction,Immune System
+R-HSA-446692,IRAK1 binds to MYD88 within the IL1R complex,Reaction,Immune System
+R-HSA-446694,IRAK4 phosphorylates IRAK1,Reaction,Immune System
+R-HSA-9681763,IL1R1 binds IL1R1 inhibitors,Reaction,Immune System
+R-HSA-445753,"IL1B,Myr82K-Myr83K-IL1A:IL1R1",Reaction,Immune System
+R-HSA-8948063,"hp-IRAK1:p-Pellino, IRAK4:p-Pellino bind UBE2N:UBE2V1",BlackBoxEvent,Immune System
+R-HSA-446684,IRAK2 is phosphorylated downstream of IRAK4 following IL1 receptor activation,BlackBoxEvent,Immune System
+R-HSA-209125,SCF Beta-TrCP complex binds to NFKB p50:p65: phospho IKBA complex,Reaction,Immune System
+R-HSA-209087,IKBA is phosphorylated by Phospho IKKB kinase,Reaction,Immune System
+R-HSA-8948066,K63polyUb-IRAK1 dissociates,BlackBoxEvent,Immune System
+R-HSA-5609665,"CHUK, IKBKB and IKBKG form IKK complex",Reaction,Immune System
+R-HSA-9630923,NFkB inhibitor binds NFkB complex,Reaction,Immune System
+R-HSA-168140,Active IKK Complex phosphorylates NF-kB inhibitor ,Reaction,Immune System
+R-HSA-933530,Activation of IKK by MEKK1,Reaction,Immune System
+R-HSA-933528,Interaction of MEKK1 with TRAF6,Reaction,Immune System
+R-HSA-918230,Recruitment of TRAF6/TRAF2 to IPS-1,Reaction,Immune System
+R-HSA-168910,RIP1 facilitates IKK complex phosphorylation,Reaction,Immune System
+R-HSA-168930,Viral dsRNA:TLR3:TRIF complex recruits RIP1,Reaction,Immune System
+R-HSA-1810457,ZBP1(DAI) recruits RIP1 and RIP3,Reaction,Immune System
+R-HSA-1591234,ZBP1 binds cytosolic DNA,Reaction,Immune System
+R-HSA-168166,NFkB complex is transported from cytosol to nucleus,Reaction,Immune System
+R-HSA-446130,Interleukin-1 receptor type 2 binds Interleukin 1,Reaction,Immune System
+R-HSA-209063,Beta-TrCP ubiquitinates NFKB p50:p65:phospho IKBA complex,Reaction,Immune System
+R-HSA-446648,IL1R1:IL1:IL1RAP:MYD88 homodimer binds IRAK4,Reaction,Immune System
+R-HSA-446634,IRAK4 is activated by autophosphorylation,Reaction,Immune System
+R-HSA-446894,TRAF6 binding leads to IRAK1:TRAF6 release,Reaction,Immune System
+R-HSA-5607724,"26S proteasome processes K48PolyUb-K21,22-p-S32,36-IkBA:NF-kB complex to form NF-kB complex",BlackBoxEvent,Immune System
+R-HSA-5607728,"beta-TRCP ubiquitinates IkB-alpha in p-S32,33-IkB-alpha:NF-kB complex",BlackBoxEvent,Immune System
+R-HSA-5607725,"SCF-beta-TRCP ubiquitinates p-7S-p100:RELB in active NIK:p-176,S180-IKKA dimer:p-7S-p100:SCF-beta-TRCP",BlackBoxEvent,Immune System
+R-HSA-2730894,NFKB1:RELA translocates from the cytosol to the nucleus,BlackBoxEvent,Immune System
+R-HSA-209061,Ubiquitinated and phosphorylated IKBA binds to and is degraded by the proteasome complex,BlackBoxEvent,Immune System
+R-HSA-727819,TAK1 phosphorylates MKK6,Reaction,Immune System
+R-HSA-450827,"hp-IRAK1, hp-IRAK4 4 phosphorylate Pellino-1 and 2.",BlackBoxEvent,Immune System
+R-HSA-446877,TRAF6 is K63 poly-ubiquitinated,Reaction,Immune System
+R-HSA-450173,IRAK1 induces oligomerisation of TRAF6,Reaction,Immune System
+R-HSA-451418,Pellino ubiquitinates IRAK1,Reaction,Immune System
+R-HSA-8948018,UBE2N:UBE2V1 dissociates from hp-IRAK1:3xK63-polyUb-TRAF6:3xUBE2N:UBE2V1,BlackBoxEvent,Immune System
+R-HSA-451561,NEMO binds polyubiquitinated IRAK1,Reaction,Immune System
+R-HSA-8948015,hp-IRAK1:3xTRAF6 binds UBE2N:UBE2V1:K63-polyUb,Reaction,Immune System
+R-HSA-450187,TAK1 is activated within the TAK1 complex,BlackBoxEvent,Immune System
+R-HSA-507719,p62:MEKK3 binds to TRAF6,Reaction,Immune System
+R-HSA-446870,Polyubiquitinated TRAF6 binds the TAK1 complex,Reaction,Immune System
+R-HSA-450690,"hp-IRAK1,hp-IRAK4 bind Pellino1,2,3",Reaction,Immune System
+R-HSA-450133,IL1R1:IL1:IL1RAP binds MYD88 homodimer,Reaction,Immune System
+R-HSA-445757,IL1 receptor antagonist protein binds Interleukin 1 receptors,Reaction,Immune System
+R-HSA-6790025,"Expression of BCL2, BCL2L1",BlackBoxEvent,Immune System
+R-HSA-6786293,"p-Y705-STAT3 dimer, p-Y641-STAT6 dimer translocate to nucleus",BlackBoxEvent,Immune System
+R-HSA-6786097,"p-Y705-STAT3, p-Y641-STAT6 dimerise",BlackBoxEvent,Immune System
+R-HSA-6786072,"p-Y705-STAT3,p-Y641-STAT6 dissociate",BlackBoxEvent,Immune System
+R-HSA-6786095,"JAK1 phosphorylates STAT3,STAT6",Reaction,Immune System
+R-HSA-6786124,"STAT3,STAT6 bind p-Y-IL4R",Reaction,Immune System
+R-HSA-6786096,"IL4R, IL2RG, JAK1 in IL4-bound IL4R1:JAK1 are phosphorylated",BlackBoxEvent,Immune System
+R-HSA-6786058,JAK1 binds IL4R in IL4-bound IL4R1,BlackBoxEvent,Immune System
+R-HSA-6786092,IL4:IL4R:JAK2 binds IL2RG:JAK3,Reaction,Immune System
+R-HSA-6786101,IL4 binds IL4R:JAK2,Reaction,Immune System
+R-HSA-6785898,IL4R binds JAK2,Reaction,Immune System
+R-HSA-5432814,SFTPA/SFTPD binds TLR2:TLR1,Reaction,Immune System
+R-HSA-8869694,oxPL binds CD14,Reaction,Immune System
+R-HSA-6804100,HMGB1 binds LPS,Reaction,Immune System
+R-HSA-5432852,SFTPA/SFTPD binds TLR4:LY96,Reaction,Immune System
+R-HSA-8869683,oxPL binds LBP,Reaction,Immune System
+R-HSA-6804099,HMGB1 binds LTP,Reaction,Immune System
+R-HSA-8869667,oxLDL:CD36 binds TLR4:TLR6,Reaction,Immune System
+R-HSA-2569057,RIP3 binds TRIF to mediate necroptosis,Reaction,Immune System
+R-HSA-168921,TRIF:activated TLR3/TLR4 complex recruits RIP1,Reaction,Immune System
+R-HSA-2562541,TLR4-induced ripoptosome assembly,Reaction,Immune System
+R-HSA-2562564,Caspase-8 processing within TLR4 complex,Reaction,Immune System
+R-HSA-5362500,TANK is ubiquitinated within TANK:K63polyUb-TRAF3:TRIF:activated TLR4,BlackBoxEvent,Immune System
+R-HSA-2201338,TRAF3 binds TICAM1:activated TLR4 complex,Reaction,Immune System
+R-HSA-2213017,Auto-ubiquitination of TRAF3,BlackBoxEvent,Immune System
+R-HSA-936941,Recruitment of TBK1/IKK epsilon to K63-pUb-TANK:K63-pUb-TRAF3:TRIF:activated TLR4 followed by their phosphorylation,Reaction,Immune System
+R-HSA-166271,IRF3/IRF7 recruitment to p-TBK1/p-IKK epsilon bound to the activated TLR4,Reaction,Immune System
+R-HSA-5362486,TANK binds K63-poly-Ub-TRAF3:TICAM1:activated TLR4 ,Reaction,Immune System
+R-HSA-177671,Dimerized phospho-IRF3/IRF7 is transported to the nucleus,Reaction,Immune System
+R-HSA-166245,Phosphorylation of IRF-3/IRF7 and their release from the activated TLR complex ,Reaction,Immune System
+R-HSA-168933,Dimerization of phosphorylated IRF3/IRF7,Reaction,Immune System
+R-HSA-918229,Phosphorylation and release of IRF3/IRF7,Reaction,Immune System
+R-HSA-918232,"Recruitment of IRF3,IRF7",Reaction,Immune System
+R-HSA-918225,TBK1/IKK epsilon complex interacts with MAVS bound TRAF3,Reaction,Immune System
+R-HSA-918227,Recruitment of TRAF3 to MAVS,Reaction,Immune System
+R-HSA-168909,"viral dsRNA:IFIH1, viral dsRNA:K63polyUb-DDX58 bind MAVS",Reaction,Immune System
+R-HSA-913725,viral dsRNA binds IFIH1:TKFC,Reaction,Immune System
+R-HSA-918224,DDX58 is K63 polyubiquitinated,Reaction,Immune System
+R-HSA-168935,viral dsRNA binds DDX58,Reaction,Immune System
+R-HSA-1964482,RNA polymerase III transcribes microbial dsDNA to dsRNA,BlackBoxEvent,Immune System
+R-HSA-975185,IRAK2 induces TRAF6 oligomerization initiated from endosomal compartments,Reaction,Immune System
+R-HSA-975100,Dissociation of hp-IRAK1/or IRAK2:TRAF6-oligomer from the p-IRAK4 :oligo-Myd88:activated TLR7/8 or 9 complex,Reaction,Immune System
+R-HSA-975111,TRAF6 binds to hp- IRAK1/or p-IRAK2:p-IRAK4:MyD88:activated TLR7/8 or 9  ,Reaction,Immune System
+R-HSA-975160,Phosphorylation of IRAK2 bound to the activated IRAK4:MyD88 oligomer:activated TLR 7/8 or 9,Reaction,Immune System
+R-HSA-975115,IRAK1/or IRAK2 binds to the activated IRAK4 :MyD88:activated TLR 7/8 or 9.,Reaction,Immune System
+R-HSA-975170,IRAK4 autophosphorylation in the complex with MyD88:activated TLR 7/8 or 9,Reaction,Immune System
+R-HSA-975156,IRAK4 binds to the activated TLR7/8 or 9 receptor:MyD88 complex ,Reaction,Immune System
+R-HSA-975098,MyD88 oligomerization within the complex of activated TLR 7/8 or 9 : MyD88,Reaction,Immune System
+R-HSA-975175,"MyD88 interacts with the activated TLR receptor 7, 8 or 9 ",Reaction,Immune System
+R-HSA-187895,Engulfed CpG DNA binds to endosomal C-ter TLR9,Reaction,Immune System
+R-HSA-1678920,TLR processing at low pH,Reaction,Immune System
+R-HSA-1678927,UNC93B1 delivers endosomal full-length TLRs to endolysosome,BlackBoxEvent,Immune System
+R-HSA-1678998,Endosomal TLRs pass through the Golgi,BlackBoxEvent,Immune System
+R-HSA-1678921,Full-length TLR3/7/8/9 binds to UNC93B1,Reaction,Immune System
+R-HSA-1678944,Folded full-length TLR7/8/9 dissociates from the GP96:CNPY3 complex ,Reaction,Immune System
+R-HSA-1678923,TLR folding by chaperones GP96 and CNPY3,Reaction,Immune System
+R-HSA-9691204,"TLR8 dimer binds TLR7, TLR8 ligands",Reaction,Immune System
+R-HSA-167983,"C-ter TLR7 dimer binds TLR7, TLR8 ligands",Reaction,Immune System
+R-HSA-975125,Multiple IRAK1 autophosphorylation steps within the complex pIRAK4:MyD88:activated TLR7/8 or 9,Reaction,Immune System
+R-HSA-975134,Second phosphorylation of IRAK1 by IRAK4 bound to MyD88: activated TLR 7/8 or 9,Reaction,Immune System
+R-HSA-975180,First phosphorylation of IRAK1 by IRAK4 bound to MyD88:activated TLR 7/8 or 9,Reaction,Immune System
+R-HSA-975147,Auto ubiquitination of oligo-TRAF6 bound to p-IRAK2 at endosome membrane,BlackBoxEvent,Immune System
+R-HSA-450358,Activated TRAF6 synthesizes unanchored polyubiquitin chains upon TLR stimulation ,Polymerisation,Immune System
+R-HSA-937075,Phosphorylated TAK1 leaves activated TLR receptor complex,Reaction,Immune System
+R-HSA-168440,Formation of Activated Protein 1 (AP-1) complex. ATF2/c-JUN heterodimer. ,Reaction,Immune System
+R-HSA-450257,Nuclear export of human p38 MAPK mediated by its substrate MAPKAPK2 or 3,Reaction,Immune System
+R-HSA-168915,K63-linked ubiquitination of RIP1 bound to the activated TLR complex,Reaction,Immune System
+R-HSA-937029,IKBKG subunit of IKK complex binds polyubiquinated RIP1,Reaction,Immune System
+R-HSA-2559568,SARM binds TICAM1:TRAM:TLR4:LY96:LPS:CD14,Reaction,Immune System
+R-HSA-8940998,"IL36RN, IL1F10 bind IL1RL2",Reaction,Immune System
+R-HSA-8848316,IL36 binds IL1RL2,Reaction,Immune System
+R-HSA-8848314,IL36:IL1RL2 binds IL1RAP-1,Reaction,Immune System
+R-HSA-9007901,IL1F10 binds IL1RL2,Reaction,Immune System
+R-HSA-9008054,IL1F10 binds IL1RAPL1,Reaction,Immune System
+R-HSA-9008043,MAPK8 phosphorylation,BlackBoxEvent,Immune System
+R-HSA-9007882,IL1F10 is cleaved,BlackBoxEvent,Immune System
+R-HSA-9008052,IL1F10(?-152) binds IL1RAPL1,Reaction,Immune System
+R-HSA-9009072,STAT3 phosphorylation,BlackBoxEvent,Immune System
+R-HSA-9008577,IL37:IL18R1 binds SIGIRR,Reaction,Immune System
+R-HSA-8848335,IL37 binds  IL18R1,Reaction,Immune System
+R-HSA-9008694,"IL37, IL37(?-218) translocates from cytosol to extracellular region",Reaction,Immune System
+R-HSA-9012689,IL37(1-?) and IL37 (?-) dissocates from IL37(1-?):IL37(?-218):CASP1(120-197):CASP1(317-404),BlackBoxEvent,Immune System
+R-HSA-9012556,IL37:2x(CASP1(120-197):CASP1(317-404)) cleaves IL37,BlackBoxEvent,Immune System
+R-HSA-9012542,IL37 binds 2x(CASP1(120-197):CASP1(317-404)),BlackBoxEvent,Immune System
+R-HSA-9008684,TBK1 phosphorylation,BlackBoxEvent,Immune System
+R-HSA-9008587,"IL37, IL37(?-218) binds IL18BP",Reaction,Immune System
+R-HSA-9008928,"IL37(?-218):p-S423,S425-SMAD3 translocates to the nucleus",BlackBoxEvent,Immune System
+R-HSA-9009910,"IL37(?-218) binds p-S423,S425-SMAD3",Reaction,Immune System
+R-HSA-9008696,IL37(?-218) translocates from the cytosol to the nucleus,BlackBoxEvent,Immune System
+R-HSA-9008894,PTPNs gene transcription and translation,BlackBoxEvent,Immune System
+R-HSA-9008692,IL37(?-218) binds SMAD3,Reaction,Immune System
+R-HSA-8848370,IL18 binds IL18R1,Reaction,Immune System
+R-HSA-6797293,"Expression of IL18, ALOX5",BlackBoxEvent,Immune System
+R-HSA-8848395,IL18:IL18R1 binds IL18RAP,Reaction,Immune System
+R-HSA-8848392,IL18BP binds IL18,Reaction,Immune System
+R-HSA-2559456,TIRAP binds PIP2-rich regions in the plasma membrane,Reaction,Immune System
+R-HSA-166869,TRAF6 binds MEKK1,Reaction,Immune System
+R-HSA-937034,IRAK1 phosphorylates Pellino,Reaction,Immune System
+R-HSA-937044,Pellino binds hp-IRAK1:TRAF6,Reaction,Immune System
+R-HSA-937050,Pellino ubiquitinates hp-IRAK1,Reaction,Immune System
+R-HSA-937032,NEMO subunit of IKK complex binds to activated IRAK1,Reaction,Immune System
+R-HSA-937059,Phosphorylation of IRAK2 bound to the activated IRAK4:MyD88 oligomer:TIRAP:activated TLR complex,Reaction,Immune System
+R-HSA-2262775,Dissociation of p-IRAK2:TRAF6 from the activated TLR:oligo-Myd88:TIRAP:p-IRAK4 complex,Reaction,Immune System
+R-HSA-2262777,TRAF6 binds to p-IRAK2  ,Reaction,Immune System
+R-HSA-1671691,PRLR-bound STAT5 is phosphorylated,Reaction,Immune System
+R-HSA-1369080,PRLR binds STAT5,Reaction,Immune System
+R-HSA-1364043,Tyrosine phosphorylation of PRLR,BlackBoxEvent,Immune System
+R-HSA-982810,JAK2 phosphorylation,BlackBoxEvent,Immune System
+R-HSA-982768,GH:GHR:JAK2 complex undergoes a conformational change,BlackBoxEvent,Immune System
+R-HSA-982778,Growth hormone binds the growth hormone receptor,Reaction,Immune System
+R-HSA-982775,Growth hormone receptor dimerizes,Reaction,Immune System
+R-HSA-982792,Growth hormone receptor binds JAK2,Reaction,Immune System
+R-HSA-1671687,PRLR activation,BlackBoxEvent,Immune System
+R-HSA-976991,Prolactin receptor ligands bind the prolactin receptor,Reaction,Immune System
+R-HSA-1364044,PRLR:JAK2 dimerizes,Reaction,Immune System
+R-HSA-1302698,PRLR associates with JAK2,Reaction,Immune System
+R-HSA-188002,Rab5-mediated recruitment of class III PI3K to TLR9,Reaction,Immune System
+R-HSA-9607224,Active FLT3:GRB2:p-Y-GAB2 binds PIK3R1,Reaction,Immune System
+R-HSA-9606622,GAB2 in Active FLT3:GRB2:GAB2 is phosphorylated,BlackBoxEvent,Immune System
+R-HSA-9606624,Active FLT3:GRB2 binds GAB2,Reaction,Immune System
+R-HSA-6787737,CSF3R binds CSF3 dimer,Reaction,Immune System
+R-HSA-8981657,IL34 dimer binds PTPRZ1,Reaction,Immune System
+R-HSA-449073,Caspase-3 cleaves pro-interleukin-16,Reaction,Immune System
+R-HSA-449077,Interleukin-16 is secreted,BlackBoxEvent,Immune System
+R-HSA-448632,IL34 dimerizes,Reaction,Immune System
+R-HSA-9014074,TXLNA (IL14) binds syntaxin4,Reaction,Immune System
+R-HSA-9009488,IL34 binds CSF1,Reaction,Immune System
+R-HSA-449117,TXLNA (IL14) binds syntaxin1A,Reaction,Immune System
+R-HSA-9014052,TXLNA (IL14) binds syntaxin3,Reaction,Immune System
+R-HSA-6787820,IL34 dimer binds CSF1R,Reaction,Immune System
+R-HSA-9009485,IL34:CSF1 binds CSF1R,BlackBoxEvent,Immune System
+R-HSA-8854738,CSF3 dimer:CSFR binds CSFR,Reaction,Immune System
+R-HSA-449087,CD4 binds Interleukin-16,Reaction,Immune System
+R-HSA-448591,Interleukin-32 binds proteinase-3,Reaction,Immune System
+R-HSA-448661,IFNL1 binds IL10RB:TYK2 and IFNLR1:JAK1,Reaction,Immune System
+R-HSA-8987120,JAK1 binds IFNLR1,Reaction,Immune System
+R-HSA-8987223,IL10RB binds TYK2,Reaction,Immune System
+R-HSA-9009554,IL34 dimer:SDC1 binds CSF1R,BlackBoxEvent,Immune System
+R-HSA-9009558,IL34 dimer binds SDC1,Reaction,Immune System
+R-HSA-419645,Dimerization of LIMK1 by Hsp90,Reaction,Immune System
+R-HSA-419644,Transphosphorylation of pLIMK1,BlackBoxEvent,Immune System
+R-HSA-399950,Phosphorylation of cofilin by LIMK-1,Reaction,Immune System
+R-HSA-452102,p-STAT5 dimerizes,Reaction,Immune System
+R-HSA-919404,Phosphorylated STAT5 is released,Reaction,Immune System
+R-HSA-452097,Recruited STAT5 is phosphorylated,Reaction,Immune System
+R-HSA-452108,"Phosphorylation of IL2RB Y338, Y392 or Y510 enables STAT recruitment",Reaction,Immune System
+R-HSA-6785165,"p-STAT5A, p-STAT5B dissociate from IL7:p-Y449-IL7R:JAK1:IL2RG:p-JAK3:p-STAT5A,p-STAT5B",Reaction,Immune System
+R-HSA-1295540,"IL7:p-Y449-IL7R:JAK1:IL2RG:p-JAK3:STAT5A,STAT5B phosphorylates STAT5",BlackBoxEvent,Immune System
+R-HSA-9025969,IL7:p-Y449-IL7R:JAK1:IL2RG:p-JAK3 binds STAT5,BlackBoxEvent,Immune System
+R-HSA-1295519,IL7R is phosphorylated on Y499,Reaction,Immune System
+R-HSA-8983063,JAK3 in IL7:p-Y449-IL7R:JAK1:IL2RG:JAK3 is phosphorylated,BlackBoxEvent,Immune System
+R-HSA-449958,IL7:IL7R:JAK1 binds IL2RG:JAK3,Reaction,Immune System
+R-HSA-449978,IL7 binds IL7R:JAK1,Reaction,Immune System
+R-HSA-1264832,JAK1 binds IL7R,Reaction,Immune System
+R-HSA-921155,p-STAT5 dissociates from the receptor complex,Reaction,Immune System
+R-HSA-879909,Activation of STAT5a/b by JAK2,Reaction,Immune System
+R-HSA-879930,STAT5 is recruited by JAK2,Reaction,Immune System
+R-HSA-879910,"JAK2 is phosphorylated, activated",Reaction,Immune System
+R-HSA-508292,SYK binds IL2RB,Reaction,Immune System
+R-HSA-508451,PTK2B is phosphorylated,BlackBoxEvent,Immune System
+R-HSA-508513,PTK2B binds JAK3,Reaction,Immune System
+R-HSA-507937,STAT5 dimers translocate to the nucleus,BlackBoxEvent,Immune System
+R-HSA-9679028,JAK3 binds JAK3 inhibitors,Reaction,Immune System
+R-HSA-508282,SYK is a substrate for JAK1,Reaction,Immune System
+R-HSA-8983384,"IL15:IL15RA:p-Y-IL2RB:p-Y-JAK1:p-Y-IL2RG:p-Y-JAK3:p-Y-SHC1:GRB2 binds SOS1,SOS2",BlackBoxEvent,Immune System
+R-HSA-8983394,IL15:IL15RA:p-Y-IL2RB:p-Y-JAK1:p-Y-IL2RG:p-Y-JAK3:p-Y-SHC1 binds GRB2,Reaction,Immune System
+R-HSA-8983309,IL15:IL15RA:p-Y-IL2RB:p-Y-JAK1:p-Y-IL2RG:p-Y-JAK3 phosphorylates SHC1,BlackBoxEvent,Immune System
+R-HSA-8983299,IL15:IL15RA:p-Y-IL2RB:p-Y-JAK1:p-Y-IL2RG:p-Y-JAK3 binds SHC1,BlackBoxEvent,Immune System
+R-HSA-9009700,IL2RB and IL2RG are phosphorylated,BlackBoxEvent,Immune System
+R-HSA-8983300,IL15RA:IL15:IL2RB:JAK1:IL2RG:JAK3 phosphorylates JAK3 and JAK1,BlackBoxEvent,Immune System
+R-HSA-449115,IL15:IL15RA binds IL2RB:JAK1 and IL2RG:JAK3,BlackBoxEvent,Immune System
+R-HSA-8983307,IL15 binds IL15RA,Reaction,Immune System
+R-HSA-8983373,p-Y-STAT3 binds p-STAT5,BlackBoxEvent,Immune System
+R-HSA-8983374,p-Y-STAT3 and p-STAT5 dissociates from IL15:IL15RA:IL2RB:p-JAK1:IL2RG:p-JAK3:p-Y-STAT3:p-STAT5,BlackBoxEvent,Immune System
+R-HSA-8983371,IL15:IL15RA:p-Y-IL2RB:p-Y-JAK1:p-Y-IL2RG:p-Y-JAK3 phosphorylates STAT3 and STAT5,BlackBoxEvent,Immune System
+R-HSA-8983378,IL15:IL15RA:p-Y-IL2RB:p-Y-JAK1:p-Y-IL2RG:p-Y-JAK3 binds STAT3 and STAT5,BlackBoxEvent,Immune System
+R-HSA-8983379,p-Y-STAT3:p-STAT5 translocates to the nucleus,BlackBoxEvent,Immune System
+R-HSA-8983425,IL15:IL15RA:IL2RB:JAK1:IL2RG:p-JAK3:p-Y-SHC1:GRB2 binds GAB2,BlackBoxEvent,Immune System
+R-HSA-8983424,IL15:IL15RA:p-Y-IL2RB:p-Y-JAK1:p-Y-IL2RG:p-Y-JAK3:p-Y-SHC1:GRB2:GAB2 phosphorylates GAB2,BlackBoxEvent,Immune System
+R-HSA-8983298,IL15 binds IL2RB:JAK1 and IL2RG:JAK3,BlackBoxEvent,Immune System
+R-HSA-8983335,IL15:IL15RA:IL2RB:JAK1:IL2RG:JAK3 translocates from the plasma membrane to the endosome,BlackBoxEvent,Immune System
+R-HSA-389348,Activation of Rac1 by pVav1,Reaction,Immune System
+R-HSA-389354,Activation of Vav1,Reaction,Immune System
+R-HSA-389352,Translocation of Vav1 to CD28,Reaction,Immune System
+R-HSA-388814,Grb2 binds CD28,Reaction,Immune System
+R-HSA-389350,Activation of Cdc42 by pVav1,Reaction,Immune System
+R-HSA-2029456,RAC1 and CDC42 activate PAK1,Reaction,Immune System
+R-HSA-2029445,An unknown GEF exchanges GTP for GDP on CDC42:GDP,BlackBoxEvent,Immune System
+R-HSA-2029460,PAK1 phosphorylates LIMK1,Reaction,Immune System
+R-HSA-2029454,Autophosphorylation of PAK1,Reaction,Immune System
+R-HSA-2029471,Hydrolysis of PC to PA by PLD,Reaction,Immune System
+R-HSA-2029475,Production of AA by iPLA2 upon FCGR activation,BlackBoxEvent,Immune System
+R-HSA-2029468,Conversion of PA into DAG by PAP-1,Reaction,Immune System
+R-HSA-2029465,RAC1:GTP and PIP3 bind WAVE Regulatory Complex (WRC),Reaction,Immune System
+R-HSA-2197697,Recruitment of CRKII:DOCK180:ELMO complex to FCGR,Reaction,Immune System
+R-HSA-2130194,ABL phosphorylates WAVEs,Reaction,Immune System
+R-HSA-2029469,p-ERK phosphorylates WAVEs and ABI,Reaction,Immune System
+R-HSA-2029466,"(WASPs, WAVE):G-actin:ARP2/3 binds F-actin",Reaction,Immune System
+R-HSA-442592,WASPs or WAVEs activate the ARP2/3 complex,Reaction,Immune System
+R-HSA-430180,NCK recruits WASP,Reaction,Immune System
+R-HSA-2197698,"Src phosphorylate WASP,N-WASP",Reaction,Immune System
+R-HSA-2197691,"WIP binds WASP,N-WASP, activating them",Reaction,Immune System
+R-HSA-442586,Activation of WASP and N-WASP by CDC42,Reaction,Immune System
+R-HSA-2197690,Detachment of WASP/WAVE,Reaction,Immune System
+R-HSA-2029473,Branching and elongation of mother and daughter filaments,BlackBoxEvent,Immune System
+R-HSA-2029467,Activation of RAC1 by CRKII:DOCK180:ELMO,Reaction,Immune System
+R-HSA-1861595,Extension of pseudopodia by myosin-X in a PI3K dependent manner,Reaction,Immune System
+R-HSA-2029458,Recruitment of VAV1 to p-6Y-SYK,Reaction,Immune System
+R-HSA-2029449,Phosphorylation of SYK by Src kinases,Reaction,Immune System
+R-HSA-2029453,Phosphorylation of VAV,Reaction,Immune System
+R-HSA-2029451,Activation of RAC1 by VAV,Reaction,Immune System
+R-HSA-2029476,Role of myosins in phagosome formation,BlackBoxEvent,Immune System
+R-HSA-1222407,Superoxide and nitric oxide react to peroxynitrite,Reaction,Immune System
+R-HSA-418436,Nitric Oxide Synthase (NOS) produces Nitric Oxide (NO),Reaction,Immune System
+R-HSA-1015702,Expression of IFN-induced genes,BlackBoxEvent,Immune System
+R-HSA-1015699,ISGF3 binds the ISRE promoter elements in IFN-stimulated genes,Reaction,Immune System
+R-HSA-909721,Translocation of ISGF3 complex to nucleus,Reaction,Immune System
+R-HSA-9710963,p-STAT1dimer:KPNA1 binds KPNB1,Reaction,Immune System
+R-HSA-9710959,p-STAT1 dimer binds KPNA1,Reaction,Immune System
+R-HSA-909725,Interaction of IRF9 with p-STAT2:p-STAT1,Reaction,Immune System
+R-HSA-909722,Release of p-STAT2:p-STAT1 dimer,Reaction,Immune System
+R-HSA-909726,Phosphorylation of STAT1,Reaction,Immune System
+R-HSA-909732,Phosphorylation of STAT2,Reaction,Immune System
+R-HSA-909719,Recruitment of STAT2 to p-IFNAR1,Reaction,Immune System
+R-HSA-909730,Phosphorylation of INFAR1 by TYK2,Reaction,Immune System
+R-HSA-909729,Activation of JAK kinases,Reaction,Immune System
+R-HSA-909724,Recruitment of IFNAR1,Reaction,Immune System
+R-HSA-909720,IFN alpha/beta binds to IFNAR2,Reaction,Immune System
+R-HSA-909718,Formation of p-STAT1 homodimer,Reaction,Immune System
+R-HSA-1112690,PTPN11 binds CBL,Reaction,Immune System
+R-HSA-1112708,PTPN11 binds p-Y759-IL6ST,Reaction,Immune System
+R-HSA-1112510,IL6ST is tyrosine phosphorylated,BlackBoxEvent,Immune System
+R-HSA-1112514,JAK activation,BlackBoxEvent,Immune System
+R-HSA-1067659,Assembly of hexameric IL-6 receptor,Reaction,Immune System
+R-HSA-1067651,"IL6:IL6R-2 binds IL6ST:JAK1, JAK2, (TYK2)",Reaction,Immune System
+R-HSA-1067640,IL6 binds IL6R-2,Reaction,Immune System
+R-HSA-1067646,"JAK1,JAK2,(TYK2) bind IL6ST",Reaction,Immune System
+R-HSA-1067688,"IL6:IL6R binds IL6ST:JAK1,JAK2,(TYK2)",Reaction,Immune System
+R-HSA-1067667,IL6 binds IL6R,Reaction,Immune System
+R-HSA-1112755,SOCS3 binds IL6ST,Reaction,Immune System
+R-HSA-1112565,"Tyrosine phosphorylated IL6ST binds STAT1,STAT3",Reaction,Immune System
+R-HSA-1112727,Serine phosphorylation of STATs,BlackBoxEvent,Immune System
+R-HSA-1112602,"Tyrosine phosphorylation of STAT1, STAT3 by IL6 receptor",Reaction,Immune System
+R-HSA-1112538,"Phosphorylated STAT1, STAT3 form dimers",Reaction,Immune System
+R-HSA-1112604,Phosphorylated STATs are released,Reaction,Immune System
+R-HSA-1067676,IL6:IL6R-2 binds IL6ST-2,Reaction,Immune System
+R-HSA-1112703,PTPN11 is phosphorylated,Reaction,Immune System
+R-HSA-1112587,STAT1 and STAT3 dimers translocate to the nucleus,BlackBoxEvent,Immune System
+R-HSA-9681294,IL6R binds IL6R inhibitors,Reaction,Immune System
+R-HSA-6783556,LIFR:JAKs bind gp130:JAKs:CNTFR,Reaction,Immune System
+R-HSA-449829,IL11 binds IL11RA,Reaction,Immune System
+R-HSA-6783524,"OSM,LIF,CTF1 receptor complex binds gp130",Reaction,Immune System
+R-HSA-6783681,LIF binds LIFR,Reaction,Immune System
+R-HSA-6783552,"OSM binds LIFR:JAKs,OSMR:JAKs",Reaction,Immune System
+R-HSA-6784204,JAKs bind OSMR,Reaction,Immune System
+R-HSA-6783530,gp130:JAKs bind CNTFR,Reaction,Immune System
+R-HSA-6783670,CRLF1 binds CLCF1,Reaction,Immune System
+R-HSA-448660,IL31:IL31RA:JAK1 binds OSMR:JAK1,BlackBoxEvent,Immune System
+R-HSA-5696482,CTF1 binds LIFR:JAKs,Reaction,Immune System
+R-HSA-6784189,JAKs bind LIFR,Reaction,Immune System
+R-HSA-5696490,CRLF1:CLCF1 binds CNTRF,Reaction,Immune System
+R-HSA-5696491,CNTF binds CNTFR complex,Reaction,Immune System
+R-HSA-449976,"IL11:IL11RA binds IL6ST:JAK1,JAK2,(TYK2)",Reaction,Immune System
+R-HSA-3134914,Beta-catenin migrates to the nucleus,BlackBoxEvent,Immune System
+R-HSA-3134904,Phosphorylation of beta-catenin at Ser552,Reaction,Immune System
+R-HSA-3134901,LRR FLII-interacting protein 1 associates with beta-catenin,Reaction,Immune System
+R-HSA-3134896,LRR FLII-interacting protein 1 binds dsDNA,Reaction,Immune System
+R-HSA-3134883,Beta-catenin enhances association of IRF3 with CBP/p300 ,Reaction,Immune System
+R-HSA-9604480,NFkB complex translocates from the cytosol to the nucleus,Reaction,Immune System
+R-HSA-2395992,"p-T,4S-IRF3 is dimerized",Reaction,Immune System
+R-HSA-1606327,Phosphorylation and release of IRF3 ,Reaction,Immune System
+R-HSA-1606345,Recruitment of IRF3 to activated ZBP1:TBK1,Reaction,Immune System
+R-HSA-1606324,Recruitment TBK1 to dsDNA:ZBP1 followed by its activation,Reaction,Immune System
+R-HSA-2032396,Dimerized phospho-IRF3 migrates to the nucleus,Reaction,Immune System
+R-HSA-9679819,TBK1 binds amlexanox,Reaction,Immune System
+R-HSA-3204303,MRE11 binds cytosolic DNA,Reaction,Immune System
+R-HSA-3134800,STING dimerization,Reaction,Immune System
+R-HSA-3244643,STING binds cyclic GMP-AMP,BlackBoxEvent,Immune System
+R-HSA-3244614,cGAS produces cyclic GMP-AMP,Reaction,Immune System
+R-HSA-3244647,cGAS binds cytosolic DNA,Reaction,Immune System
+R-HSA-2396009,STING binds c-di-GMP,BlackBoxEvent,Immune System
+R-HSA-2396002,TBK1 is phosphorylated within STING:TBK1:IRF3 complex,Reaction,Immune System
+R-HSA-2396007,IRF3 is phosphorylated by TBK1,Reaction,Immune System
+R-HSA-1834939,STING recruits TBK1 and IRF3,Reaction,Immune System
+R-HSA-3134822,DDX41 binds viral dsDNA ,Reaction,Immune System
+R-HSA-1834951,IFI16 binds cytosolic dsDNA,Reaction,Immune System
+R-HSA-9013869,"DDX41 binds bacterial c-di-AMP, c-di-GMP  ",Reaction,Immune System
+R-HSA-3249378,STING recruits TBK1 and STAT6,Reaction,Immune System
+R-HSA-3249390,TBK1 is phosphorylated within STING:TBK1:STAT6 complex,Reaction,Immune System
+R-HSA-3249371,TBK1 phosphorylates STAT6 at Ser407,Reaction,Immune System
+R-HSA-3249379,p-S407-STAT6 is phosphorylated at Tyr641,Reaction,Immune System
+R-HSA-3249372,"p-S407,Y641-STAT6 is dimerized",Reaction,Immune System
+R-HSA-3249370,"p-S407,Y641-STAT6 dimer migrates to the nucleus",Reaction,Immune System
+R-HSA-3134954,DHX9 binds DNA,Reaction,Immune System
+R-HSA-3134962,DHX36 binds DNA,Reaction,Immune System
+R-HSA-3134953,DHX36 or DHX9 binds MyD88,Reaction,Immune System
+R-HSA-933533,Dimerization of p-IRF7,Reaction,Immune System
+R-HSA-933525,Phosphorylation and release of IRF7,Reaction,Immune System
+R-HSA-933538,Recruitment of IRF7 to TRAF6,Reaction,Immune System
+R-HSA-933527,Recruitment of TBK1/IKK epsilon complex to TANK:TRAF6,Reaction,Immune System
+R-HSA-933537,Recruitment of TANK to TRAF6,Reaction,Immune System
+R-HSA-975106,Phosphorylation and release of IRF7 upon TLR7/8 or 9 activation,Reaction,Immune System
+R-HSA-975188,TRAF6 interacts with IRF7 upon TLR7/8 or 9 activation,Reaction,Immune System
+R-HSA-9604487,p-IRF7:p-IRF7 translocates to the nucleus,Reaction,Immune System
+R-HSA-3134946,DDX41 ubiquitination by TRIM21,Reaction,Immune System
+R-HSA-3249392,NLRP4 and DTX4 associate with p-S172-TBK1 within STING:TBK1:IRF3,Reaction,Immune System
+R-HSA-8948709,DTX4 ubiquitinates p-S172-TBK1 within NLRP4:DTX4:STING:TBK1:IRF3,Reaction,Immune System
+R-HSA-1964496,STING binds TRIM32 or TRIM56 ,Reaction,Immune System
+R-HSA-3134804,STING ubiquitination by TRIM32 or TRIM56,Reaction,Immune System
+R-HSA-3245943,Viral DNA cleavage by TREX1,BlackBoxEvent,Immune System
+R-HSA-3244605,TREX1 binds retroviral-derived DNA,Reaction,Immune System
+R-HSA-8948703,NLRP4 and DTX4 associate with p-S172-TBK1 within dsDNA:ZBP1:TBK1,Reaction,Immune System
+R-HSA-3249386,DTX4 ubiquitinates p-S172-TBK1 within NLRP4:DTX4:dsDNA:ZBP1:TBK1,Reaction,Immune System
+R-HSA-879201,Bcl-2 and Bcl-XL bind NLRP1,Reaction,Immune System
+R-HSA-844447,NLRP1 senses MDP,BlackBoxEvent,Immune System
+R-HSA-879222,MDP:NLRP1 binds ATP,Reaction,Immune System
+R-HSA-844438,NLRP1 oligomerizes,Polymerisation,Immune System
+R-HSA-879221,PSTPIP1 binds Pyrin,Reaction,Immune System
+R-HSA-877361,Pyrin binds ASC,Reaction,Immune System
+R-HSA-1028821,Dimerization of Phospho IRF3 or phospho IRF7,Reaction,Immune System
+R-HSA-1028816,"Translocation of phosphorylated IRF3,IRF7 dimers into nucleus",Reaction,Immune System
+R-HSA-1028817,"CREBBP, EP300 binds p-T,4S-IRF3:p-T,4S-IRF3",Reaction,Immune System
+R-HSA-1028815,"p-T,4S-IRF3:p-T,4S-IRF3:CREBBP, EP300 binds promoters of Interferon-beta",Reaction,Immune System
+R-HSA-1028812,Expression of interferon-beta,BlackBoxEvent,Immune System
+R-HSA-9705137,TBK1 or IKBKE forms homodimers,Reaction,Immune System
+R-HSA-9705320,"TBK1, IKBKE are autophosphorylated at Ser172",Reaction,Immune System
+R-HSA-9709842,MAVS binds TOMM70,Reaction,Immune System
+R-HSA-9709831,HSP90 binds TBK1 and IRF3,Reaction,Immune System
+R-HSA-9709852,MAVS:TOMM70 recruits HSP90:TBK1:IRF3,Reaction,Immune System
+R-HSA-933531,Translocation of p-IRF7:p-IRF7 to nucleus,Reaction,Immune System
+R-HSA-933536,p-IRF7 dimer interacts with coactivator CBP/p300,Reaction,Immune System
+R-HSA-1028820,Formation of VAF (virus-activated factor) complex,Reaction,Immune System
+R-HSA-9604499,Expression of Interferon-alpha and beta mediated by VAF/pIRF7:CBP/p300,BlackBoxEvent,Immune System
+R-HSA-1028819,VAF/pIRF7:CBP/p300 binds the promoters of type-I IFN genes,Reaction,Immune System
+R-HSA-9705145,"TBK1, IKBKE form homodimers",Reaction,Immune System
+R-HSA-9705323,Phosphorylation of TBK1/IKBKE,Reaction,Immune System
+R-HSA-937337,TAX1BP1:A20 inhibit TBK1/IKKi K63-polyubiquitination,Reaction,Immune System
+R-HSA-936380,Interaction of PIN1 with p-IRF3,Reaction,Immune System
+R-HSA-936390,CYLD mediated deubiquitination of DDX58 (RIG-I),BlackBoxEvent,Immune System
+R-HSA-936564,NLRX1 inhibits MAVS-DDX58 interaction.,Reaction,Immune System
+R-HSA-936462,PIN1 mediated IRF3 degradation,BlackBoxEvent,Immune System
+R-HSA-990528,Interaction of PCBP2 with MAVS,Reaction,Immune System
+R-HSA-937343,NLRC5 interacts with DDX58/IFIH1,Reaction,Immune System
+R-HSA-990526,Recruitment of AIP4 and K48 ubiquitination of MAVS/IPS-1,Reaction,Immune System
+R-HSA-936412,"RNF125 mediated ubiquitination of DDX58, IFIH1 and MADS",BlackBoxEvent,Immune System
+R-HSA-936381,OTUD5 deubiquitinates TRAF3,Reaction,Immune System
+R-HSA-936378,Inhibition of DDX58/IFIH1 signaling by ATG5:ATG12:MAVS,Reaction,Immune System
+R-HSA-936475,Negative regulation of DDX58/IFIH1 signaling by RNF216,BlackBoxEvent,Immune System
+R-HSA-936563,ISGylation of DDX58,Reaction,Immune System
+R-HSA-933532,Processing of caspases,Reaction,Immune System
+R-HSA-933523,"Dimerzation of procaspase-8, procaspase-10",Reaction,Immune System
+R-HSA-933526,Recruitment of caspase-8 and -10 to FADD complex,Reaction,Immune System
+R-HSA-168934,MAVS interacts with RIPK1 and FADD,Reaction,Immune System
+R-HSA-933539,Recruitment of IKK complex,Reaction,Immune System
+R-HSA-3134821,DNA-PK binds microbial dsDNA,Reaction,Immune System
+R-HSA-8948027,RNASEs bind bacterial phospholipids,Reaction,Immune System
+R-HSA-6801687,PRTN3 cleaves CAMP(31-170) to generate CAMP(134-170),BlackBoxEvent,Immune System
+R-HSA-1222685,Cathelicidin LL-37 binds to bacterial cell wall,Reaction,Immune System
+R-HSA-6801808,"REG3A,REG3G binds bacterial peptidoglycan",Reaction,Immune System
+R-HSA-6801766,"Trypsin cleaves REG3A or REG3G to generate REG3A,G(38-175)",BlackBoxEvent,Immune System
+R-HSA-6803545,ATP7A transports cytosolic Cu2+ to phagosomal lumen,Reaction,Immune System
+R-HSA-435171,NRAMP1 transports divalent metal ions across phagosomal membranes of macrophages,Reaction,Immune System
+R-HSA-6799981,PGLYRP2 binds bacterial peptidoglycan,Reaction,Immune System
+R-HSA-6799977,PGLYRP2 hydrolyzes bacterial peptidoglycan,BlackBoxEvent,Immune System
+R-HSA-6809521,BPIF binds bacteria,Reaction,Immune System
+R-HSA-6810643,EPPIN protein complex binds bacteria,Reaction,Immune System
+R-HSA-6807585,BPI binds LPS on the bacterial surface,Reaction,Immune System
+R-HSA-6803063,"RNASEs bind bacterial LPS, PGN",Reaction,Immune System
+R-HSA-6813626,LEAP2 binds bacteria,Reaction,Immune System
+R-HSA-6804527,INTL1 binds bacterial glycans,Reaction,Immune System
+R-HSA-6808566,CHGA-derived peptide binds the bacterial cell surface,Reaction,Immune System
+R-HSA-8862771,PLA2G2A binds bacterial phospholipids,Reaction,Immune System
+R-HSA-6799959,"PGLYRP3,4 binds bacterial peptidoglycan",Reaction,Immune System
+R-HSA-6801776,REG3A binds bacterial phospholipids,Reaction,Immune System
+R-HSA-8862300,LYZ binds bacterial peptidoglycan,Reaction,Immune System
+R-HSA-8862320,LYZ hydrolyzes peptidoglycans in the bacterial cell wall,BlackBoxEvent,Immune System
+R-HSA-1471322,Beta-defensins are secreted,Reaction,Immune System
+R-HSA-1467269,Beta-defensins bind microbial membranes causing disruption,BlackBoxEvent,Immune System
+R-HSA-1471338,"Beta-defensins 1, 4A and 103 bind CCR6",Reaction,Immune System
+R-HSA-1974676,Beta defensin 103 activates TLR1:TLR2,Reaction,Immune System
+R-HSA-1973968,Beta-defensins 4A and 103 bind CCR2,Reaction,Immune System
+R-HSA-1462023,Pre-pro-defensins are cleaved to remove the signal peptide,BlackBoxEvent,Immune System
+R-HSA-1462039,Pro-HNP1-4 are cleaved to biologically active defensin,Reaction,Immune System
+R-HSA-1462003,HNP1-4 are stored in primary neutrophil granules,Reaction,Immune System
+R-HSA-1462041,HNP1-4 are released into phagocytic vacuoles,Reaction,Immune System
+R-HSA-1462014,Alpha-defensins form biologically active dimers,Reaction,Immune System
+R-HSA-1461993,pro-HD5 is cleaved by trypsin,Reaction,Immune System
+R-HSA-1462005,pro-defensin alpha 5 is secreted,Reaction,Immune System
+R-HSA-1461995,pro-defensin alpha 5 is stored in Paneth cell granules,Reaction,Immune System
+R-HSA-1471314,HNP1-3 bind CD4,Reaction,Immune System
+R-HSA-1461971,Alpha-defensin dimers adsorb onto microbial membrane anionic phospholipids,Reaction,Immune System
+R-HSA-1461982,Alpha-defensin dimers multimerize to form a pore complex,BlackBoxEvent,Immune System
+R-HSA-1972385,ADP-Ribosylation of HNP-1,Reaction,Immune System
+R-HSA-1471354,HNP1-3 bind gp120,Reaction,Immune System
+R-HSA-1467209,Binding of defensins to lipid II,Reaction,Immune System
+R-HSA-6813659,"ELANE, CTSG or PRTN3 binds bacteria",Reaction,Immune System
+R-HSA-6789072,PGLYRP1 binds bacterial peptidoglycan,Reaction,Immune System
+R-HSA-6801762,REG3A oligomerize to form a pore complex,Reaction,Immune System
+R-HSA-1222491,Lactoferrin scavenges iron ions,Reaction,Immune System
+R-HSA-6798528,S100A8:S100A9 binds Mn2+,Reaction,Immune System
+R-HSA-6798474,S100A8:S100A9 binds Zn2+,Reaction,Immune System
+R-HSA-5229273,"LCN2:2,5DHBA binds Fe3+",Reaction,Immune System
+R-HSA-6798489,S100A7 or S100A7A binds Zn2+,Reaction,Immune System
+R-HSA-6803047,DCD peptide binds bacterial membrane phospholipids,Reaction,Immune System
+R-HSA-6802999,DCD is processed into DCD(63-110),BlackBoxEvent,Immune System
+R-HSA-6803060,DCD(63-110) is processed to DCD(63-109),BlackBoxEvent,Immune System
+R-HSA-6810724,PI3 binds the bacterial surface,Reaction,Immune System
+R-HSA-6803104,DCD forms oligomeric complex,Reaction,Immune System
+R-HSA-6807144,"HTN1,HTN3 or HTN5 binds the bacterial anionic surface ",Reaction,Immune System
+R-HSA-6807565,GNLY is transferred to the phagosome,BlackBoxEvent,Immune System
+R-HSA-6806732,GNLY binds the bacterial cell surface,Reaction,Immune System
+R-HSA-6807581,"HTN5, (HTN1, HTN3) binds fungal SSA1/SSA2",Reaction,Immune System
+R-HSA-6807578,GNLY binds the bacterial cell surface in the phagosome,Reaction,Immune System
+R-HSA-2730871,RasGRP interacts with DAG and Ca2+,Reaction,Immune System
+R-HSA-2730849,Calcineurin binds and dephosphorylates NFAT,BlackBoxEvent,Immune System
+R-HSA-2730867,Translocation of CaN:CaM:NFAT to nucleus,Reaction,Immune System
+R-HSA-2730833,Phosphorylation of TEC kinases by p-SYK,Reaction,Immune System
+R-HSA-2730885,Recruitment of TEC kinases to p-SLP-76,Reaction,Immune System
+R-HSA-2730858,Autophosphorylation of BTK/ITK,Reaction,Immune System
+R-HSA-2730888,Phosphorylation of PLC-gamma,Reaction,Immune System
+R-HSA-2730896,Phosphorylation of MEK4 by MEKK1,Reaction,Immune System
+R-HSA-2424477,SOS mediated nucleotide exchange of RAS (SHC),Reaction,Immune System
+R-HSA-2396606,Recruitment of PLC-gamma to SLP-76 and p-5Y-LAT,Reaction,Immune System
+R-HSA-9724685,IgE binds omalizumab,Reaction,Immune System
+R-HSA-2730843,Phosphorylation of LAT by p-SYK,Reaction,Immune System
+R-HSA-8985943,p-Y701-STAT1 dimerizes,Reaction,Immune System
+R-HSA-8985900,"p-Y701-STAT1, p-Y705-STAT3, p-Y649-STAT5 dissociates from IL9:p-Y116-IL9R:JAK1:IL2RG:p-904,939-JAK3:p-Y705-STAT3",BlackBoxEvent,Immune System
+R-HSA-8985988,"IL9:p-Y116-IL9R:JAK1:IL2RG:p-904,939-JAK3:STAT3 phosphorylates STAT1, STAT3 or STAT5",Reaction,Immune System
+R-HSA-8985929,"IL9:p-Y116-IL9R:JAK1:IL2RG:p-904,939-JAK3 binds STAT1, STAT3, STAT5A or STAT5B",Reaction,Immune System
+R-HSA-8985973,"IL9R is phosphorylated by IL9:IL9R:JAK1:IL2RG:p-Y904,939-JAK3",BlackBoxEvent,Immune System
+R-HSA-8985914,IL9:IL9R:JAK1:IL2RG:JAK3 phosphorylates JAK3,BlackBoxEvent,Immune System
+R-HSA-8963734,IL9 binds IL9R:JAK1 and IL2RG:JAK3,Reaction,Immune System
+R-HSA-9011748,IL9R binds JAK1,Reaction,Immune System
+R-HSA-8985966,p-Y701-STAT1 binds p-Y705-STAT3,Reaction,Immune System
+R-HSA-8985981,p-Y701-STAT1:p-Y705-STAT3 translocates from the cytosol to the nucleus,BlackBoxEvent,Immune System
+R-HSA-8985950,"p-Y649-STAT5A, p-STAT5B dimerizes",BlackBoxEvent,Immune System
+R-HSA-5340385,HAVCR2 binds LGALS9,Reaction,Immune System
+R-HSA-508247,Gab2 binds the p85 subunit of Class 1A PI3 kinases,Reaction,Immune System
+R-HSA-912527,SHC1 mediates cytokine-induced phosphorylation of GAB2,BlackBoxEvent,Immune System
+R-HSA-453104,Phosphorylated SHC1 recruits GRB2:GAB2,BlackBoxEvent,Immune System
+R-HSA-913374,Phosphorylated SHC1 recruits SHIP,Reaction,Immune System
+R-HSA-913424,The SHC1:SHIP1 complex is stabilized by GRB2,Reaction,Immune System
+R-HSA-9006873,IL21 receptor STAT binding,BlackBoxEvent,Immune System
+R-HSA-9006850,IL21 receptor JAK phosphorylation,BlackBoxEvent,Immune System
+R-HSA-9006844,IL21:IL21R:JAK1 binds IL2RG:JAK3,BlackBoxEvent,Immune System
+R-HSA-9005980,IL21 binds IL21R:JAK1,BlackBoxEvent,Immune System
+R-HSA-9006870,IL21 receptor STAT phosphorylation,BlackBoxEvent,Immune System
+R-HSA-1168636,"p-RasGRP1,3:DAG cause RAS to exchange GDP for GTP",Reaction,Immune System
+R-HSA-9690461,FKBP1A binds tacrolimus,Reaction,Immune System
+R-HSA-2025882,"Calcineurin dephosphorylates NFATC1,2,3",BlackBoxEvent,Immune System
+R-HSA-2025890,"Calcineurin binds NFATC1,2,3",Reaction,Immune System
+R-HSA-1168641,TAK1 associated with the CBM complex phosphorylates IKKbeta,Reaction,Immune System
+R-HSA-1168637,CARMA1:BCL10:MALT1 complex recruits TAK1 and IKK,BlackBoxEvent,Immune System
+R-HSA-1168644,CARMA1 recruits MALT1 and BCL10 forming CBM Complex,Reaction,Immune System
+R-HSA-1168635,PRKCB (PKC-beta) phosphorylates CARMA1,BlackBoxEvent,Immune System
+R-HSA-1168373,"PRKCB (Protein kinase C beta, PKC-beta) binds diacylglycerol and phosphatidylserine",Reaction,Immune System
+R-HSA-1168640,Ubiquitinated IkB is degraded,BlackBoxEvent,Immune System
+R-HSA-1168643,SCF-beta-TrCP ubiquitinylates IkB,BlackBoxEvent,Immune System
+R-HSA-1168642,SCF with beta-TrCP1 or beta-TrCP2 binds NF-kappaB:phospho-IkB,Reaction,Immune System
+R-HSA-1168638,Activated IKK phosphorylates I-kappaB,Reaction,Immune System
+R-HSA-1168633,NF-kappaB translocates from the cytosol to the nucleus,BlackBoxEvent,Immune System
+R-HSA-9606884,"PI(3,4,5)P3 (PIP3) binds DAPP1 (BAM32) and DAPP1 is phosphorylated",BlackBoxEvent,Immune System
+R-HSA-9606894,p-DAPP1 (p-BAM32) binds PLCG2,Reaction,Immune System
+R-HSA-5690740,CD22 binds B-cell receptor,Reaction,Immune System
+R-HSA-5690702,LYN phosphorylates CD22,Reaction,Immune System
+R-HSA-5690669,CD22 binds itself to form homo-oligomers,Polymerisation,Immune System
+R-HSA-5690701,SHP1 binds p-CD22,Reaction,Immune System
+R-HSA-389756,AKT interacts and phosphorylates Cot,Reaction,Immune System
+R-HSA-392530,p-S400-Cot phosphorylates NIK,Reaction,Immune System
+R-HSA-389788,Activation of PAKs by RAC1 and CDC42,Reaction,Immune System
+R-HSA-389381,Gads binds CD28,Reaction,Immune System
+R-HSA-6790087,HVEM induses BTLA phosphorylation,BlackBoxEvent,Immune System
+R-HSA-389523,BTLA interacts with HVEM,Reaction,Immune System
+R-HSA-389941,SHP-1 and SHP-2 bind pBTLA,Reaction,Immune System
+R-HSA-388817,ICOS binds ICOSL/B7-H2,Reaction,Immune System
+R-HSA-389762,Phosphorylation of PD-1,Reaction,Immune System
+R-HSA-388828,PD-1 binds B7DC and B7H1,Reaction,Immune System
+R-HSA-389759,Interaction of SHP-1 or SHP-2 with phospho PD-1,Reaction,Immune System
+R-HSA-389758,Dephosphorylation of CD3-zeta by PD-1 bound phosphatases,Reaction,Immune System
+R-HSA-9679421,PDCD1 binds PDCD1 inhibitors,Reaction,Immune System
+R-HSA-389919,Grb2 binds pBTLA,Reaction,Immune System
+R-HSA-388833,Phosphorylation of CTLA-4,Reaction,Immune System
+R-HSA-388809,CTLA-4 binds B7-1/B7-2,Reaction,Immune System
+R-HSA-389532,PP2A binds CTLA4 dimer,Reaction,Immune System
+R-HSA-388829,SHP2 phosphatase binds CTLA-4,Reaction,Immune System
+R-HSA-390329,Dephosphorylation of AKT by PP2A,Reaction,Immune System
+R-HSA-430183,NCK binds PAK,Reaction,Immune System
+R-HSA-430190,p-SLP-76 binds NCK,Reaction,Immune System
+R-HSA-430135,p-SLP-76 binds ADAP,Reaction,Immune System
+R-HSA-430201,p-SLP-76:ADAP binds Ena/VASP,Reaction,Immune System
+R-HSA-8855375,PTPN22 dissociates from CSK,Reaction,Immune System
+R-HSA-8852200,Inactivation of LCK by PTPN22,Reaction,Immune System
+R-HSA-8855381,PTPN22 dephosphorylates ZAP70,Reaction,Immune System
+R-HSA-2424482,p85 regulatory unit of PI3K binds p-6Y-SYK,Reaction,Immune System
+R-HSA-2424480,PI3K phosphorylates PIP2 to PIP3,Reaction,Immune System
+R-HSA-2396594,Phosphorylation of SLP-76 by p-SYK,Reaction,Immune System
+R-HSA-2424481,Recruitment of VAV and BTK to p-SLP-76,Reaction,Immune System
+R-HSA-2424486,Phosphorylation and activation of VAV2/VAV3 by SYK,Reaction,Immune System
+R-HSA-2424484,Phosphorylation of BTK by p-SYK,Reaction,Immune System
+R-HSA-2424487,Phosphorylation of PLC-gamma by p-BTK/p-SYK,Reaction,Immune System
+R-HSA-2424485,Release of p-PLCG1,Reaction,Immune System
+R-HSA-2424476,Activation of RAC1 by VAV2/3,Reaction,Immune System
+R-HSA-2426569,Interaction of DAP12 and IREM2,Reaction,Immune System
+R-HSA-2172123,Interaction of SIGLEC14/15/16 and DAP12,Reaction,Immune System
+R-HSA-2426566,Interaction of DAP12 and CLM7,Reaction,Immune System
+R-HSA-210274,SIRP beta binds TYROBP,Reaction,Immune System
+R-HSA-210292,Interaction of DAP12 and TREM1,Reaction,Immune System
+R-HSA-210271,Interaction of DAP12 and MDL-1,Reaction,Immune System
+R-HSA-210273,Interaction of DAP12 and NKp44,Reaction,Immune System
+R-HSA-210309,Interaction of DAP12 and KIR2DS2,Reaction,Immune System
+R-HSA-2272753,Interaction of DAP12 and KIR2DS4,Reaction,Immune System
+R-HSA-2272795,Interaction of DAP12 and KIR2DS1,Reaction,Immune System
+R-HSA-210298,Interaction of DAP12 and KIR3DS1,Reaction,Immune System
+R-HSA-2272668,Interaction of DAP12 and KIR2DS5,Reaction,Immune System
+R-HSA-6798747,Exocytosis of tertiary granule membrane proteins,Reaction,Immune System
+R-HSA-6800426,Exocytosis of ficolin-rich granule membrane proteins,Reaction,Immune System
+R-HSA-6798749,Exocytosis of specific granule lumen proteins,Reaction,Immune System
+R-HSA-6798745,Exocytosis of tertiary granule lumen proteins,Reaction,Immune System
+R-HSA-6798743,Exocytosis of secretory granule membrane proteins,Reaction,Immune System
+R-HSA-6800434,Exocytosis of ficolin-rich granule lumen proteins,Reaction,Immune System
+R-HSA-6798748,Exocytosis of secretory granule lumen proteins,Reaction,Immune System
+R-HSA-6798751,Exocytosis of azurophil granule lumen proteins,Reaction,Immune System
+R-HSA-6798739,Exocytosis of azurophil granule membrane proteins,Reaction,Immune System
+R-HSA-6799350,Exocytosis of specific granule membrane proteins,Reaction,Immune System
+R-HSA-688136,TNFAIP3 (A20) deubiquitinates RIP2,Reaction,Immune System
+R-HSA-622415,RIP2 binds NEMO,Reaction,Immune System
+R-HSA-9676160,AAMP binds NOD2,Reaction,Immune System
+R-HSA-622420,NOD1 induced apoptosis is mediated by RIP2 and CARD8,Reaction,Immune System
+R-HSA-741386,RIP2 induces K63-linked ubiquitination of NEMO,Reaction,Immune System
+R-HSA-741411,CYLD deubiquitinates NEMO,Reaction,Immune System
+R-HSA-1247960,Activation of p38 MAPK,Reaction,Immune System
+R-HSA-741395,CARD9 binds RIP2 (and NOD2),Reaction,Immune System
+R-HSA-6788999,HV1-mediated H+ transfer,BlackBoxEvent,Immune System
+R-HSA-6789092,NOX2 generates superoxide anion from oxygen,Reaction,Immune System
+R-HSA-6789136,Myeloperoxidase (MPO) binds to the bacterial cell surface,BlackBoxEvent,Immune System
+R-HSA-6789031,Membrane-bound myeloperoxidase (MPO) produces hypochlorous acid (HOCl),Reaction,Immune System
+R-HSA-6789126,Myeloperoxidase (MPO) produces hypochlorous acid (HOCl),Reaction,Immune System
+R-HSA-8933635,Myeloperoxidase (MPO) catalyzes oxidation of nitrite to nitrogen dioxide,Reaction,Immune System
+R-HSA-8855490,Lactoperoxidase (LPO) produces OSCN-,Reaction,Immune System
+R-HSA-9625904,Hypochlorous acid (HOCL) reacts with Lys residue to form Lys-monochloramine,Reaction,Immune System
+R-HSA-6789218,Hypochlorous acid (HOCl) reacts with unsaturated lipid to form lipid chlorohydrins,Reaction,Immune System
+R-HSA-6789185,Chloride ion and N-acyl group react to chloramide,Reaction,Immune System
+R-HSA-6788974,Hypochlorous acid and nitrite react to nitryl chloride (NO2Cl),Reaction,Immune System
+R-HSA-9625913,Hypochlorous acid (HOCL) reacts with Lys-monochloramine,Reaction,Immune System
+R-HSA-8941411,OSCN- reacts with Cys residues,Reaction,Immune System
+R-HSA-9625540,Cys-sulfenyl chloride is converted to Cys-sulfenic acid,Reaction,Immune System
+R-HSA-9625548,Hypochlorous acid (HOCL) oxidizes Cys residues to form Cys-sulfenyl chloride,Reaction,Immune System
+R-HSA-6789208,HOCl-induced glycosaminoglycan fragmentation,BlackBoxEvent,Immune System
+R-HSA-6804006,NO and NO2 react to N2O3,Reaction,Immune System
+R-HSA-6803989,Nitric oxide and O2 react to NO2,Reaction,Immune System
+R-HSA-1222353,Protonation of superoxide,Reaction,Immune System
+R-HSA-1222516,Intraphagosomal pH is lowered to 5 by V-ATPase,Reaction,Immune System
+R-HSA-6788975,Superoxide anion dismutates to H2O2,Reaction,Immune System
+R-HSA-1222686,Nitric oxide diffuses into the phagosome,Reaction,Immune System
+R-HSA-6789160,"Hydrogen peroxide and Fe2+ react to hydroxyl, hydroxide and Fe3+",Reaction,Immune System
+R-HSA-6789077,Hydrogen peroxide enters the bacterium,BlackBoxEvent,Immune System
+R-HSA-6789109,Superoxide anion reacts with Fe-S cluster,Reaction,Immune System
+R-HSA-9626753,H2O2 oxidizes Cys residues to form Cys-sulfenic acid,Reaction,Immune System
+R-HSA-1222662,Nitric oxide enters the bacterium,BlackBoxEvent,Immune System
+R-HSA-1222342,Hydroperoxyl enters the bacterium,BlackBoxEvent,Immune System
+R-HSA-6789042,Hydroxyl-initiated lipid peroxidation,Reaction,Immune System
+R-HSA-1222411,Peroxynitrite oxidizes Peptide-Methionine residues,Reaction,Immune System
+R-HSA-1470073,Peroxynitrite enters the bacterium,BlackBoxEvent,Immune System
+R-HSA-8948180,Peroxynitrite oxidizes Cys residues,Reaction,Immune System
+R-HSA-6789114,Hydroxyl radical reacts with the base and sugar moiety of DNA,Reaction,Immune System
+R-HSA-1222512,Nitric oxide oxidizes to nitrosyl ion,Reaction,Immune System
+R-HSA-1222384,Glutathione scavenges nitrosyl,Reaction,Immune System
+R-HSA-6804035,N2O3 diffuses to phagosome,BlackBoxEvent,Immune System
+R-HSA-8942052,Superoxide and nitric oxide react to peroxynitrite in the phagosome,Reaction,Immune System
+R-HSA-6803978,S-nitrosylation of cysteine residues in proteins by N2O3,Reaction,Immune System
+R-HSA-6803988,N2O3 enters bacteria,BlackBoxEvent,Immune System
+R-HSA-8942075,Peroxynitrite and carbon dioxide react to nitrosoperoxycarbonate,Reaction,Immune System
+R-HSA-6803999,HNO2 produces N2O3,Reaction,Immune System
+R-HSA-6803998,Nitrite ion and HNO2 form a conjugated acid-base pair,Reaction,Immune System
+R-HSA-983148,Interaction of Erp57 with MHC class I HC,Reaction,Immune System
+R-HSA-983145,Binding of newly synthesized MHC class I heavy chain (HC) with calnexin,Reaction,Immune System
+R-HSA-8951499,Loading of antigenic peptides on to class I MHC,Reaction,Immune System
+R-HSA-983158,Trimming of peptides in ER,BlackBoxEvent,Immune System
+R-HSA-983144,Transport of Antigen peptide in to ER,Reaction,Immune System
+R-HSA-983150,Proteasomal cleavage of substrate,BlackBoxEvent,Immune System
+R-HSA-983147,Release of E3 from polyubiquitinated substrate,Reaction,Immune System
+R-HSA-983156,Polyubiquitination of substrate,BlackBoxEvent,Immune System
+R-HSA-983140,Transfer of Ub from E2 to substrate and release of E2,Reaction,Immune System
+R-HSA-983157,Interaction of E3 with substrate and E2-Ub complex,Reaction,Immune System
+R-HSA-983152,Transfer of ubiquitin from E1 to E2,Reaction,Immune System
+R-HSA-983153,E1 mediated ubiquitin activation,Reaction,Immune System
+R-HSA-983162,Trimming of N-ter extended precursor fragments by cytosolic aminopeptidases,BlackBoxEvent,Immune System
+R-HSA-983142,Formation of peptide loading complex (PLC),Reaction,Immune System
+R-HSA-983146,Interaction of beta-2-microglobulin (B2M) chain with  class I HC,Reaction,Immune System
+R-HSA-203979,Coat Assembly,Reaction,Immune System
+R-HSA-983427,Expression of peptide bound class I MHC on cell surface,BlackBoxEvent,Immune System
+R-HSA-983421,Journey of cargo through Golgi complex,BlackBoxEvent,Immune System
+R-HSA-983422,Disassembly of COPII coated vesicle,Reaction,Immune System
+R-HSA-983424,Budding of COPII coated vesicle,Reaction,Immune System
+R-HSA-983425,Recruitment of Sec31p:Sec13p to prebudding complex and formation of COPII vesicle,Reaction,Immune System
+R-HSA-983426,Capturing cargo and formation of prebudding complex,Reaction,Immune System
+R-HSA-983138,Transport of MHC heterotrimer to ER exit site,Reaction,Immune System
+R-HSA-983161,Dissociation of the Antigenic peptide:MHC:B2M peptide loading complex,Reaction,Immune System
+R-HSA-1236970,Proteasomal clevage of exogenous antigen,BlackBoxEvent,Immune System
+R-HSA-1236968,Egress of internalized antigen into cytosol from early endosome,BlackBoxEvent,Immune System
+R-HSA-1236940,Exogenous soluble antigen targeted to more stable early endosome,Reaction,Immune System
+R-HSA-1236955,Movement of clathrin coated vesicles into early endosome,Reaction,Immune System
+R-HSA-1236941,Internalization of receptor bound antigen into clathrin coted vesicles,Reaction,Immune System
+R-HSA-1236939,Interaction of exogenous soluble antigen with its corresponding receptor,Reaction,Immune System
+R-HSA-1236948,Antigen processing by cathepsin S in endosoytic vesicle,Reaction,Immune System
+R-HSA-1236964,Translocation of peptide bound MHC class I complex to cell surface,BlackBoxEvent,Immune System
+R-HSA-1236943,Loading of antigen peptide onto MHC class I molecule,Reaction,Immune System
+R-HSA-1236954,Trimming of peptides by IRAP in endocytic vesicles,Reaction,Immune System
+R-HSA-8863895,IKKB phosphorylates SNAP23,Reaction,Immune System
+R-HSA-1236947,Egress of internalized antigen to the cytosol via sec61,Reaction,Immune System
+R-HSA-1236938,Partial proteolysis of antigen in phagolysosomes,BlackBoxEvent,Immune System
+R-HSA-1236963,Maturation of phagosome into phagolysosome,BlackBoxEvent,Immune System
+R-HSA-1236956,Engulfment of particulate antigen into phagocytic vesicle,Reaction,Immune System
+R-HSA-1236958,Interaction of particulate antigens with dendritic cell receptors,Reaction,Immune System
+R-HSA-8863973,Fusion of ERC and phagosome,BlackBoxEvent,Immune System
+R-HSA-8951595,"CALR, TAP, TAPBP dissociate from SEC22B:STX4",Reaction,Immune System
+R-HSA-8863858,"SEC22B, CALR, STX4, TAP and TAPBP bind",Reaction,Immune System
+R-HSA-8863914,"Transport of SEC22B, TAP and PLC from ER to ERGIC",Reaction,Immune System
+R-HSA-1236935,Proteasomal cleavage of substrate,BlackBoxEvent,Immune System
+R-HSA-1236972,Escape of antigens from phagosome to cytosol,BlackBoxEvent,Immune System
+R-HSA-1236949,Translocation of antigenic peptides back to phagosomes via TAP,Reaction,Immune System
+R-HSA-1236965,Export of peptide loaded MHC class I complex to PM,BlackBoxEvent,Immune System
+R-HSA-1236971,Peptide loading on MHC class I in phagosome,BlackBoxEvent,Immune System
+R-HSA-1236967,Alkalization of the phagosomal lumen by NOX2,Reaction,Immune System
+R-HSA-8940641,THOP1 cleaves oligopeptide fragment (8-16aa),BlackBoxEvent,Immune System
+R-HSA-5621354,CLEC4E binds alpha-mannan and trehalose-6-6'-dimycolate,Reaction,Immune System
+R-HSA-5621355,LYN and FYN phosphorylate FCER1G in CLEC6A:FCERG and CLEC4E:FCERG,Reaction,Immune System
+R-HSA-5621352,CLEC6A binds alpha-mannan in fungal cell walls,Reaction,Immune System
+R-HSA-5621353,"CLEC4D binds mycobacterial trehalose-6,6'-dimycolate (TDM)",Reaction,Immune System
+R-HSA-5621366,"SYK binds to p-Y65,Y76-FCER1G",Reaction,Immune System
+R-HSA-5621370,SYK autophosphorylates,Reaction,Immune System
+R-HSA-5621363,"SYK phosphorylates PLCG2 in p-6Y-SYK:p-Y65,Y76-FCER1G:PLCG2",Reaction,Immune System
+R-HSA-5621356,"PLCG1 binds p-6Y-SYK:p-Y65,Y76-FCER1G",Reaction,Immune System
+R-HSA-5621347,PLCG2 translocates from cytosol to plasma membrane,Reaction,Immune System
+R-HSA-5621367,CLEC4A binds HIV and HCV glycoproteins,Reaction,Immune System
+R-HSA-8858500,CLEC10A binds Tn-MUC1,Reaction,Immune System
+R-HSA-5621371,CLEC4C binds HIV and HCV glycoproteins,Reaction,Immune System
+R-HSA-5607726,"Active NIK:p-S176,180-IKKA dimer phosphorylates p100:RELB",Reaction,Immune System
+R-HSA-5668404,TNFA binds TNFR2,Reaction,Immune System
+R-HSA-5668467,2xTNFR2 binds TNFA trimer:TNFR2,Reaction,Immune System
+R-HSA-5668417,"cIAP1,2:TRAF2:TRAF3:NIK complex binds TNFR2 trimer",Reaction,Immune System
+R-HSA-5668414,"TRAF2 ubiquitinates cIAP1,2 in cIAP1,2:TRAF1:TRAF2:TRAF3:NIK",BlackBoxEvent,Immune System
+R-HSA-5668454,"K63polyUb-cIAP1,2 ubiquitinates TRAF3",BlackBoxEvent,Immune System
+R-HSA-5668481,Protesomal degradation of K48polyUb-TRAF3,BlackBoxEvent,Immune System
+R-HSA-5607721,Activation of NIK,Reaction,Immune System
+R-HSA-5607720,p100:RELB binds active NIK:p-IKKA dimer,Reaction,Immune System
+R-HSA-5607741,p52:RELB translocates from cytosol to nucleus,Reaction,Immune System
+R-HSA-5607723,"SCF-beta-TRCP binds p-7S-p100 in active NIK:p-S176,180-IKKA dimer:p-7S-p100:RELB",Reaction,Immune System
+R-HSA-5607722,Active NIK phosphorylates IKKA dimer,Reaction,Immune System
+R-HSA-5607731,26S proteasome processes p-7S-p100:RELB to form p52:RELB,BlackBoxEvent,Immune System
+R-HSA-5660965,CCL17 and CCL22 genes are transcribed,BlackBoxEvent,Immune System
+R-HSA-5660665,Caspase-8 binds MALT,Reaction,Immune System
+R-HSA-5660662,ASC binds Caspase-8 complex,Reaction,Immune System
+R-HSA-5660663,Caspase-8 cleaves IL1B precursor,Reaction,Immune System
+R-HSA-5660622,IL1B gene is transcribed,BlackBoxEvent,Immune System
+R-HSA-5624494,RAF1 binds p21 RAS:GTP,Reaction,Immune System
+R-HSA-5621573,CD209 activate GTPase RAS,BlackBoxEvent,Immune System
+R-HSA-5621606,CD209 binds ManLAM,Reaction,Immune System
+R-HSA-5624492,PAK phosphorylates p21 RAF1 on S338,Reaction,Immune System
+R-HSA-5624486,"SFKs phosphorylates RAF1 on Y340,Y341",BlackBoxEvent,Immune System
+R-HSA-5621571,CD209 binds ICAM2,Reaction,Immune System
+R-HSA-5660980,p-S276-RELA binds RELB,Reaction,Immune System
+R-HSA-5624473,Protein kinase A (PKA) and RPS6KA5 (MSK1) phosphorylates p65 (RELA) subunit,Reaction,Immune System
+R-HSA-5660660,p300 acetylates RELA subunit,Reaction,Immune System
+R-HSA-5660666,CBP and p300 binds NF-kB complex,Reaction,Immune System
+R-HSA-5621615,CD209 binds ICAM3,Reaction,Immune System
+R-HSA-976801,Complement factor I complex formation,Reaction,Immune System
+R-HSA-976768,Factor H binds to C3b,Reaction,Immune System
+R-HSA-976810,Complement factor I binds to extracellular Factor H:C3b,Reaction,Immune System
+R-HSA-976743,Factor I inactivates plasma Factor H-bound C3b,Reaction,Immune System
+R-HSA-1006169,Factor H binds host cell surface markers,Reaction,Immune System
+R-HSA-981728,Factor H binds to membrane-associated C3b,Reaction,Immune System
+R-HSA-977359,Complement factor I binds to membrane-associated Factor H:C3b,Reaction,Immune System
+R-HSA-977371,Factor I inactivates Factor H-boundC3b,Reaction,Immune System
+R-HSA-8853252,"CR2:C3d,C3dg,iC3b binds CD19:CD81",Reaction,Immune System
+R-HSA-1006143,CD46 binds C3b,Reaction,Immune System
+R-HSA-8852580,"Clusterin binds C5b-C7, C8, C9",Reaction,Immune System
+R-HSA-8852874,"CR2 binds C3d, C3dg, iC3b",Reaction,Immune System
+R-HSA-8852266,"C1-Inh binds Antigen: antibody: C1 complex activated C1r, C1s",Reaction,Immune System
+R-HSA-9021306,"C1-Inh binds and inactivates C1r, C1s",Reaction,Immune System
+R-HSA-8852481,Antigen:IgG:C1Q:2xActivated C1R:SERPING1:2xActivated C1S:SERPING1 dissociates,Reaction,Immune System
+R-HSA-2530445,CD59 inhibits MAC formation,Reaction,Immune System
+R-HSA-173723,C8 binds C5b:C6:C7,Reaction,Immune System
+R-HSA-173720,C5b:C6:C7 translocates to the plasma membrane,Reaction,Immune System
+R-HSA-173709,C7 binds C5b:C6,Reaction,Immune System
+R-HSA-173705,C5b binds C6,Reaction,Immune System
+R-HSA-8951486,CD46 binds C4b,Reaction,Immune System
+R-HSA-977602,"Complement factor I binds to MCP, CR1:C4b, C3b",Reaction,Immune System
+R-HSA-977629,Displacement of C2a/Bb by CR1,Reaction,Immune System
+R-HSA-977375,CR1 binds C3bBb/C4bC2a,Reaction,Immune System
+R-HSA-977615,Factor I inactivates MCP/CR1-bound C4b/C3b,Reaction,Immune System
+R-HSA-2855047,Hydrolysis of internal thioester in C4b,Reaction,Immune System
+R-HSA-8852809,"CPN, CPB2 cleave C3a, C5a",Reaction,Immune System
+R-HSA-2530429,Formation of soluble VTN:C5b-C9 ,Reaction,Immune System
+R-HSA-964811,C5AR2 binds anaphylatoxins and thier desArginated derivatives,Reaction,Immune System
+R-HSA-977605,Factor H displaces Bb,Reaction,Immune System
+R-HSA-977363,Factor H binds to C3bBb,Reaction,Immune System
+R-HSA-981637,Complement factor I inactivates C4BP-bound C4b,Reaction,Immune System
+R-HSA-981658,Complement factor I binds C4BP,Reaction,Immune System
+R-HSA-977626,C4b-binding protein binds C4b,Reaction,Immune System
+R-HSA-3266557,Factor I cleaves iC3b,Reaction,Immune System
+R-HSA-981535,"CD55 (DAF) binds C3bBb, C4bC2a",Reaction,Immune System
+R-HSA-977619,CD55 (DAF) promotes C3bBb/C4bC2a dissociation,Reaction,Immune System
+R-HSA-981648,C4b binding protein binds C4bC2a,BlackBoxEvent,Immune System
+R-HSA-8851436,CFHR dimers bind C3b,Reaction,Immune System
+R-HSA-8852716,"Thrombin, ELANE cleave C5",Reaction,Immune System
+R-HSA-981665,C4b binding protein binds Protein S,Reaction,Immune System
+R-HSA-2530453,Vitronectin (VTN) binds to C5b:C6:C7,Reaction,Immune System
+R-HSA-981621,C3 convertases spontaneously dissociate,Reaction,Immune System
+R-HSA-981680,C4b binding protein displaces C2a,BlackBoxEvent,Immune System
+R-HSA-173725,C9 binds C5b:C6:C7:C8,Reaction,Immune System
+R-HSA-879377,The TRTK-12 fragment of F-actin capping protein alpha binds the AGER ligand S100B,Reaction,Immune System
+R-HSA-879411,Advanced glycosylation end product-specific receptor (AGER/RAGE) is a multiligand receptor,Reaction,Immune System
+R-HSA-879358,"AGER-1,2,3 bind AGEs",Reaction,Immune System
+R-HSA-879362,AGER binds ERK1/2,Reaction,Immune System
+R-HSA-1678981,TLR9 processing at neutral pH,Reaction,Immune System
+R-HSA-1679589,Engulfed CpG DNA binds to endosomal full-length TLR9,Reaction,Immune System
+R-HSA-1679098,Engulfed CpG DNA binds to endosomal N-ter TLR9 dimer,Reaction,Immune System
+R-HSA-9679045,C-ter TLR9 dimer binds HCQ,Reaction,Immune System
+R-HSA-975118,TRAF6 ubiquitinqtes IRF7 within the activated TLR7/8 or 9 complex,BlackBoxEvent,Immune System
+R-HSA-975097,Activated TRAF6:p-IRAK2 interacts with TAK1 complex upon TLR7/8 or 9 stimulation,Reaction,Immune System
+R-HSA-975103,Auto phosphorylation of TAK1 bound to p-IRAK2:pUb oligo-TRAF6: free K63 pUb:TAB1:TAB2/TAB3  upon TLR7/8 or 9 activation,Reaction,Immune System
+R-HSA-975142,Pellino binds hp-IRAK1:TRAF6 upon TLR7/8 or 9 activation,Reaction,Immune System
+R-HSA-975139,IRAK1 phosphorylates Pellino upon TLR7/8 or 9 activation ,Reaction,Immune System
+R-HSA-975122,Pellino ubiquitinates hp-IRAK1 upon TLR7/8 or 9 activation<br>,Reaction,Immune System
+R-HSA-975119,NEMO subunit of IKK complex binds to activated IRAK1 upon stimulation of TLR7/8 or 9.,Reaction,Immune System
+R-HSA-9679029,C-ter TLR7 dimer binds HCQ,Reaction,Immune System
+R-HSA-9013992,TRAF3 binds to TRIF:activated TLR3 complex,Reaction,Immune System
+R-HSA-9013979,IRF3/IRF7 recruitment to p-TBK1/p-IKK epsilon bound to the activated TLR3,Reaction,Immune System
+R-HSA-9013986,Recruitment of TBK1/IKK epsilon to K63-pUb-TANK:K63-pUb-TRAF3:TRIF:activated TLR3 followed by their phosphorylation,Reaction,Immune System
+R-HSA-9013990,TANK is ubiquitinated within TANK:K63polyUb-TRAF3:TICAM1:TLR3:viral dsRNA,BlackBoxEvent,Immune System
+R-HSA-9013985,TANK binds K63-poly-Ub-TRAF3:TICAM1:activated TLR3,Reaction,Immune System
+R-HSA-9013974,Auto-ubiquitination of TRAF3 within activated TLR3 complex,BlackBoxEvent,Immune System
+R-HSA-9013978,Phosphorylation of IRF-3/IRF7 and their release from the activated TLR3 complex ,Reaction,Immune System
+R-HSA-9014320,SARM binds viral dsRNA:TLR3:TICAM1,Reaction,Immune System
+R-HSA-9013963,RIP3 binds TICAM1 within TLR3 complex to mediate necroptosis ,Reaction,Immune System
+R-HSA-9013889,TLR3-induced ripoptosome assembly,Reaction,Immune System
+R-HSA-9013895,Caspase-8 processing within TLR3 complex,Reaction,Immune System
+R-HSA-9014343,IKBKG subunit of IKK complex binds K63pUb- RIP1 within the TLR3 complex,Reaction,Immune System
+R-HSA-9014342,K63-linked ubiquitination of RIP1 bound to the activated TLR complex,Reaction,Immune System
+R-HSA-2559439,CD14:LPS binds CR3,Reaction,Immune System
+R-HSA-166168,TLR4:LY96:LPS:CD14 recruits TRAM (TICAM2),Reaction,Immune System
+R-HSA-2201293,Endocytosis of TLR4:LY96:LPS:CD14,Reaction,Immune System
+R-HSA-2201341,Endocytosis of TRAM (TICAM2),Reaction,Immune System
+R-HSA-1675473,SH2B binds JAK2,Reaction,Immune System
+R-HSA-1369114,PRLR binds SHP2 (PTPN11),Reaction,Immune System
+R-HSA-1369115,SHP2 is phosphorylated,Reaction,Immune System
+R-HSA-1370500,PRLR binds SCF beta-TrCP complex,Reaction,Immune System
+R-HSA-1370505,PRLR is phosphorylated at Ser-349,BlackBoxEvent,Immune System
+R-HSA-1170539,Prolactin receptor is internalized,BlackBoxEvent,Immune System
+R-HSA-199093,CXADR binds to AMICA1,Reaction,Immune System
+R-HSA-912790,CBL binds CRK,Reaction,Immune System
+R-HSA-912629,CBL is tyrosine phosphorylated,Reaction,Immune System
+R-HSA-879917,"CBL, GRB2, FYN and PI3K p85 subunit are constitutively associated",Reaction,Immune System
+R-HSA-912734,CBL:CRKL binds RAPGEF1,Reaction,Immune System
+R-HSA-912627,CBL ubiquitinates PI3K,BlackBoxEvent,Immune System
+R-HSA-912727,CBL binds VAV,Reaction,Immune System
+R-HSA-912724,CBL binds B-cell linker protein,Reaction,Immune System
+R-HSA-914182,14-3-3 zeta binding allows recruitment of PI3K,Reaction,Immune System
+R-HSA-912757,p-S585-IL3RB binds 14-3-3 proteins,Reaction,Immune System
+R-HSA-913451,IL3RB is phosphorylated on Ser-585,Reaction,Immune System
+R-HSA-879914,IL3 stimulation induces Vav binding to Tec kinase,Reaction,Immune System
+R-HSA-909738,SHP1 and SHP2 bind the common beta chain,Reaction,Immune System
+R-HSA-914022,SHP2 can recruit GRB2,Reaction,Immune System
+R-HSA-914036,SHP1 and SHP2 dephosphorylate Y628 of IL3RB,Reaction,Immune System
+R-HSA-9606784,Active FLT3:GRB2:p-Y-GAB2 binds PTPN11,BlackBoxEvent,Immune System
+R-HSA-9604969,Active FLT3 binds PTPN11,Reaction,Immune System
+R-HSA-8865605,BRWD1 binds SMARCA4,Reaction,Immune System
+R-HSA-8865693,BRWD1 gene expression is repressed by STAT5,BlackBoxEvent,Immune System
+R-HSA-8865626,p-STAT5 dimers bind the BRWD1 gene promoter,Reaction,Immune System
+R-HSA-8865613,"BRWD1 binds AcK(9,14,18,79)-p(S10,T11)-histone H3",Reaction,Immune System
+R-HSA-9678737,IFNAR1:TYK2 binds TYK2 inhibitors,Reaction,Immune System
+R-HSA-9678935,"IFNAR2:JAK1:STAT2 binds JAK1,2 inhibitors",Reaction,Immune System
+R-HSA-9678561,"IFNGR1:JAK1:INFGR2:JAK2 binds JAK1,2 inhibitors",Reaction,Immune System
+R-HSA-9645134,p-STAT5 dissociates from activator:STAT5 complex,Reaction,Immune System
+R-HSA-9645137,Activator phosphorylates STAT5,Reaction,Immune System
+R-HSA-9645126,Activators bind STAT5,Reaction,Immune System
+R-HSA-9698170,Active FLT3:GRB2:p-GAB2:PIK3R1 binds PIK3CA,Reaction,Immune System
+R-HSA-9706308,Active FLT3 binds to GRB10,Reaction,Immune System
+R-HSA-9706336,Active FLT3 binds to SYK,Reaction,Immune System
+R-HSA-9609274,Active FLT3 binds HCK,BlackBoxEvent,Immune System
+R-HSA-9605259,Active FLT3 binds FYN,Reaction,Immune System
+R-HSA-9706312,Active FLT3 binds to LCK,Reaction,Immune System
+R-HSA-9706304,Active FLT3 binds to GRAP2,Reaction,Immune System
+R-HSA-9706293,Active FLT3 binds to CBL,Reaction,Immune System
+R-HSA-9706354,Ubiquitination of FLT3,BlackBoxEvent,Immune System
+R-HSA-9706350,FLT3 phosphorylates CBL,Reaction,Immune System
+R-HSA-9706323,Active FLT3 binds to SLA2,Reaction,Immune System
+R-HSA-9706364,Internalization of ubiquitinated FLT3,BlackBoxEvent,Immune System
+R-HSA-9698408,PTPRJ dephosphorylates active FLT3,Reaction,Immune System
+R-HSA-9706319,Active FLT3 binds to SLA,Reaction,Immune System
+R-HSA-9706287,Active FLT3 binds to ABL2,Reaction,Immune System
+R-HSA-9706328,Active FLT3 binds to SOCS2,Reaction,Immune System
+R-HSA-9706330,Active FLT3 binds to SOCS6,Reaction,Immune System
+R-HSA-9706298,Active FLT3 binds to CSK,Reaction,Immune System
+R-HSA-9706315,Active FLT3 binds to SH2B3,Reaction,Immune System
+R-HSA-9699574,FOXO3-dependent BCL2L11 gene expression,BlackBoxEvent,Immune System
+R-HSA-9699575,FOXO3-dependent CDKN1B gene expression,BlackBoxEvent,Immune System
+R-HSA-9699581,AKT-phosphorylated FOXO3 translocates to cytosol,BlackBoxEvent,Immune System
+R-HSA-9699579,AKT phosphorylates FOXO3 downstream of FLT3 ,Reaction,Immune System
+R-HSA-9699578,Active FLT3 phosphorylates CDKN1B,Reaction,Immune System
+R-HSA-9706340,Active FLT3:p-Y-GRB10 binds PIK3R1,Reaction,Immune System
+R-HSA-9706344,FLT3 phosphorylates GRB10,Reaction,Immune System
+R-HSA-9706345,Active FLT3:p-Y GRB10:PIK3R1 binds PIK3CA,Reaction,Immune System
+R-HSA-354173,Activation of Rap1 by cytosolic GEFs,Reaction,Immune System
+R-HSA-939265,Activation of Rap1 by membrane-associated GEFs,Reaction,Immune System
+R-HSA-392834,Activation of EPACs by cAMP,Reaction,Immune System
+R-HSA-1678841,Regulation of protein ISGylation by ISG15 deconjugating enzyme USP18,BlackBoxEvent,Immune System
+R-HSA-1678843,ISGylation of protein translation regulator 4EHP,Reaction,Immune System
+R-HSA-1169395,ISGylation of viral protein NS1,Reaction,Immune System
+R-HSA-1169403,Interaction of E3 ligase with ISG15:E2 complex,Reaction,Immune System
+R-HSA-1169404,Transfer of ISG15 from E1 to E2 (UBCH8),Reaction,Immune System
+R-HSA-1169397,Activation of ISG15 by UBA7 E1 ligase,Reaction,Immune System
+R-HSA-1678842,Competitive inhibition of translation initiation by ISGylated 4EHP,Reaction,Immune System
+R-HSA-1169394,ISGylation of IRF3,Reaction,Immune System
+R-HSA-1169399,Interaction of ISG15 with NEDD4 and inhibition of Ebola virus budding,Reaction,Immune System
+R-HSA-1169398,ISGylation of host protein filamin B,Reaction,Immune System
+R-HSA-1169307,Monoubiquitination of N-myristoyl GAG (P12493) protein,BlackBoxEvent,Immune System
+R-HSA-1169402,ISGylation of E2 conjugating enzymes,Reaction,Immune System
+R-HSA-1169405,ISGylation of protein phosphatase 1 beta (PP2CB),Reaction,Immune System
+R-HSA-1169406,ISGylation of host proteins,Reaction,Immune System
+R-HSA-8985097,OAS2 dimerizes,Reaction,Immune System
+R-HSA-8985138,OAS2 binds viral dsRNA,Reaction,Immune System
+R-HSA-8983688,OAS1 oligomerizes,Reaction,Immune System
+R-HSA-8983671,OAS1 binds viral dsRNA,Reaction,Immune System
+R-HSA-8985153,OASL binds DDX58,Reaction,Immune System
+R-HSA-8983680,OAS1 produces oligoadenylates,Polymerisation,Immune System
+R-HSA-8985091,OAS3 produces oligoadenylates,Reaction,Immune System
+R-HSA-8985157,OAS3 binds viral dsRNA,Reaction,Immune System
+R-HSA-8985123,RNASEL binds 2'-5' oligoadenylate,Reaction,Immune System
+R-HSA-8985104,OAS2 produces oligoadenylates,Polymerisation,Immune System
+R-HSA-9009950,PDE12 cleaves 2'-5' oligoadenylates ,Depolymerisation,Immune System
+R-HSA-8985201,ABCE1 binds RNASEL,Reaction,Immune System
+R-HSA-9009936,RNASEL cleaves cellular ssRNA,BlackBoxEvent,Immune System
+R-HSA-9009941,RNASEL cleaves viral ssRNA,BlackBoxEvent,Immune System
+R-HSA-5223305,"ABCE1 binds RNASEL, inhibiting it",Reaction,Immune System
+R-HSA-913529,Translocation of p-STAT1:p-STAT1 dimer to nucleus,Reaction,Immune System
+R-HSA-912685,UBP43 binds IFNAR2 and prevents JAK1 interaction,Reaction,Immune System
+R-HSA-997311,Dephosphorylation of TYK2 by PTP1B,Reaction,Immune System
+R-HSA-997309,Dephosphorylation of STAT1 by SHP2,Reaction,Immune System
+R-HSA-912680,Inhibition of JAK kinase activity by SOCS1/3,Reaction,Immune System
+R-HSA-997314,Dephosphorylation of JAK1 by SHP1,Reaction,Immune System
+R-HSA-873924,Phosphorylation of IFNGR1 by JAK kinases,Reaction,Immune System
+R-HSA-873918,Transphosphorylation of JAK1,Reaction,Immune System
+R-HSA-873919,Phosphorylation of JAK2,Reaction,Immune System
+R-HSA-873926,IFNG dimer binds IFNGR,Reaction,Immune System
+R-HSA-873927,Release of STAT1 dimer from active receptor unit,Reaction,Immune System
+R-HSA-909552,Phosphorylation of STAT1 at Ser727,Reaction,Immune System
+R-HSA-873922,Phosphorylation of STAT1 by JAK kinases,Reaction,Immune System
+R-HSA-873921,Binding of STAT1 to p-IFNGR1,Reaction,Immune System
+R-HSA-1031716,Expression of IFNG-stimulated genes,BlackBoxEvent,Immune System
+R-HSA-1031713,GAF binds the GAS promoter elements in the IFNG-regulated genes,Reaction,Immune System
+R-HSA-873917,Translocation of STAT1 dimer to nucleus,BlackBoxEvent,Immune System
+R-HSA-877308,Dephosphorylation of JAKs by PTPs,Reaction,Immune System
+R-HSA-997326,Dephosphorylation of p-STAT1 dimer by nuclear isoform of TCPTP,Reaction,Immune System
+R-HSA-877269,SOCS-1 and SOCS-3 binds to p-JAK2,Reaction,Immune System
+R-HSA-877281,PIAS1 binds p-STAT1 dimer,Reaction,Immune System
+R-HSA-9674546,CSF3 dimer:2xCSF3R:LYN:JAK1 induces phosphorylation of JAK1,BlackBoxEvent,Immune System
+R-HSA-9677585,CSF3 dimer:CSFR:LYN:JAK1 binds CSFR:LYN:JAK1,Reaction,Immune System
+R-HSA-9677579,CSF3 dimer (GCSF dimer) binds CSF3R:JAK1:LYN,Reaction,Immune System
+R-HSA-9705461,"p-Y-STAT1,3,5 dimer binds SOCS1 gene",Reaction,Immune System
+R-HSA-9674550,"p-Y-STAT1,3,5 dimer translocates from the cytosol to the nucleoplasm",BlackBoxEvent,Immune System
+R-HSA-9674542,"p-Y-STAT1,3,5 dimerize",Reaction,Immune System
+R-HSA-9674563,"CSF3 dimer:2xp-4Y-CSF3R:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2:p-Y-STAT1,3,5 dissociates yielding CSF3 dimer:2xp-4Y-CSF3R:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2 and p-Y-STAT1,3,5",Reaction,Immune System
+R-HSA-9674567,"p-Y-JAK1,2 phosphorylates STAT1,3,5 in CSF3 dimer:2xp-4Y-CSF3R:LYN:p-Y-JAK1:p-Y-JAK2:p-TYK2",Reaction,Immune System
+R-HSA-9674562,"CSF3 dimer:2xp-4Y-CSF3R:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2 binds STAT1,3,5",Reaction,Immune System
+R-HSA-9676071,"CSF3 dimer:2xp-4Y-CSF3R:LYN:p-Y-JAK1 binds and activates JAK2, TYK2, SYK, and HCK",BlackBoxEvent,Immune System
+R-HSA-9674558,p-Y-JAK1 phosphorylates CSF3R in CSF3 dimer:2xCSF3R:LYN:p-Y-JAK1,Reaction,Immune System
+R-HSA-9705729,"SOCS1,3:p-4Y-CSF3R:CSF3 dimer:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2 binds CUL5, ELOB, ELOC, RNF7",Reaction,Immune System
+R-HSA-9705726,"SOCS1,3:p-4Y-CSF3R:CSF3 dimer:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2 is endocytosed",BlackBoxEvent,Immune System
+R-HSA-9705467,"SOCS1,3 binds p-4Y-CSF3R:CSF3 dimer:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2",Reaction,Immune System
+R-HSA-9705458,"p-Y-STAT1,3,5 dimer enhances expression of SOCS3",BlackBoxEvent,Immune System
+R-HSA-9705465,"p-Y-STAT1,3,5 dimer binds SOCS3 gene",Reaction,Immune System
+R-HSA-9705466,"p-Y-STAT1,3,5 dimer enhances expression of SOCS1",BlackBoxEvent,Immune System
+R-HSA-9707977,"CSF3 dimer:2xK48polyUb-K655,p-4Y-CSF3R:LYN:p-Y-JAK1:p-JAK2:p-Y-SYK:p-HCK:p-TYK2 translocates from the endocytic vesicle membrane to the lysosomal membrane",BlackBoxEvent,Immune System
+R-HSA-9705738,"SOCS1,3 ubiquitinates CSF3R in SOCS1,3:p-4Y-CSF3R:CSF3 dimer:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2:CUL5:ELOB:ELOC:RNF7",BlackBoxEvent,Immune System
+R-HSA-9674808,"CSF3 dimer:2xp-4Y-CSF3R:LYN:p-Y-JAK1:p-JAK2:p-TYK2 binds and phosphorylates SHC1, GRB2, GAB2, and PTPN11 (SHP2)",BlackBoxEvent,Immune System
+R-HSA-9674816,"p-Y546,Y584-PTPN11 (in CSF3 dimer:2xp-4Y-CSF3R:LYN:p-Y-JAK1:p-JAK2:p-SYK:p-HCK:p-TYK2:SHC:GRB2:PTPN11) dephosphorylates KRAS",Reaction,Immune System
+R-HSA-1168789,GHR internalization,BlackBoxEvent,Immune System
+R-HSA-1168768,JAK2 binds STAT1/3,Reaction,Immune System
+R-HSA-1168839,SHP1 (PTPN6) binds JAK2 in the receptor complex,Reaction,Immune System
+R-HSA-982807,JAK2 phosphorylation of GHR,Reaction,Immune System
+R-HSA-1168393,STAT5 association with GHR,Reaction,Immune System
+R-HSA-1168777,Metalloprotease cleavage of GHR,Reaction,Immune System
+R-HSA-1168456,Growth hormone receptor binds Lyn,Reaction,Immune System
+R-HSA-1168459,Lyn activates ERK,BlackBoxEvent,Immune System
+R-HSA-1168394,STAT5 tyrosine phosphorylation,Reaction,Immune System
+R-HSA-1362485,GHBP binds GH,Reaction,Immune System
+R-HSA-982765,Growth hormone forms dimers and oligomers,Polymerisation,Immune System
+R-HSA-1169210,PTP1B dephosphorylates JAK2,Reaction,Immune System
+R-HSA-1168445,PTP1B binds the GH receptor complex,Reaction,Immune System
+R-HSA-1168767,JAK2 phosphorylates STAT1/STAT3,Reaction,Immune System
+R-HSA-1168894,p-STAT5A/B dissociates from the Growth Hormone receptor,Reaction,Immune System
+R-HSA-1169188,SHP1 (PTPN6) dephosphorylates JAK2,Reaction,Immune System
+R-HSA-1362465,GHBP binds GHR,Reaction,Immune System
+R-HSA-1168423,JAK2 phosphorylation of IRS-1/2,Reaction,Immune System
+R-HSA-1168809,SOCS binding to GHR,Reaction,Immune System
+R-HSA-1169192,PTP1B dephosphorylates GHR,Reaction,Immune System
+R-HSA-1168813,SOCS binding to JAK2,Reaction,Immune System
+R-HSA-5668534,"cIAP1,2 ubiquitinates NIK in cIAP1,2:TRAF2::TRAF3:NIK",BlackBoxEvent,Immune System
+R-HSA-5668543,TRAF3:NIK binds TRAF2:cIAP1/2,Reaction,Immune System
+R-HSA-5676598,TRAF2:cIAP1/2 complex binds FN14:TWEAK,Reaction,Immune System
+R-HSA-5669023,TWEAK binds FN14,Reaction,Immune System
+R-HSA-5676599,sBAFF trimer binds BAFFR,Reaction,Immune System
+R-HSA-5676596,TRAF3 binds BAFFR:BAFF,Reaction,Immune System
+R-HSA-5668789,"LA,TNFSF14 binds LTBR",Reaction,Immune System
+R-HSA-5676597,"TRAF2:TRAF1:cIAP1,2:TRAF3:NIK regulatory complex binds CD40",Reaction,Immune System
+R-HSA-199404,CD40L binds CD40,Reaction,Immune System
+R-HSA-5676595,TRAFs bind RANK:RANKL,Reaction,Immune System
+R-HSA-5676592,"2xRANK binds RANKL,sRANKL trimer:RANK",Reaction,Immune System
+R-HSA-5676589,"RANKL,sRANKL trimer binds RANK",Reaction,Immune System
+R-HSA-5676593,"TRAF2:TRAF1:cIAP1,2:TRAF3:NIK regulatory complex binds LTBR",Reaction,Immune System
+R-HSA-5676591,"2xLTBR binds LTBR:lymphotoxin,TNFSF14 trimer",Reaction,Immune System
+R-HSA-5668545,NIK autophosphorylates on T559,Reaction,Immune System
+R-HSA-5669012,EDA binds EDAR,Reaction,Immune System
+R-HSA-5693012,TNFSF15 binds TNFRSF25,Reaction,Immune System
+R-HSA-5669013,EDA-3 binds EDA2R,Reaction,Immune System
+R-HSA-5676607,"sBAFF,sAPRIL binds TACI,BCMA",Reaction,Immune System
+R-HSA-8858475,TNFSF9 binds TNFRSF9,Reaction,Immune System
+R-HSA-5692315,OX40L binds OX40,Reaction,Immune System
+R-HSA-5669024,CD70 binds CD27,Reaction,Immune System
+R-HSA-5675948,"TNFRSF6B binds TNFSF6,14,15",Reaction,Immune System
+R-HSA-8856189,TNFSF8 binds TNFRSF8,Reaction,Immune System
+R-HSA-5669035,"TNFSF11 binds TNFRSF11A, B",Reaction,Immune System
+R-HSA-5675947,TNFSF18 binds TNFRSF18,Reaction,Immune System
+R-HSA-5675656,EDA:EDAR binds EDARADD,Reaction,Immune System
+R-HSA-5669097,"LTA trimer binds TNFRSF1A,1B,14",Reaction,Immune System
+R-HSA-5668520,26Sproteasome degrades K48polyUb-NIK,BlackBoxEvent,Immune System
+R-HSA-6784006,"STAT3 is phosphorylated by p-Y-JAK1,P-Y-TYK2",Reaction,Immune System
+R-HSA-6784323,IL10 dimer:2xp-Y-IL10RA:p-Y-JAK1:2xIL10RB:p-Y-TYK2 binds STAT3,Reaction,Immune System
+R-HSA-6784324,"p-Y-JAK1,p-Y-TYK2 phosphorylate IL10RA",BlackBoxEvent,Immune System
+R-HSA-6784319,"JAK1,TYK2 phosphorylate JAK1,TYK2",BlackBoxEvent,Immune System
+R-HSA-449811,IL10 dimer:2xIL10RA1:JAK1 binds IL10RB:TYK2,Reaction,Immune System
+R-HSA-449803,IL10 dimer binds IL10RA:JAK1,Reaction,Immune System
+R-HSA-449855,IL10 dimerizes,Reaction,Immune System
+R-HSA-6784160,IL10 negatively regulates extracellular inflammatory mediators,BlackBoxEvent,Immune System
+R-HSA-6784763,p-Y705-STAT3 dimer translocates from cytosol to nucleoplasm,BlackBoxEvent,Immune System
+R-HSA-6784765,p-Y705-STAT3 dimerizes,BlackBoxEvent,Immune System
+R-HSA-6784791,p-Y705-STAT3 dissociates from IL10 dimer:2xp-Y-IL10RA:p-Y-JAK1:2xIL10RB:p-Y-TYK2:p-Y705-STAT3,Reaction,Immune System
+R-HSA-8982162,pâ€‘Y705-STAT3 dissociates from IL19:IL20RA:p-JAK1:IL20RB,BlackBoxEvent,Immune System
+R-HSA-8982163,IL19:IL20RA:p-JAK1:IL20RB:STAT3 phosphorylates STAT3,Reaction,Immune System
+R-HSA-8982165,IL19:IL20RA:pâ€‘JAK1:IL20RB binds STAT3,BlackBoxEvent,Immune System
+R-HSA-8987084,IL19:IL20RA:JAK1:IL20RB phosphorylates JAK1,BlackBoxEvent,Immune System
+R-HSA-448728,IL19 binds IL20RA:JAK1:IL20RB,BlackBoxEvent,Immune System
+R-HSA-448744,IL20RA binds IL20RB,BlackBoxEvent,Immune System
+R-HSA-8987039,JAK1 binds IL20RA,BlackBoxEvent,Immune System
+R-HSA-8987236,"p-Y705-STAT3 dissociates from  IL22:p-Y251,p-Y301-IL22RA1:p-JAK1:IL10RB:p-TYK2:p-Y705-STAT3",BlackBoxEvent,Immune System
+R-HSA-8987070,"IL22:p-Y251,p-Y301-IL22RA1:p-JAK1:IL10RB:p-TYK2:STAT3 phosphorylates STAT3",Reaction,Immune System
+R-HSA-8987014,"IL22:p-Y251,p-Y301-IL22RA1:p-JAK1:PTPN11:IL10RB:p-TYK2 binds STAT3",BlackBoxEvent,Immune System
+R-HSA-8987132,"IL22:pâ€‘Y251,pâ€‘Y301â€‘IL22RA1:pâ€‘JAK1:PTPN11:IL10RB:pâ€‘TYK2 binds PTPN11",Reaction,Immune System
+R-HSA-8986995,IL22:IL22RA1:p-JAK1:IL10RB:p-TYK2 phosphorylates IL22RA,BlackBoxEvent,Immune System
+R-HSA-8987042,"IL22:IL22RA1:JAK1:IL10RB:TYK2 phosphorylates JAK1,TYK2",BlackBoxEvent,Immune System
+R-HSA-8854645,IL22:IL22RA1:JAK1 binds IL10RB:TYK2,Reaction,Immune System
+R-HSA-448480,IL22 binds IL22RA1:JAK1 receptor complex,Reaction,Immune System
+R-HSA-448741,IL22RA2 binds IL22,Reaction,Immune System
+R-HSA-8987043,IL22RA1 binds JAK1,Reaction,Immune System
+R-HSA-6790029,Expression of PTGS2,BlackBoxEvent,Immune System
+R-HSA-8937656,IL10 negatively regulates plasma membrane-associated inflammatory mediators,BlackBoxEvent,Immune System
+R-HSA-6785047,IL10 positively regulates extracellular inflammatory mediators,BlackBoxEvent,Immune System
+R-HSA-8937654,IL10 positively regulates plasma membrane-associated inflammatory mediators,BlackBoxEvent,Immune System
+R-HSA-1295516,IL7:p-Y449-IL7R:JAK1:IL2RG:JAK3 binds PI3K regulatory subunits,Reaction,Immune System
+R-HSA-8983003,"IL7:p-Y449-IL7R:JAK1:IL2RG:JAK3:PI3K-regulatory subunits binds IRS1,IRS2",BlackBoxEvent,Immune System
+R-HSA-8983059,STAT3 is phosphorylated by TSLP:IL7R:CRLF2:STAT3 complex,BlackBoxEvent,Immune System
+R-HSA-8983077,STAT3 binds TSLP:IL7R:CRLF2,BlackBoxEvent,Immune System
+R-HSA-8983061,TSLP binds CRLF2:IL7R,BlackBoxEvent,Immune System
+R-HSA-8865711,RAG1:RAG2 recombinase binds immunoglobulin kappa locus in a BRWD1-dependent manner,BlackBoxEvent,Immune System
+R-HSA-8983011,Expression of STAT5 upregulated genes,BlackBoxEvent,Immune System
+R-HSA-9012671,"p-STAT5 binds CISH, SOCS1 and SOCS2 gene",BlackBoxEvent,Immune System
+R-HSA-1266684,IL7 binds HGF(495-728) to form PPBSF,Reaction,Immune System
+R-HSA-8983078,p-STAT3 dissociates from TSLP:IL7R:CRLF2:p-STAT3 complex,BlackBoxEvent,Immune System
+R-HSA-8987150,"IL24:IL20RA:p-JAK1:IL20RB:STAT1,STAT3 phosphorylates STAT1 or STAT3",BlackBoxEvent,Immune System
+R-HSA-8987097,"IL24:p-IL20RA:p-JAK1:IL20RB binds STAT1,STAT3",BlackBoxEvent,Immune System
+R-HSA-8987129,JAK1 in IL24:IL20RA:JAK1:IL20RB is phosphorylated,Reaction,Immune System
+R-HSA-8986972,IL24 binds IL20RA:JAK1:IL20RB,BlackBoxEvent,Immune System
+R-HSA-8987266,"IFNL1:p-Y434,Y517-IFNLR1:p-JAK1:IL10RB:p-TYK2 binds STAT1, STAT2, STAT3, STAT4, STAT5",BlackBoxEvent,Immune System
+R-HSA-8987040,IFNL1:IFNLR1:p-JAK1:IL10RB:p-TYK2 phosphorylates IFNLR1,Reaction,Immune System
+R-HSA-8987202,"IFNL1:IFNLR1:JAK1:IL10RB:TYK2 phosphorylates JAK1,TYK2",BlackBoxEvent,Immune System
+R-HSA-8987141,"IL20:IL20RA:JAK1:IL20RB:p-JAK3,p-JAK2:STAT3 phosphorylates STAT3",Reaction,Immune System
+R-HSA-8987104,"IL20:IL20RA:JAK1:IL20RB:pâ€‘JAK2,pâ€‘JAK3 binds STAT3",BlackBoxEvent,Immune System
+R-HSA-8987179,"IL20:IL20RA:JAK1:IL20RB:JAK2,JAK3 phosphorylates JAK2,JAK3",BlackBoxEvent,Immune System
+R-HSA-8987220,"IL20:IL20RA:JAK1:IL20RB binds JAK2,JAK3",BlackBoxEvent,Immune System
+R-HSA-8987015,IL20 binds IL20RA:JAK1:IL20RB,BlackBoxEvent,Immune System
+R-HSA-8987012,IL24:IL22RA1:JAK1:IL20RB phosphorylates JAK1,BlackBoxEvent,Immune System
+R-HSA-448708,IL24 binds to IL22RA1:JAK1:IL20RB,BlackBoxEvent,Immune System
+R-HSA-8987270,"p-STAT1,p-STAT3 dissociate from IL24:IL20RA:p-Y1022,Y1023-JAK1:IL20RB:p-STAT1, p-STAT3",BlackBoxEvent,Immune System
+R-HSA-8987161,p-STAT3 dissociates from IL24:IL22RA1:pâ€‘JAK1:IL20RB:pâ€‘STAT3,BlackBoxEvent,Immune System
+R-HSA-8987096,IL24:IL22RA1:p-JAK1:IL20RB:STAT3 phosphorylates STAT3,BlackBoxEvent,Immune System
+R-HSA-8987063,IL24:IL22RA1:p-JAK1:IL20RB binds STAT3,BlackBoxEvent,Immune System
+R-HSA-8987033,"p-STAT1, p-Y-STAT2, p-STAT3, p-STAT4, p-STAT5 dissociates from IFNL1:p-Y343,Y517-IFNLR1:p-JAK1:IL10RB:p-TYK2:p-STAT1,p-STAT2,p-STAT3,p-STAT4,p-STAT5",BlackBoxEvent,Immune System
+R-HSA-8986985,"IFNL1:p-Y343,Y517-IFNLR1:p-JAK1:IL10RB:p-TYK2:STAT1 phosphorylates STAT1, STAT2, STAT3, STAT4 and STAT5",BlackBoxEvent,Immune System
+R-HSA-9005340,Expression of SOCS3,BlackBoxEvent,Immune System
+R-HSA-8987052,p-STAT3 dimer translocates from cytosol to nucleoplasm,BlackBoxEvent,Immune System
+R-HSA-8987214,p-STAT3 dimerizes,BlackBoxEvent,Immune System
+R-HSA-8987230,p-STAT1 and p-STAT3 dissociates from IL26:IL10RB:p-TYK2:IL20RA:p-JAK1,BlackBoxEvent,Immune System
+R-HSA-8987255,"IL26:IL10RB:p-TYK2:IL20RA:p-JAK1:STAT1,STAT3  phosphorylates STAT1,STAT3",BlackBoxEvent,Immune System
+R-HSA-8987080,"IL26:IL10RB:p-TYK2:IL20RA:p-JAK1 binds STAT1, STAT3",BlackBoxEvent,Immune System
+R-HSA-8986994,"IL26:IL20RA:JAK1:IL10RB:TYK2 phosphorylates JAK1, TYK2",BlackBoxEvent,Immune System
+R-HSA-8986480,IL26:IL20RA:JAK1 binds IL10RB:TYK2,Reaction,Immune System
+R-HSA-8986446,IL26 binds IL20RA:JAK1,BlackBoxEvent,Immune System
+R-HSA-8987156,"p-STAT3 dissociates from IL20:IL20RA:JAK1:IL20RB:p-Y1007,Y1008-JAK2,p-JAK3",BlackBoxEvent,Immune System
+R-HSA-9009227,IL20 binds to IL22RA1:JAK1:IL20RB,BlackBoxEvent,Immune System
+R-HSA-8987218,p-STAT1 dimer translocates from the cytosol to the nucleoplasm,BlackBoxEvent,Immune System
+R-HSA-8987007,p-STAT1 dimerizes,BlackBoxEvent,Immune System
+R-HSA-8987105,"IFNL2,IFNL3 bind IL10RB:TYK2 and IFNLR1:JAK1",BlackBoxEvent,Immune System
+R-HSA-6785895,"Expression of IL4, IL13-upregulated extracellular proteins",BlackBoxEvent,Immune System
+R-HSA-6793958,Expression of STAT6-upregulated plasma membrane proteins,BlackBoxEvent,Immune System
+R-HSA-6788582,"STAT1,STAT3,STAT6 phosphorylation",Reaction,Immune System
+R-HSA-6788571,"STAT1,STAT3,STAT6 bind IL13:IL13R type II",Reaction,Immune System
+R-HSA-6786050,"IL4R, IL13RA, JAK2 and TYK2 are tyrosine phosphorylated",BlackBoxEvent,Immune System
+R-HSA-6786110,JAK1 binds IL4R in IL13-bound IL13R type II,BlackBoxEvent,Immune System
+R-HSA-6786114,IL13:IL13RA:TYK2 binds IL4R:JAK2,Reaction,Immune System
+R-HSA-6786118,IL13 binds IL13RA:TYK2,Reaction,Immune System
+R-HSA-6785762,IL13RA1 binds TYK2,Reaction,Immune System
+R-HSA-6789615,Expression of STAT3-upregulated extracellular proteins,BlackBoxEvent,Immune System
+R-HSA-6793975,Expression of GATA3,BlackBoxEvent,Immune System
+R-HSA-6797245,Expression of FASLG,BlackBoxEvent,Immune System
+R-HSA-449818,IL13 binds IL13RA2,Reaction,Immune System
+R-HSA-6793978,Expression of STAT6-upregulated extracellular proteins,BlackBoxEvent,Immune System
+R-HSA-6788346,Expression of IL13-upregulated plasma membrane proteins,BlackBoxEvent,Immune System
+R-HSA-6788623,p-Y-STATs translocate to nucleus,BlackBoxEvent,Immune System
+R-HSA-6788622,p-Y-STATs dimerize,BlackBoxEvent,Immune System
+R-HSA-6788628,p-Y-STATs dissociate,BlackBoxEvent,Immune System
+R-HSA-6790022,Expression of STAT3-upregulated plasma membrane proteins,BlackBoxEvent,Immune System
+R-HSA-6785860,Expression of SOCS1,BlackBoxEvent,Immune System
+R-HSA-6789325,Expression of IL13-downregulated extracellular proteins,BlackBoxEvent,Immune System
+R-HSA-6789960,"Expression of NDN,TP53",BlackBoxEvent,Immune System
+R-HSA-6797271,Expression of MAOA,BlackBoxEvent,Immune System
+R-HSA-6786070,IL4:IL4R:JAK2 binds IL13RA1:TYK2,Reaction,Immune System
+R-HSA-6790038,Expression of HSP90B1,BlackBoxEvent,Immune System
+R-HSA-6797269,"Expression of HSPA8, ALOX15",BlackBoxEvent,Immune System
+R-HSA-6790036,Expression of STAT3-upregulated nuclear proteins,BlackBoxEvent,Immune System
+R-HSA-6797268,Expression of HMOX1,BlackBoxEvent,Immune System
+R-HSA-6789524,"Expression of IL4,IL13-downregulated extracellular genes",BlackBoxEvent,Immune System
+R-HSA-6797267,Expression of CD36,BlackBoxEvent,Immune System
+R-HSA-6785821,"SOCS5,(SOCS1) bind IL4RA",Reaction,Immune System
+R-HSA-6790041,Expression of STAT3-upregulated cytosolic proteins,BlackBoxEvent,Immune System
+R-HSA-8950504,IL27 binds CRLF1,BlackBoxEvent,Immune System
+R-HSA-8950537,"JAK1, JAK2, TYK2 in IL27:EBI3:IL27RA:JAK1:IL6ST:(JAK1,JAK2,TYK2) are phosphorylated",BlackBoxEvent,Immune System
+R-HSA-8950441,p-Y701-STAT1 and p-Y705-STAT3 dissociate from IL27:IL27 receptor,BlackBoxEvent,Immune System
+R-HSA-448421,Interleukin-27 translocates from the ER lumen to the extracellular region,BlackBoxEvent,Immune System
+R-HSA-8950731,CRLF1:IL27 translocates to the extracellular region,BlackBoxEvent,Immune System
+R-HSA-8950733,p-Y701-STAT1:p-Y705-STAT3 translocates to the nucleus,BlackBoxEvent,Immune System
+R-HSA-8950766,IL27RA dimerizes,Reaction,Immune System
+R-HSA-8950210,Interleukin-27 dissociates from Interleukin-27 receptor,Reaction,Immune System
+R-HSA-8950340,IL27RA and IL6ST are phosphorylated after IL27:IL27 receptor interaction and JAK's phosphorylation,BlackBoxEvent,Immune System
+R-HSA-448427,Interleukin-27 binds Interleukin-27 receptor,Reaction,Immune System
+R-HSA-8950342,EBI3:CANX binds IL27,BlackBoxEvent,Immune System
+R-HSA-8950716,IL27RA binds JAK1,Reaction,Immune System
+R-HSA-8950398,CANX dissociates from IL27:EBI3,BlackBoxEvent,Immune System
+R-HSA-8950782,p-STAT1 binds p-STAT3,Reaction,Immune System
+R-HSA-8950271,sIL27RA translocates from the cytoplasm to the extracellular region,BlackBoxEvent,Immune System
+R-HSA-8950674,IL27 translocates from the cytosol to the extracellular space,BlackBoxEvent,Immune System
+R-HSA-8950387,CANX binds EBI3,Reaction,Immune System
+R-HSA-8950485,STAT3 and STAT1 are phosphorylated by JAKs after IL27:IL27R interaction,BlackBoxEvent,Immune System
+R-HSA-8950518,"STAT1, STAT3 bind p-Y611-IL27RA from Interleukin-27:Interleukin-27 receptor complex",BlackBoxEvent,Immune System
+R-HSA-8950057,IL12RB1 binds TYK2,Reaction,Immune System
+R-HSA-8950344,Expression of BolA-like protein 2,BlackBoxEvent,Immune System
+R-HSA-8950181,Y693-STAT4 dimer translocates to the nucleus,BlackBoxEvent,Immune System
+R-HSA-8950218,Expression of Moesin,BlackBoxEvent,Immune System
+R-HSA-8950732,Expression of Macrophage migration inhibitory factor,BlackBoxEvent,Immune System
+R-HSA-8950415,Expression of heterogeneous nuclear ribonucleoprotein F,BlackBoxEvent,Immune System
+R-HSA-8950721,Expression of Programmed cell death protein 4,BlackBoxEvent,Immune System
+R-HSA-8950213,Expression of Phosphatidylinositol transfer protein alpha isoform,BlackBoxEvent,Immune System
+R-HSA-8950533,Expression of Ras-related protein Ral-A,BlackBoxEvent,Immune System
+R-HSA-8950681,Expression of Lamin-B1,BlackBoxEvent,Immune System
+R-HSA-8950426,Expression of lymphocyte cytosolic protein 1,BlackBoxEvent,Immune System
+R-HSA-8950684,Expression of Heterogeneous nuclear ribonucleoprotein D-like,BlackBoxEvent,Immune System
+R-HSA-8950173,Expression of ADP-ribosylation factor 1,BlackBoxEvent,Immune System
+R-HSA-8950365,Expression of S-methyl-5'-thioadenosine phosphorylase,BlackBoxEvent,Immune System
+R-HSA-9006431,Expression of IFNG gene,BlackBoxEvent,Immune System
+R-HSA-8950623,Expression of Carbonic anhydrase 1,BlackBoxEvent,Immune System
+R-HSA-8950175,Expression of Glutathione S-transferase omega-1,BlackBoxEvent,Immune System
+R-HSA-8950367,Expression of transaldolase 1,BlackBoxEvent,Immune System
+R-HSA-8950608,Expression U2 small nuclear ribonucleoprotein A',BlackBoxEvent,Immune System
+R-HSA-8950480,Expression of annexin A2,BlackBoxEvent,Immune System
+R-HSA-8981073,Expression of Interleukin-10,BlackBoxEvent,Immune System
+R-HSA-8950225,Expression of Ras-related protein Rap-1b,BlackBoxEvent,Immune System
+R-HSA-8950292,Expression of Heterogeneous nuclear ribonucleoproteins A2/B1,BlackBoxEvent,Immune System
+R-HSA-8950634,Expression of capping actin protein of muscle Z-line alpha subunit 1,BlackBoxEvent,Immune System
+R-HSA-8950314,Expression of calponin-2,BlackBoxEvent,Immune System
+R-HSA-8950637,Expression of cell division cycle 42,BlackBoxEvent,Immune System
+R-HSA-8950190,Expression of PAK2,BlackBoxEvent,Immune System
+R-HSA-8950567,Expression of Plasminogen activator inhibitor 2,BlackBoxEvent,Immune System
+R-HSA-8950328,Expression of Peptidyl-prolyl cis-trans isomerase A,BlackBoxEvent,Immune System
+R-HSA-8950201,Expression of Aryl Hydrocarbon receptor-interacting protein,BlackBoxEvent,Immune System
+R-HSA-8950586,Expression of glutathione S-transferase alpha 2,BlackBoxEvent,Immune System
+R-HSA-8950718,Expression of TCP1,BlackBoxEvent,Immune System
+R-HSA-8950322,Expression of ribosomal protein lateral stalk subunit P0,BlackBoxEvent,Immune System
+R-HSA-8950771,Expression of SOD1,BlackBoxEvent,Immune System
+R-HSA-8950260,Expression of Proteasome activator complex subunit 2,BlackBoxEvent,Immune System
+R-HSA-8950581,Expression of Cofilin-1,BlackBoxEvent,Immune System
+R-HSA-8950389,"Expression of Stress-70 protein, mitochondrial",BlackBoxEvent,Immune System
+R-HSA-8950410,IL12B:IL12B translocates from ER lumen to the extracellular region,BlackBoxEvent,Immune System
+R-HSA-8950347,IL12A:IL12B translocates from late endosome lumen to extracellular region,Reaction,Immune System
+R-HSA-8950575,IL12A:IL12B translocates from ER lumen to Golgi,BlackBoxEvent,Immune System
+R-HSA-8950063,IL12RB2 binds JAK2,Reaction,Immune System
+R-HSA-8950752,IL12A:IL12B translocates from Golgi lumen to late endosome lumen,Reaction,Immune System
+R-HSA-8950113,IL12A binds IL12B,BlackBoxEvent,Immune System
+R-HSA-8950179,IL12B translocates from the cytosol to the extracellular region,BlackBoxEvent,Immune System
+R-HSA-8981093,IL12 bound to IL12R internalises,BlackBoxEvent,Immune System
+R-HSA-8950757,IL12RB2 in IL12A:IL12RB1:p-Y-TYK2:IL12B:IL12RB2:p-JAK2 is phosphorylated,BlackBoxEvent,Immune System
+R-HSA-8952807,p-Y693-STAT4 dissociates after IL12:IL12R interaction,BlackBoxEvent,Immune System
+R-HSA-8950456,IL12B dimerizes,Reaction,Immune System
+R-HSA-447252,IL12RB1:TYK2 binds IL12RB2:JAK2,Reaction,Immune System
+R-HSA-8950778,p-Y693-STAT4 dimerizes,Reaction,Immune System
+R-HSA-8950128,Interleukin-12 dissociates from Interleukin-12 receptor,Reaction,Immune System
+R-HSA-8950448,STAT4 binds to IL12RB2 in Interleukin-12 receptor complex,Reaction,Immune System
+R-HSA-8950354,STAT4 is phosphorylated by p-JAK2 and/or p-Y-TYK2 after IL12:IL12R interaction,BlackBoxEvent,Immune System
+R-HSA-447226,Interleukin-12 binds Interleukin-12 receptor,Reaction,Immune System
+R-HSA-8950423,"JAK2, TYK2 in IL12A:IL12RB1:TYK2:IL12B:IL12RB2:JAK2 are phosphorylated",Reaction,Immune System
+R-HSA-8984012,"JAK1,JAK2 bound to IL27RA:IL12RB2 receptor are phosphorylated",BlackBoxEvent,Immune System
+R-HSA-8984001,IL35 binds IL27RA:IL12RB2 receptor,BlackBoxEvent,Immune System
+R-HSA-448627,Interleukin-35 translocates from the ER lumen to the extracellular region,BlackBoxEvent,Immune System
+R-HSA-8950740,CANX dissociates from IL12A:EBI3,BlackBoxEvent,Immune System
+R-HSA-8950362,EBI3:CANX binds IL12A,BlackBoxEvent,Immune System
+R-HSA-8984014,"JAK1,JAK2 bound to IL27RA:IL12RB2 receptor phosphorylate STAT1,STAT3",BlackBoxEvent,Immune System
+R-HSA-8984021,"STAT1,STAT3 associate with IL27RA:IL12RB2 receptor",BlackBoxEvent,Immune System
+R-HSA-8983872,JAK2 bound to IL12RB2:IL12RB2 phosphorylate STAT4,BlackBoxEvent,Immune System
+R-HSA-8983876,STAT4 binds IL12RB2:IL12RB2,BlackBoxEvent,Immune System
+R-HSA-8983870,JAK2 in IL12RB2:IL12RB2 receptor is phosphorylated,BlackBoxEvent,Immune System
+R-HSA-8983519,IL35 binds IL12RB2:IL12RB2 receptor,BlackBoxEvent,Immune System
+R-HSA-8984963,EBI3 gene transcription and translation,BlackBoxEvent,Immune System
+R-HSA-8950522,p-STAT1:p-STAT4 translocates to the nucleus,BlackBoxEvent,Immune System
+R-HSA-8983983,p-STAT1 and p-STAT4 dissociate from IL12RB2:IL6ST receptor,BlackBoxEvent,Immune System
+R-HSA-8950453,JAK1/JAK2 bound to IL12RB2:IL6ST receptor phosphorylates STAT1 and STAT4,BlackBoxEvent,Immune System
+R-HSA-8983996,STAT1 and STAT4 associate with IL12RB2:IL6ST receptor,BlackBoxEvent,Immune System
+R-HSA-8950405,JAK1/JAK2 bound to IL35:IL6ST:IL12RB2 receptor are phosphorylated,BlackBoxEvent,Immune System
+R-HSA-6809140,IL35 binds IL-12RB2:IL6ST receptor,BlackBoxEvent,Immune System
+R-HSA-8984964,IL12A gene transcription and translation,BlackBoxEvent,Immune System
+R-HSA-8983878,p-STAT4 dissociates from IL12RB2:IL12RB2 receptor,BlackBoxEvent,Immune System
+R-HSA-8983835,JAK1/JAK2/TYK2 bound to IL6ST:IL6ST phosphorylate STAT1,BlackBoxEvent,Immune System
+R-HSA-8983841,STAT1 associates with IL6ST:IL6ST,BlackBoxEvent,Immune System
+R-HSA-8983834,JAK1/JAK2/TYK2 bound to IL6ST:IL6ST are phosphorylated,BlackBoxEvent,Immune System
+R-HSA-8983518,IL35 binds IL6ST:IL6ST receptor,BlackBoxEvent,Immune System
+R-HSA-8984023,"p-STAT1, p-STAT3 dissociate from IL27RA:IL12RB2 receptor",BlackBoxEvent,Immune System
+R-HSA-8983845,p-STAT1 dissociates from IL6ST:IL6ST,BlackBoxEvent,Immune System
+R-HSA-8950364,IL23R in IL23:IL23 receptor complex is phosphorylated,Reaction,Immune System
+R-HSA-8950780,p-Y705-STAT3 binds p-Y693-STAT4,Reaction,Immune System
+R-HSA-8952749,STAT4 binds p-Y-IL23R in IL23:IL23 receptor,BlackBoxEvent,Immune System
+R-HSA-8950269,"STAT3, STAT4 are phosphorylated by p-JAK2, p-TYK2 in IL23:IL23 receptor",BlackBoxEvent,Immune System
+R-HSA-8950591,"JAK2, TYK2 in IL23A:IL12B:IL23R:JAK2:IL12RB1:TYK2 are phosphorylated",BlackBoxEvent,Immune System
+R-HSA-8950737,IL23R binds JAK2,Reaction,Immune System
+R-HSA-447130,Interleukin-23 binds interleukin-23 receptor,BlackBoxEvent,Immune System
+R-HSA-8950741,IL12B:IL23A translocates from ER lumen to extracellular space,BlackBoxEvent,Immune System
+R-HSA-8950724,p-Y705-STAT3:p-Y693-STAT4 translocates to the nucleus,BlackBoxEvent,Immune System
+R-HSA-8950183,IL12B binds IL23A,Reaction,Immune System
+R-HSA-8950583,STAT3 binds to p-Y-IL23R in IL23:IL23 receptor,BlackBoxEvent,Immune System
+R-HSA-8952823,"p-Y693-STAT4, p-Y705-STAT3 dissociate from IL23:IL23 receptor",BlackBoxEvent,Immune System
+R-HSA-447219,IL17RA and IL17RB bind IL25 dimer,BlackBoxEvent,Immune System
+R-HSA-5678544,IL17RA:IL17RE binds IL17C dimer,BlackBoxEvent,Immune System
+R-HSA-447246,"IL17RA and IL17RC bind IL17A dimer,IL17F dimer,IL17A:IL17F",BlackBoxEvent,Immune System
+R-HSA-913996,PKA/PKG phosphorylate Rap1GAP2,Reaction,Immune System
+R-HSA-913993,14-3-3 proteins beta and zeta bind and inhibit Rap1Gap2,Reaction,Immune System
+R-HSA-392513,Rap1 signal termination by Rap1GAPs,Reaction,Immune System
+R-HSA-392835,Rap1 sequesters Raf1 to inhibit ERK cascade,Reaction,Immune System
+R-HSA-199043,LILRs interact with MHC Class I,Reaction,Immune System
+R-HSA-199169,MHC Class I interacts with CD160,Reaction,Immune System
+R-HSA-8862084,"PILRA,PILRB bind CD99",Reaction,Immune System
+R-HSA-198983,NKG2D homodimer interacting with ligands,Reaction,Immune System
+R-HSA-199046,Ligands bind L-selectin,Reaction,Immune System
+R-HSA-199558,KIR2DL1 interacting with HLA-C group 2 (Cw3),Reaction,Immune System
+R-HSA-199112,CRTAM binds to NECL2,Reaction,Immune System
+R-HSA-199566,KIR3DL1 interacting with HLA Bw4,Reaction,Immune System
+R-HSA-8862090,"PILRA binds PIANP, COLLEC12 trimer, NPDC1, CLEC4G",Reaction,Immune System
+R-HSA-8850326,TCR binds self-lipid-based antigen via CD1,Reaction,Immune System
+R-HSA-199062,KLRC1:KLRD1 heterodimer interacts with HLA-E,Reaction,Immune System
+R-HSA-199131,PVR binds CD226,Reaction,Immune System
+R-HSA-199579,KIR2DL4 interacting with HLA-G,Reaction,Immune System
+R-HSA-199576,KIR3DL2 interacting with HLA-A3,Reaction,Immune System
+R-HSA-199583,KIR2DS2 interacting with HLA-C group 1 (Cw3),Reaction,Immune System
+R-HSA-199518,C3d-complexed antigen binds to complement receptor,Reaction,Immune System
+R-HSA-199587,KIR2DS1 interacting with HLA-C group 2 (Cw4),Reaction,Immune System
+R-HSA-199079,Epithelial cadherin binds to KLRG1,Reaction,Immune System
+R-HSA-199014,CD96 binds PVR,Reaction,Immune System
+R-HSA-198955,TCR complex interacts with peptide antigen-presenting MHC Class I,Reaction,Immune System
+R-HSA-199144,Nectin 2 binds CD226,Reaction,Immune System
+R-HSA-198958,KIR2DL2/3 interacting with HLA-C group 1 (Cw4),Reaction,Immune System
+R-HSA-5685606,CLEC2D binds KLRB1,Reaction,Immune System
+R-HSA-5696358,"TREM,CD300 binds lipids",Reaction,Immune System
+R-HSA-199154,CD200 binds to CD200R,Reaction,Immune System
+R-HSA-5685607,Sialic acid binds SIGLEC,Reaction,Immune System
+R-HSA-5685604,SLAMF6 binds SLAMF6,Reaction,Immune System
+R-HSA-5696356,OSCAR binds collagen and SP-D,Reaction,Immune System
+R-HSA-5685605,SLAMF7 binds SLAMF7,Reaction,Immune System
+R-HSA-5696357,LAIR2 binds collagen,Reaction,Immune System
+R-HSA-8850356,TCR binds microbial lipid-based antigen via CD1,Reaction,Immune System
+R-HSA-5685602,NCR3LG1 binds NCR3,Reaction,Immune System
+R-HSA-5685603,SAP and EAT2 binds SLAMF6,Reaction,Immune System
+R-HSA-5686625,LAIR1 binds collagen,Reaction,Immune System
+R-HSA-199161,Fc gamma receptors interact with antigen-bound IgG,Reaction,Immune System
+R-HSA-5685608,CLEC2B binds KLRF1 dimer,Reaction,Immune System
+R-HSA-2130336,Initial proteolyis of Ii by aspartic proteases to lip22,Reaction,Immune System
+R-HSA-2213235,Trafficking of nonameric complex in the endocytic pathway,BlackBoxEvent,Immune System
+R-HSA-2130486,Uncoating of clathrin-coated vesicles and fusion with endosomes,Reaction,Immune System
+R-HSA-2130725,Internalization of MHC II:Ii clathrin coated vesicle,BlackBoxEvent,Immune System
+R-HSA-2130640,Recruitment of clathrin coated vesicle by Ii,Reaction,Immune System
+R-HSA-2130500,Insertion of MHC II:Ii complex in to the plasma membrane,BlackBoxEvent,Immune System
+R-HSA-2130378,Transport of MHC II:Ii complex to plasma membrane,BlackBoxEvent,Immune System
+R-HSA-2130393,Transport of MHC II:Ii complex along Golgi to TGN,BlackBoxEvent,Immune System
+R-HSA-2213243,Fusion of COPII vesicle with Golgi complex,Reaction,Immune System
+R-HSA-2130731,Formation of COPII vesicle,Reaction,Immune System
+R-HSA-8951500,Dissociation of CANX from nonameric complex,Reaction,Immune System
+R-HSA-2213241,Formation of nonameric complex,Reaction,Immune System
+R-HSA-2213239,Formation of MHC II alpha beta heterodimer,Reaction,Immune System
+R-HSA-2130478,Interaction of invariant chain trimer and MHC II alpha beta dimer,Reaction,Immune System
+R-HSA-2213236,TGN-lysosome vesicle uncoating and release of nonameric complex to lysosome,Reaction,Immune System
+R-HSA-2130641,Translocation of TGN-lysosome vesicle to lysosome,Reaction,Immune System
+R-HSA-2130619,TGN-lysosomal vesicle coat assembly,BlackBoxEvent,Immune System
+R-HSA-8951498,"Dissociation of Arf1:GDP, AP-1 Clathrin coated nonameric complex",Reaction,Immune System
+R-HSA-2130349,Generation of CLIP from lip10,Reaction,Immune System
+R-HSA-2130504,Cleavage of lip22 to lip10,Reaction,Immune System
+R-HSA-2213240,Reduction of disulphide bonds in MHC II antigens,Reaction,Immune System
+R-HSA-2130627,MHC class II antigen internalization,BlackBoxEvent,Immune System
+R-HSA-8856157,LAG3 (CD233) binds MHC II,Reaction,Immune System
+R-HSA-2213244,Loading of antigenic peptides,Reaction,Immune System
+R-HSA-2130706,MHC class II antigen processing,Reaction,Immune System
+R-HSA-2213246,Disassociation of CLIP from MHC II,Reaction,Immune System
+R-HSA-2213248,Transport of antigen loaded MHC II molecules to surface,BlackBoxEvent,Immune System
+R-HSA-8851044,BTN1A1 binds xanthine oxidoreductase (XDH),Reaction,Immune System
+R-HSA-8851988,BTN2A2 binds T cell surface,Reaction,Immune System
+R-HSA-8938431,BTN3A1 and BTN1A1 binds periplakin (PPL),Reaction,Immune System
+R-HSA-8851038,BTN3A1 binds prenylated phosphoantigens,Reaction,Immune System
+R-HSA-8852013,BTNL8 binds resting T cell surface,Reaction,Immune System
+R-HSA-8851979,BTNL9 binds immune cell surfaces,Reaction,Immune System
+R-HSA-8851018,BTN2A1 binds DC-SIGN,Reaction,Immune System
+R-HSA-8852010,BTNL2 binds activated T cells surface,Reaction,Immune System

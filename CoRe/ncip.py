@@ -546,12 +546,10 @@ class ncip:
         for e in self.G_d.edges():
             i, j = node_idx[e[0]], node_idx[e[1]]
 
-            #if 'PPI' in self.G_d.get_edge_data(e[0],e[1])['category']:
-            #    w = 1.0
-            #else:
-            #    w = 1.0
-
-            w = 10**rand.uniform(-2,0)
+            if 'PPI' in self.G_d.get_edge_data(e[0],e[1])['category']:
+                w = 1.0
+            else:
+                w = 1.0
 
             if self.G_d.get_edge_data(e[0],e[1])['channel']=='down':
                 C[self.code_length*j:self.code_length*(j+1),self.code_length*i:self.code_length*(i+1)] = w*down_regulation
