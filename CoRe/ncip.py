@@ -445,10 +445,10 @@ class ncip:
 
         return H_drop, H_gain
 
-    def get_final_state(self,X,sources):
+    def get_final_state_old(self,X,sources):
         """
         Computes the final state of the network using the initial state X and the information transfer
-        matrix Tmat. The state of the sources are fixed during the information transfer. The number of
+        matrix C_dense. The state of the sources are fixed during the information transfer. The number of
         nodes in the network is n and the number of states for each node is m.
 
         Parameters
@@ -471,7 +471,7 @@ class ncip:
         tol = 1.0
         steps = 0
 
-        while tol>1e-4:
+        while tol>1e-10:
             X_old = np.array(X, copy=True)
             X = self.C_sparse.dot(X)
 
@@ -483,6 +483,70 @@ class ncip:
             steps += 1
 
         return X, steps
+
+    def get_final_state(self,X,sources):
+        """
+        Computes the final state of the network using the initial state X and the information transfer
+        matrix C_dense. The state of the sources are fixed during the information transfer. The number of
+        nodes in the network is n and the number of states for each node is m.
+
+        Parameters
+        ----------
+        X: array_like
+            A [mn,1] numpy array.
+
+        sources: list
+            Node numbers that are sources in the network, whose probabilistic state, e.g. {P[v=1],P[v=0]}
+            has to be fixed during information propagation.
+
+        Returns
+        -------
+        X: array_like
+            Stationary state of the network.
+
+        steps: int
+            Number of steps it took to reach the stationary state of the network.
+        """
+
+        self.apply_BC(sources)
+
+        tol = 1.0
+        steps = 0
+
+        while tol>1e-4:
+            X_old = np.array(X, copy=True)
+            X = self.C_sparse_with_BC.dot(X)
+
+            tol = np.linalg.norm(X-X_old,1)
+
+            steps += 1
+
+        return X, steps
+
+    def apply_BC(self,sources):
+        """
+        Computes the final state of the network using the initial state X and the information transfer
+        matrix C_dense. The state of the sources are fixed during the information transfer. The number of
+        nodes in the network is n and the number of states for each node is m.
+
+        Parameters
+        ----------
+
+        sources: list
+            Node numbers that are sources in the network, whose probabilistic state, e.g. {P[v=1],P[v=0]}
+            has to be fixed during information propagation.
+
+        """
+
+        C_dense = self.C_sparse.todense()
+
+        for s in sources:
+            C_dense[2*s:2*(s+1),:] = 0
+            C_dense[2*s:2*(s+1),2*s:2*(s+1)] = np.identity(2)
+
+        # Sparse matrix after imposing additional boundary conditions
+        # Stored as a class variable for nullspace, etc. calculations
+        self.C_sparse_with_BC = sparse.csr_matrix(C_dense)
 
     def construct_C(self,rho=0,h=1,neglect_modules=[]):
         """
@@ -747,3 +811,25 @@ class ncip:
             print(outstring,file=nf)
 
         nf.close()
+
+    def save_nullspace(self,outfile):
+        """
+        Computes and saves the nullspace for the communication matrix.
+
+        Parameters
+        ----------
+        outfile: string
+            Name of the file to store the nullspace. The numpy array is saved in csv format. 
+        """
+
+        C_dense = self.temp_C_sparse.todense()
+        C_diff = C_dense - np.eye(C_dense.shape[0])
+        C_diff_sparse = sp.sparse.csr_matrix(C_diff)
+
+        try:
+            ns = sp.linalg.null_space(C_diff)
+            np.savetxt(outfile+'-nullspace.csv',ns,delimiter=",")
+        except sp.linalg.LinAlgError:
+            print('SVD did not converge.')
+            pass
+

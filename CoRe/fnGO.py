@@ -334,7 +334,7 @@ def compute_q_values(p_values,go_names,go_tags,alpha=0.01,return_all=False):
     else:
         return p_values_go_tags, p_values_go, q_values
 
-def compute_p_values(sources,GO_BPs,interaction_set,total_genes,minimum_GOBP=False,size_threshold=np.inf,full=False):
+def compute_p_values_old(sources,GO_BPs,interaction_set,total_genes,minimum_GOBP=False,size_threshold=np.inf,full=False):
     """
     Benjamini-Hochberg p-value correction for multiple hypothesis testing.
 
@@ -398,19 +398,83 @@ def compute_p_values(sources,GO_BPs,interaction_set,total_genes,minimum_GOBP=Fal
 
     return go_tags, go_names, p_values
 
-    def read_embedding(filename):
-        wf = open(filename)
-        all_lines = wf.readlines()
-        wf.close()
+def read_embedding(filename):
+    wf = open(filename)
+    all_lines = wf.readlines()
+    wf.close()
 
-        embed_idx = {}
+    embed_idx = {}
 
-        for l in all_lines:
-            all_values = l.rstrip('\r\n').split(',')
+    for l in all_lines:
+        all_values = l.rstrip('\r\n').split(',')
 
-            embed_idx[int(all_values[0])] = []
+        embed_idx[int(all_values[0])] = []
 
-            for k in all_values[1:]:
-                embed_idx[int(all_values[0])].append(int(k))
+        for k in all_values[1:]:
+            embed_idx[int(all_values[0])].append(int(k))
 
-        return embed_idx
+    return embed_idx
+
+def compute_p_values(sources,GO_BPs_set,interaction_set,total_genes,minimum_GOBP=False,size_threshold=np.inf,full=False):
+    """
+    Benjamini-Hochberg p-value correction for multiple hypothesis testing.
+
+    Parameters
+    ----------
+    sources: list
+        Names of factors that are causing the information transfer in the network.
+
+    minimum_GOBP: list
+        Names of gene sets for biological processes at the lowest level, i.e. these sets do not contain other gene sets.
+
+    GO_BPs: array_like
+        Gene sets for Gene Ontology Biological Processes.
+
+    interaction_set: dict
+        Set of genes receiving information from the sources.
+
+    total_genes: int
+        Total number of unique genes across all gene sets.
+
+    Returns
+    -------
+    go_names: dict
+        Gene Ontology Biological Processes that are over-represented by the sources.
+
+    p_values: dict
+        Fisher's exact test p-value for Gene Ontology over-represenation analysis.
+    """
+
+    go_tags, go_names, p_values = {}, {}, {}
+
+    if minimum_GOBP==False:
+        all_gene_sets = list(GO_BPs_set.keys())
+    else:
+        all_gene_sets = minimum_GOBP
+
+    for s_g in sources:
+        len_interaction = len(interaction_set[s_g])
+
+        go_tags[s_g] = []
+        go_names[s_g] = []
+        p_values[s_g] = []
+
+        #for go in minimum_GOBP:
+        for go in all_gene_sets:
+            len_gene_BP = len(GO_BPs_set[go])
+
+            if len_gene_BP<=size_threshold:
+                intersection = GO_BPs_set[go].intersection(interaction_set[s_g])
+                
+                len_intersection = len(intersection)
+
+                if len_intersection>0:
+                    pvalue = hg.sf(len_intersection-1, total_genes, len_gene_BP, len_interaction)
+
+                    p_values[s_g].append(pvalue)
+                    go_names[s_g].append(go.replace('_',' ').replace('GOBP ',''))
+                    go_tags[s_g].append(go)
+                    #if s_g=='SARS-CoV2 nsp7':
+                    #    print(s_g,go,len_intersection,pvalue,intersection[0])
+
+    return go_tags, go_names, p_values

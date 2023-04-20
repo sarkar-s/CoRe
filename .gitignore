@@ -1,3 +1,4 @@
+C-G-check.ipynb
 Construct_network-with_disease.ipynb
 Check-disease-networks.ipynb
 Maximum-reference-state.ipynb
@@ -10,3 +11,4 @@ Collective_finite_responses_ORA.ipynb
 /Examples/Immunometabolism_with_SARS-CoV-2
 /Examples/collective_action
 /preprocessors
+/notebooks_to_ignore
